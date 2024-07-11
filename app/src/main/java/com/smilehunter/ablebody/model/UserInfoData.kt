@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.model
 
-import com.smilehunter.ablebody.data.dto.Gender
+import com.smilehunter.ablebody.data.model.Gender
 
 data class UserInfoData(
     val createDate: String,

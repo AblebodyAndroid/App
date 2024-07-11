@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.model
 
-import com.smilehunter.ablebody.data.dto.ItemGender
+import com.smilehunter.ablebody.data.model.ItemGender
 
 data class BrandListData(
     val name: String,

@@ -1,10 +1,10 @@
 package com.smilehunter.ablebody.data.repository
 
-import com.smilehunter.ablebody.data.dto.ItemChildCategory
-import com.smilehunter.ablebody.data.dto.ItemGender
-import com.smilehunter.ablebody.data.dto.ItemParentCategory
-import com.smilehunter.ablebody.data.dto.SortingMethod
-import com.smilehunter.ablebody.data.dto.response.FindItemResponse
+import com.smilehunter.ablebody.data.model.ItemChildCategory
+import com.smilehunter.ablebody.data.model.ItemGender
+import com.smilehunter.ablebody.data.model.ItemParentCategory
+import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.network.model.FindItemResponse
 import retrofit2.Response
 
 interface FindItemRepository {

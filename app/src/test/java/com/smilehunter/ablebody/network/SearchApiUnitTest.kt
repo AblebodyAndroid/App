@@ -1,8 +1,8 @@
 package com.smilehunter.ablebody.network
 
-import com.smilehunter.ablebody.data.dto.ItemGender
-import com.smilehunter.ablebody.data.dto.ItemParentCategory
-import com.smilehunter.ablebody.data.dto.SortingMethod
+import com.smilehunter.ablebody.data.model.ItemGender
+import com.smilehunter.ablebody.data.model.ItemParentCategory
+import com.smilehunter.ablebody.data.model.SortingMethod
 import com.smilehunter.ablebody.network.utils.TestRetrofit
 import kotlinx.coroutines.runBlocking
 import org.junit.Test

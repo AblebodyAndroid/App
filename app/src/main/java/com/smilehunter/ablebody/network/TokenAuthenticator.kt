@@ -1,7 +1,7 @@
 package com.smilehunter.ablebody.network
 
-import com.smilehunter.ablebody.data.dto.response.RefreshTokenResponse
-import com.smilehunter.ablebody.data.dto.response.data.RefreshTokenResponseData
+import com.smilehunter.ablebody.network.model.RefreshTokenResponse
+import com.smilehunter.ablebody.network.model.response.RefreshTokenResponseData
 import com.smilehunter.ablebody.sharedPreferences.TokenSharedPreferences
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
@@ -10,7 +10,7 @@ import okhttp3.Response
 import okhttp3.Route
 import javax.inject.Provider
 
-class TokenAuthenticator constructor(
+class TokenAuthenticator(
     private val tokenSharedPreferences: Provider<TokenSharedPreferences>,
     private val networkService: Provider<NetworkService>
 ) : Authenticator {

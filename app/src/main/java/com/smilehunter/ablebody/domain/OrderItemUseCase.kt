@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain
 
-import com.smilehunter.ablebody.data.dto.request.AddOrderListRequest
+import com.smilehunter.ablebody.network.model.request.AddOrderListRequest
 import com.smilehunter.ablebody.data.repository.OrderManagementRepository
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher.IO
 import com.smilehunter.ablebody.network.di.Dispatcher

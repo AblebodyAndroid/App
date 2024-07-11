@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain
 
-import com.smilehunter.ablebody.data.dto.response.data.CreatorDetailLikeUsersResponseData
+import com.smilehunter.ablebody.network.model.response.CreatorDetailLikeUsersResponseData
 import com.smilehunter.ablebody.data.repository.LikeListRepository
 import com.smilehunter.ablebody.model.LikeListData
 import com.smilehunter.ablebody.model.LikedLocations

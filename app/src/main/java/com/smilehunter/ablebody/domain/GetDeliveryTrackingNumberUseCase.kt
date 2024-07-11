@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain
 
-import com.smilehunter.ablebody.data.dto.response.data.GetDeliveryInfoResponseData
+import com.smilehunter.ablebody.network.model.response.GetDeliveryInfoResponseData
 import com.smilehunter.ablebody.data.repository.OrderManagementRepository
 import com.smilehunter.ablebody.model.DeliveryTrackingData
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher.IO
