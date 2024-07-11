@@ -118,7 +118,7 @@ private fun PermissionExplanationContentLayout(
 @Preview(showBackground = true)
 @Composable
 private fun PermissionExplanationContentLayoutPreview() {
-    PermissionExplanationContentLayout() { }
+    PermissionExplanationContentLayout { }
 }
 
 @OptIn(ExperimentalMaterialApi::class)

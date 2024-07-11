@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.data.repository
 
-import com.smilehunter.ablebody.data.dto.response.data.CreatorDetailLikeUsersResponseData
+import com.smilehunter.ablebody.network.model.response.CreatorDetailLikeUsersResponseData
 import com.smilehunter.ablebody.network.NetworkService
 import javax.inject.Inject
 

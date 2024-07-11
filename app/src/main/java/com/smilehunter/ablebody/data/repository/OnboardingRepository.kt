@@ -1,9 +1,9 @@
 package com.smilehunter.ablebody.data.repository
 
-import com.smilehunter.ablebody.data.dto.response.CheckSMSResponse
-import com.smilehunter.ablebody.data.dto.response.NewUserCreateResponse
-import com.smilehunter.ablebody.data.dto.response.SendSMSResponse
-import com.smilehunter.ablebody.data.dto.response.StringResponse
+import com.smilehunter.ablebody.network.model.CheckSMSResponse
+import com.smilehunter.ablebody.network.model.NewUserCreateResponse
+import com.smilehunter.ablebody.network.model.SendSMSResponse
+import com.smilehunter.ablebody.network.model.StringResponse
 import retrofit2.Response
 
 interface OnboardingRepository {
@@ -17,7 +17,7 @@ interface OnboardingRepository {
     ): Response<CheckSMSResponse>
     suspend fun checkNickname(nickname: String): Response<StringResponse>
     suspend fun createNewUser(
-        gender: com.smilehunter.ablebody.data.dto.Gender,
+        gender: com.smilehunter.ablebody.data.model.Gender,
         nickname: String,
         profileImage: Int,
         verifyingCode: String,

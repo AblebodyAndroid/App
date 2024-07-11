@@ -3,8 +3,7 @@ package com.smilehunter.ablebody.presentation.payment
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
-import com.smilehunter.ablebody.data.dto.request.AddOrderListRequest
+import com.smilehunter.ablebody.network.model.request.AddOrderListRequest
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
 import com.smilehunter.ablebody.domain.ConfirmPaymentUseCase

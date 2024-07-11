@@ -3,7 +3,7 @@ package com.smilehunter.ablebody.presentation.home.my
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.data.dto.request.EditProfile
+import com.smilehunter.ablebody.network.model.request.EditProfile
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
 import com.smilehunter.ablebody.domain.CheckNicknameUseCase

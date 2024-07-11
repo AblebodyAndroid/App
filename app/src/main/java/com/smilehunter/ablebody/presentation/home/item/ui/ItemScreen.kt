@@ -19,10 +19,10 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.smilehunter.ablebody.data.dto.ItemChildCategory
-import com.smilehunter.ablebody.data.dto.ItemGender
-import com.smilehunter.ablebody.data.dto.ItemParentCategory
-import com.smilehunter.ablebody.data.dto.SortingMethod
+import com.smilehunter.ablebody.data.model.ItemChildCategory
+import com.smilehunter.ablebody.data.model.ItemGender
+import com.smilehunter.ablebody.data.model.ItemParentCategory
+import com.smilehunter.ablebody.data.model.SortingMethod
 import com.smilehunter.ablebody.model.ErrorHandlerCode
 import com.smilehunter.ablebody.model.ProductItemData
 import com.smilehunter.ablebody.model.fake.fakeProductItemData

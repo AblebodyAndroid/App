@@ -1,10 +1,10 @@
 package com.smilehunter.ablebody.data.repository
 
-import com.smilehunter.ablebody.data.dto.Gender
-import com.smilehunter.ablebody.data.dto.response.CheckSMSResponse
-import com.smilehunter.ablebody.data.dto.response.NewUserCreateResponse
-import com.smilehunter.ablebody.data.dto.response.SendSMSResponse
-import com.smilehunter.ablebody.data.dto.response.StringResponse
+import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.network.model.CheckSMSResponse
+import com.smilehunter.ablebody.network.model.NewUserCreateResponse
+import com.smilehunter.ablebody.network.model.SendSMSResponse
+import com.smilehunter.ablebody.network.model.StringResponse
 import com.smilehunter.ablebody.network.NetworkService
 import com.smilehunter.ablebody.sharedPreferences.TokenSharedPreferences
 import retrofit2.Response

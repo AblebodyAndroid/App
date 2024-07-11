@@ -142,7 +142,7 @@ fun CreatorScreen(
             item(
                 span = { GridItemSpan(this.maxLineSpan) }
             ) {
-                Column() {
+                Column {
                     if (userInfoData != null) {
                         CreatorUserInfo(
                             isCreator = true,
@@ -217,7 +217,7 @@ fun NormalUserScreen(
             .padding(15.dp)
             .fillMaxSize()
     ) {
-        LazyColumn() {
+        LazyColumn {
             item {
                 if (userInfoData != null) {
                     NormalUserInfo(
@@ -275,7 +275,7 @@ fun NormalUserInfo(
     orderManagementOnClick: () -> Unit,
     onProfileEditClick: () -> Unit
 ) {
-    Column() {
+    Column {
         UserName(isCreator, nickName, settingOnClick)
         UserInformation(profileImage, userName, weight, height, job, introduction)
         OrderDetailBox(orderManagement, coupon, creatorPoint, couponOnClick, orderManagementOnClick)
@@ -305,7 +305,7 @@ fun CreatorUserInfo(
     orderManagementOnClick: () -> Unit,
     onProfileEditClick: () -> Unit
 ) {
-    Column() {
+    Column {
         UserName(isCreator, nickName, settingOnClick)
         UserInformation(profileImage, userName, weight, height, job, introduction)
         OrderDetailBox(orderManagement, coupon, creatorPoint, couponOnClick, orderManagementOnClick)
@@ -404,7 +404,7 @@ fun UserInformation(
                     platformStyle = PlatformTextStyle(includeFontPadding = false)
                 ),
             )
-            Row() {
+            Row {
                 val description = makeUserDescription(weight, height, job)
                 Text(
                     text = description,

@@ -1,7 +1,7 @@
 package com.smilehunter.ablebody.domain
 
-import com.smilehunter.ablebody.data.dto.SortingMethod
-import com.smilehunter.ablebody.data.dto.response.data.BrandMainResponseData
+import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.network.model.response.BrandMainResponseData
 import com.smilehunter.ablebody.data.repository.BrandRepository
 import com.smilehunter.ablebody.model.BrandListData
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher

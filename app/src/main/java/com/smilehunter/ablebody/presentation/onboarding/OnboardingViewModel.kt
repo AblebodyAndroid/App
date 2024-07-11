@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.messaging.FirebaseMessaging
 import com.smilehunter.ablebody.BuildConfig
-import com.smilehunter.ablebody.data.dto.Gender
-import com.smilehunter.ablebody.data.dto.response.NewUserCreateResponse
-import com.smilehunter.ablebody.data.dto.response.SendSMSResponse
+import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.network.model.NewUserCreateResponse
+import com.smilehunter.ablebody.network.model.SendSMSResponse
 import com.smilehunter.ablebody.data.repository.FCMSyncRepository
 import com.smilehunter.ablebody.data.repository.OnboardingRepository
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
