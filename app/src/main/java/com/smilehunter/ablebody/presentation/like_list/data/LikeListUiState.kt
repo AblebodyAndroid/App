@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.presentation.like_list.data
 
-import com.smilehunter.ablebody.model.LikeListData
+import com.smilehunter.ablebody.domain.model.LikeListData
 
 sealed interface LikeListUiState {
 

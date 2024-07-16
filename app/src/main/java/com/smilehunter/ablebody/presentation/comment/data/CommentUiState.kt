@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.presentation.comment.data
 
-import com.smilehunter.ablebody.model.CommentListData
+import com.smilehunter.ablebody.domain.model.CommentListData
 
 sealed interface CommentUiState {
 

@@ -1,4 +1,4 @@
-package com.smilehunter.ablebody.model
+package com.smilehunter.ablebody.domain.model
 
 import com.smilehunter.ablebody.database.model.SearchHistoryEntity
 

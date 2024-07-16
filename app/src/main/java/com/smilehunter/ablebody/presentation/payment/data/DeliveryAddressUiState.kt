@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.presentation.payment.data
 
-import com.smilehunter.ablebody.model.DeliveryAddressData
+import com.smilehunter.ablebody.domain.model.DeliveryAddressData
 
 sealed interface DeliveryAddressUiState {
 

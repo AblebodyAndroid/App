@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.presentation.order_management.data
 
-import com.smilehunter.ablebody.model.OrderItemData
+import com.smilehunter.ablebody.domain.model.OrderItemData
 
 sealed interface OrderItemUiState {
 

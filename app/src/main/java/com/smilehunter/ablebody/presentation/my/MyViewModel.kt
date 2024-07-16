@@ -12,9 +12,9 @@ import com.smilehunter.ablebody.data.repository.ManageRepository
 import com.smilehunter.ablebody.domain.usecase.GetOrderItemListUseCase
 import com.smilehunter.ablebody.domain.usecase.GetUserBoardPagerUseCase
 import com.smilehunter.ablebody.domain.usecase.GetUserInfoUseCase
-import com.smilehunter.ablebody.model.OrderItemData
-import com.smilehunter.ablebody.model.UserBoardData
-import com.smilehunter.ablebody.model.UserInfoData
+import com.smilehunter.ablebody.domain.model.OrderItemData
+import com.smilehunter.ablebody.domain.model.UserBoardData
+import com.smilehunter.ablebody.domain.model.UserInfoData
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel

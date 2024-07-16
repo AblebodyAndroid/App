@@ -9,8 +9,8 @@ import androidx.navigation.NavOptions
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.model.LikedLocations
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.LikedLocations
 import com.smilehunter.ablebody.presentation.creator_detail.ui.CreatorDetailRoute
 
 internal const val CreatorDetailRoute = "creator_detail_route"

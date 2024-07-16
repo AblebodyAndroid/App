@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.presentation.order_management.data
 
-import com.smilehunter.ablebody.model.DeliveryTrackingData
+import com.smilehunter.ablebody.domain.model.DeliveryTrackingData
 
 sealed interface DeliveryTrackingUiState {
 

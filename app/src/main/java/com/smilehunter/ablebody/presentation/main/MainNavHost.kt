@@ -8,11 +8,8 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
-import com.smilehunter.ablebody.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
 import com.smilehunter.ablebody.presentation.brand_detail.addBrandDetailScreen
 import com.smilehunter.ablebody.presentation.brand_detail.navigateToBrandDetailScreen
 import com.smilehunter.ablebody.presentation.comment.addCommentScreen
@@ -41,7 +38,6 @@ import com.smilehunter.ablebody.presentation.item_review.addItemReviewScreen
 import com.smilehunter.ablebody.presentation.item_review.navigateToItemReview
 import com.smilehunter.ablebody.presentation.like_list.addLikeUserListScreen
 import com.smilehunter.ablebody.presentation.like_list.navigateToLikeUserListScreen
-import com.smilehunter.ablebody.presentation.my.myInfo.ui.WithdrawScreenRoute
 import com.smilehunter.ablebody.presentation.notification.NotificationRoute
 import com.smilehunter.ablebody.presentation.notification.addNotificationScreen
 import com.smilehunter.ablebody.presentation.order_management.addOrderItemDetailScreen

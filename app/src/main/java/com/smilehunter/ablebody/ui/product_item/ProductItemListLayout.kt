@@ -41,7 +41,7 @@ import com.smilehunter.ablebody.data.model.ItemChildCategory
 import com.smilehunter.ablebody.data.model.ItemGender
 import com.smilehunter.ablebody.data.model.ItemParentCategory
 import com.smilehunter.ablebody.data.model.SortingMethod
-import com.smilehunter.ablebody.model.ProductItemData
+import com.smilehunter.ablebody.domain.model.ProductItemData
 import com.smilehunter.ablebody.presentation.main.ui.LocalMainScaffoldPaddingValue
 import com.smilehunter.ablebody.ui.theme.AbleBlue
 import com.smilehunter.ablebody.ui.theme.AbleDeep

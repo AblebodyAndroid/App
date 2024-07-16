@@ -13,7 +13,7 @@ import com.smilehunter.ablebody.network.model.GetMyBoardResponse
 import com.smilehunter.ablebody.network.model.UserDataResponse
 import com.smilehunter.ablebody.data.result.FileTooLargeException
 import com.smilehunter.ablebody.datastore.DataStoreService
-import com.smilehunter.ablebody.model.LocalUserInfoData
+import com.smilehunter.ablebody.domain.model.LocalUserInfoData
 import com.smilehunter.ablebody.network.NetworkService
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher.IO
 import com.smilehunter.ablebody.network.di.Dispatcher

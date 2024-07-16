@@ -37,9 +37,9 @@ import com.smilehunter.ablebody.R
 import com.smilehunter.ablebody.data.model.Gender
 import com.smilehunter.ablebody.data.model.HomeCategory
 import com.smilehunter.ablebody.data.model.PersonHeightFilterType
-import com.smilehunter.ablebody.model.CodyItemData
-import com.smilehunter.ablebody.model.CodyItemFilterBottomSheetTabFilterType
-import com.smilehunter.ablebody.model.fake.fakeCodyItemData
+import com.smilehunter.ablebody.domain.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.CodyItemFilterBottomSheetTabFilterType
+import com.smilehunter.ablebody.domain.model.fake.fakeCodyItemData
 import com.smilehunter.ablebody.presentation.main.ui.LocalMainScaffoldPaddingValue
 import com.smilehunter.ablebody.ui.theme.ABLEBODY_AndroidTheme
 import com.smilehunter.ablebody.ui.utils.previewPlaceHolder

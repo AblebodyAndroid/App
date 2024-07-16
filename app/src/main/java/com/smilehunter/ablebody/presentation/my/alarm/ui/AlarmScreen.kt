@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
 import com.smilehunter.ablebody.presentation.my.setting.ui.BenefitDescription
 import com.smilehunter.ablebody.presentation.my.setting.ui.MarketingAlarmToggleButton
 import com.smilehunter.ablebody.presentation.my.alarm.AlarmViewModel

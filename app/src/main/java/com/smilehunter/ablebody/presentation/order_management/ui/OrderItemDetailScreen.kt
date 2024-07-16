@@ -45,9 +45,9 @@ import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.model.ReceiptData
-import com.smilehunter.ablebody.model.fake.fakeReceiptData
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.ReceiptData
+import com.smilehunter.ablebody.domain.model.fake.fakeReceiptData
 import com.smilehunter.ablebody.presentation.main.ui.error_handler.NetworkConnectionErrorDialog
 import com.smilehunter.ablebody.presentation.order_management.OrderManagementViewModel
 import com.smilehunter.ablebody.presentation.order_management.data.DeliveryTrackingUiState

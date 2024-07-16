@@ -20,9 +20,9 @@ import com.smilehunter.ablebody.domain.usecase.GetRecommendKeywordUseCase
 import com.smilehunter.ablebody.domain.usecase.GetSearchHistoryUseCase
 import com.smilehunter.ablebody.domain.usecase.ProductItemPagerUseCase
 import com.smilehunter.ablebody.domain.usecase.ProductItemPagingSourceData
-import com.smilehunter.ablebody.model.CodyItemData
-import com.smilehunter.ablebody.model.ProductItemData
-import com.smilehunter.ablebody.model.SearchHistoryQuery
+import com.smilehunter.ablebody.domain.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.ProductItemData
+import com.smilehunter.ablebody.domain.model.SearchHistoryQuery
 import com.smilehunter.ablebody.presentation.search.data.KeywordUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi

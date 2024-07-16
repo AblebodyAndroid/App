@@ -7,7 +7,7 @@ import com.smilehunter.ablebody.network.model.GetAddressResponse
 import com.smilehunter.ablebody.network.model.GetCouponBagsResponse
 import com.smilehunter.ablebody.network.model.GetMyBoardResponse
 import com.smilehunter.ablebody.network.model.UserDataResponse
-import com.smilehunter.ablebody.model.LocalUserInfoData
+import com.smilehunter.ablebody.domain.model.LocalUserInfoData
 import kotlinx.coroutines.flow.Flow
 import java.io.InputStream
 

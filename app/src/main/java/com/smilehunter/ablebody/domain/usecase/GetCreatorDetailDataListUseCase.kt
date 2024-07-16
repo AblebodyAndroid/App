@@ -2,7 +2,7 @@ package com.smilehunter.ablebody.domain.usecase
 
 import com.smilehunter.ablebody.data.model.ItemChildCategory
 import com.smilehunter.ablebody.data.repository.CreatorDetailRepository
-import com.smilehunter.ablebody.model.CreatorDetailData
+import com.smilehunter.ablebody.domain.model.CreatorDetailData
 import com.smilehunter.ablebody.network.model.response.CreatorDetailResponseData
 import javax.inject.Inject
 

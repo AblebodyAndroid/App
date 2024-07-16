@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
 import com.smilehunter.ablebody.domain.usecase.GetLikeListUseCase
-import com.smilehunter.ablebody.model.LikedLocations
+import com.smilehunter.ablebody.domain.model.LikedLocations
 import com.smilehunter.ablebody.presentation.like_list.data.LikeListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -39,10 +39,10 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.model.NotificationItemData
-import com.smilehunter.ablebody.model.NotificationPassedTime
-import com.smilehunter.ablebody.model.fake.fakeNotificationItemData
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.NotificationItemData
+import com.smilehunter.ablebody.domain.model.NotificationPassedTime
+import com.smilehunter.ablebody.domain.model.fake.fakeNotificationItemData
 import com.smilehunter.ablebody.presentation.main.ui.LocalMainScaffoldPaddingValue
 import com.smilehunter.ablebody.presentation.notification.NotificationViewModel
 import com.smilehunter.ablebody.ui.theme.ABLEBODY_AndroidTheme

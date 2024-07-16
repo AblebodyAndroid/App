@@ -9,7 +9,7 @@ import com.smilehunter.ablebody.data.model.SortingMethod
 import com.smilehunter.ablebody.network.model.SearchCodyResponse
 import com.smilehunter.ablebody.network.model.SearchItemResponse
 import com.smilehunter.ablebody.network.model.UniSearchResponse
-import com.smilehunter.ablebody.model.SearchHistoryQuery
+import com.smilehunter.ablebody.domain.model.SearchHistoryQuery
 import kotlinx.coroutines.flow.Flow
 
 interface SearchRepository {

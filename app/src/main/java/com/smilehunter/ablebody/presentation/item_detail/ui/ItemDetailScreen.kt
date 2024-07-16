@@ -86,9 +86,9 @@ import coil.compose.AsyncImage
 import coil.imageLoader
 import coil.request.ImageRequest
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.model.ItemDetailData
-import com.smilehunter.ablebody.model.fake.fakeItemDetailData
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.ItemDetailData
+import com.smilehunter.ablebody.domain.model.fake.fakeItemDetailData
 import com.smilehunter.ablebody.presentation.item_detail.ItemDetailViewModel
 import com.smilehunter.ablebody.presentation.item_detail.data.ItemDetailUiState
 import com.smilehunter.ablebody.presentation.payment.data.PaymentPassthroughData
