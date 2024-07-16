@@ -12,10 +12,10 @@ import com.smilehunter.ablebody.data.model.ItemGender
 import com.smilehunter.ablebody.data.model.ItemParentCategory
 import com.smilehunter.ablebody.data.model.PersonHeightFilterType
 import com.smilehunter.ablebody.data.model.SortingMethod
-import com.smilehunter.ablebody.domain.CodyItemPagerUseCase
-import com.smilehunter.ablebody.domain.CodyPagingSourceData
-import com.smilehunter.ablebody.domain.ProductItemPagerUseCase
-import com.smilehunter.ablebody.domain.ProductItemPagingSourceData
+import com.smilehunter.ablebody.domain.usecase.CodyItemPagerUseCase
+import com.smilehunter.ablebody.domain.usecase.CodyPagingSourceData
+import com.smilehunter.ablebody.domain.usecase.ProductItemPagerUseCase
+import com.smilehunter.ablebody.domain.usecase.ProductItemPagingSourceData
 import com.smilehunter.ablebody.model.CodyItemData
 import com.smilehunter.ablebody.model.LocalUserInfoData
 import com.smilehunter.ablebody.model.ProductItemData

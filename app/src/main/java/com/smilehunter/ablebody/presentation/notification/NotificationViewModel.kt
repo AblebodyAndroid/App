@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.smilehunter.ablebody.data.repository.NotificationRepository
-import com.smilehunter.ablebody.domain.NotificationItemPagerUseCase
+import com.smilehunter.ablebody.domain.usecase.NotificationItemPagerUseCase
 import com.smilehunter.ablebody.model.NotificationItemData
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher

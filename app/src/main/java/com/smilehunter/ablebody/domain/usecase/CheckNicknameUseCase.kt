@@ -1,14 +1,14 @@
-package com.smilehunter.ablebody.domain
+package com.smilehunter.ablebody.domain.usecase
 
 import com.smilehunter.ablebody.data.repository.OnboardingRepository
-import com.smilehunter.ablebody.network.di.AbleBodyDispatcher.IO
+import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CheckNicknameUseCase @Inject constructor(
-    @Dispatcher(IO) private val ioDispatcher: CoroutineDispatcher,
+    @Dispatcher(AbleBodyDispatcher.IO) private val ioDispatcher: CoroutineDispatcher,
     private val onboardingRepository: OnboardingRepository
 ) {
 

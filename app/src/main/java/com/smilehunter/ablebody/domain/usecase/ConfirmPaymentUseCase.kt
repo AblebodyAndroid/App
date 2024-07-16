@@ -1,14 +1,14 @@
-package com.smilehunter.ablebody.domain
+package com.smilehunter.ablebody.domain.usecase
 
 import com.smilehunter.ablebody.data.repository.OrderManagementRepository
-import com.smilehunter.ablebody.network.di.AbleBodyDispatcher.IO
+import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ConfirmPaymentUseCase @Inject constructor(
-    @Dispatcher(IO) private val ioDispatcher: CoroutineDispatcher,
+    @Dispatcher(AbleBodyDispatcher.IO) private val ioDispatcher: CoroutineDispatcher,
     private val orderManagementRepository: OrderManagementRepository
 ) {
 

@@ -1,4 +1,4 @@
-package com.smilehunter.ablebody.domain
+package com.smilehunter.ablebody.domain.usecase
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig

@@ -7,8 +7,8 @@ import androidx.paging.cachedIn
 import com.smilehunter.ablebody.data.model.Gender
 import com.smilehunter.ablebody.data.model.HomeCategory
 import com.smilehunter.ablebody.data.model.PersonHeightFilterType
-import com.smilehunter.ablebody.domain.CodyItemPagerUseCase
-import com.smilehunter.ablebody.domain.CodyPagingSourceData
+import com.smilehunter.ablebody.domain.usecase.CodyItemPagerUseCase
+import com.smilehunter.ablebody.domain.usecase.CodyPagingSourceData
 import com.smilehunter.ablebody.model.CodyItemData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi

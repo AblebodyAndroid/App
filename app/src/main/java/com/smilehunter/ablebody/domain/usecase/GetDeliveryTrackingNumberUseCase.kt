@@ -1,16 +1,16 @@
-package com.smilehunter.ablebody.domain
+package com.smilehunter.ablebody.domain.usecase
 
-import com.smilehunter.ablebody.network.model.response.GetDeliveryInfoResponseData
 import com.smilehunter.ablebody.data.repository.OrderManagementRepository
 import com.smilehunter.ablebody.model.DeliveryTrackingData
-import com.smilehunter.ablebody.network.di.AbleBodyDispatcher.IO
+import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
+import com.smilehunter.ablebody.network.model.response.GetDeliveryInfoResponseData
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class GetDeliveryTrackingNumberUseCase @Inject constructor(
-    @Dispatcher(IO) private val ioDispatcher: CoroutineDispatcher,
+    @Dispatcher(AbleBodyDispatcher.IO) private val ioDispatcher: CoroutineDispatcher,
     private val orderManagementRepository: OrderManagementRepository
 ) {
 

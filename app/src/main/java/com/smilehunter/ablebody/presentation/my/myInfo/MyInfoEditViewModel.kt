@@ -11,8 +11,8 @@ import com.smilehunter.ablebody.network.model.SendSMSResponse
 import com.smilehunter.ablebody.network.model.response.SMSCheckResponseData
 import com.smilehunter.ablebody.data.repository.OnboardingRepository
 import com.smilehunter.ablebody.data.repository.UserRepository
-import com.smilehunter.ablebody.domain.EditProfileUseCase
-import com.smilehunter.ablebody.domain.GetUserInfoUseCase
+import com.smilehunter.ablebody.domain.usecase.EditProfileUseCase
+import com.smilehunter.ablebody.domain.usecase.GetUserInfoUseCase
 import com.smilehunter.ablebody.model.UserInfoData
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher

@@ -6,10 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.smilehunter.ablebody.network.model.request.EditProfile
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
-import com.smilehunter.ablebody.domain.CheckNicknameUseCase
-import com.smilehunter.ablebody.domain.EditProfileUseCase
-import com.smilehunter.ablebody.domain.GetUserInfoUseCase
-import com.smilehunter.ablebody.domain.Status
+import com.smilehunter.ablebody.domain.usecase.CheckNicknameUseCase
+import com.smilehunter.ablebody.domain.usecase.EditProfileUseCase
+import com.smilehunter.ablebody.domain.usecase.GetUserInfoUseCase
+import com.smilehunter.ablebody.domain.usecase.Status
 import com.smilehunter.ablebody.presentation.home.my.data.EditProfileUiStatus
 import com.smilehunter.ablebody.presentation.home.my.data.NicknameCheckUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
