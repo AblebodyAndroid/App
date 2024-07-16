@@ -1,30 +1,30 @@
 package com.smilehunter.ablebody.domain.repository
 
+import com.smilehunter.ablebody.domain.model.CouponData
+import com.smilehunter.ablebody.domain.model.DeliveryAddressData
+import com.smilehunter.ablebody.domain.model.LocalUserInfoData
+import com.smilehunter.ablebody.domain.model.UserInfoData
+import com.smilehunter.ablebody.domain.usecase.CouponStatus
+import com.smilehunter.ablebody.network.model.GetMyBoardResponse
 import com.smilehunter.ablebody.network.model.request.ChangePhoneNumberRequest
 import com.smilehunter.ablebody.network.model.request.EditProfile
-import com.smilehunter.ablebody.network.model.AddCouponResponse
-import com.smilehunter.ablebody.network.model.GetAddressResponse
-import com.smilehunter.ablebody.network.model.GetCouponBagsResponse
-import com.smilehunter.ablebody.network.model.GetMyBoardResponse
-import com.smilehunter.ablebody.network.model.UserDataResponse
-import com.smilehunter.ablebody.domain.model.LocalUserInfoData
 import kotlinx.coroutines.flow.Flow
 import java.io.InputStream
 
 interface UserRepository {
 
-    suspend fun getMyUserData(): UserDataResponse
-
-    suspend fun getUserData(uid: String): UserDataResponse
-
     val localUserInfoData: Flow<LocalUserInfoData>
+
+    suspend fun getMyUserData(): UserInfoData
+
+    suspend fun getUserData(uid: String): UserInfoData
 
     suspend fun updateLocalUserInfo(localUserInfoData: (LocalUserInfoData) -> LocalUserInfoData)
 
     suspend fun editProfile(
         editProfile: EditProfile,
         profileImageInputStream: InputStream?
-    ): UserDataResponse
+    ): Boolean
 
     suspend fun getMyBoard(
         uid: String? = null,
@@ -32,11 +32,11 @@ interface UserRepository {
         size: Int = 10
     ): GetMyBoardResponse
 
-    suspend fun getCouponBags(): GetCouponBagsResponse
+    suspend fun getCouponBags(): List<CouponData>
 
-    suspend fun addCouponByCouponCode(couponCode: String): AddCouponResponse
+    suspend fun addCouponByCouponCode(couponCode: String): CouponStatus
 
-    suspend fun getMyAddress(): GetAddressResponse
+    suspend fun getMyAddress(): DeliveryAddressData
 
     suspend fun addMyAddress(
         name: String,
@@ -60,7 +60,7 @@ interface UserRepository {
 
     suspend fun acceptUserAdConsent(accept: Boolean): String
 
-    suspend fun changePhoneNumber(changePhoneNumberRequest: ChangePhoneNumberRequest): UserDataResponse
+    suspend fun changePhoneNumber(changePhoneNumberRequest: ChangePhoneNumberRequest): UserInfoData
 
     suspend fun resignUser(reason: String): String
 

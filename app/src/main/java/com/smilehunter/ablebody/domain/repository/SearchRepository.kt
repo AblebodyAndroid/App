@@ -6,10 +6,10 @@ import com.smilehunter.ablebody.data.model.ItemChildCategory
 import com.smilehunter.ablebody.data.model.ItemGender
 import com.smilehunter.ablebody.data.model.ItemParentCategory
 import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.domain.model.SearchHistoryQuery
 import com.smilehunter.ablebody.network.model.SearchCodyResponse
 import com.smilehunter.ablebody.network.model.SearchItemResponse
 import com.smilehunter.ablebody.network.model.UniSearchResponse
-import com.smilehunter.ablebody.domain.model.SearchHistoryQuery
 import kotlinx.coroutines.flow.Flow
 
 interface SearchRepository {

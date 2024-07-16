@@ -1,8 +1,8 @@
 package com.smilehunter.ablebody.domain.usecase
 
 import com.smilehunter.ablebody.data.model.SortingMethod
-import com.smilehunter.ablebody.domain.repository.BrandRepository
 import com.smilehunter.ablebody.domain.model.BrandListData
+import com.smilehunter.ablebody.domain.repository.BrandRepository
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import com.smilehunter.ablebody.network.model.response.BrandMainResponseData
