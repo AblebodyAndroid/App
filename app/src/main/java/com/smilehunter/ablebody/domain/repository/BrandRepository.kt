@@ -1,4 +1,4 @@
-package com.smilehunter.ablebody.data.repository
+package com.smilehunter.ablebody.domain.repository
 
 import com.smilehunter.ablebody.data.model.Gender
 import com.smilehunter.ablebody.data.model.HomeCategory

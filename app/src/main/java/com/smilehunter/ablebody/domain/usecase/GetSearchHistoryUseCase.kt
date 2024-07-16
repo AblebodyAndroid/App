@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain.usecase
 
-import com.smilehunter.ablebody.data.repository.SearchRepository
+import com.smilehunter.ablebody.domain.repository.SearchRepository
 import com.smilehunter.ablebody.domain.model.SearchHistoryQuery
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher

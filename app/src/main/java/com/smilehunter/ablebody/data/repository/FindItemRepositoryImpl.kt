@@ -4,6 +4,7 @@ import com.smilehunter.ablebody.data.model.ItemChildCategory
 import com.smilehunter.ablebody.data.model.ItemGender
 import com.smilehunter.ablebody.data.model.ItemParentCategory
 import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.domain.repository.FindItemRepository
 import com.smilehunter.ablebody.network.model.FindItemResponse
 import com.smilehunter.ablebody.network.NetworkService
 import retrofit2.Response

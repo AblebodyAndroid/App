@@ -1,4 +1,4 @@
-package com.smilehunter.ablebody.data.repository
+package com.smilehunter.ablebody.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 

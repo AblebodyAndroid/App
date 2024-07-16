@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain.usecase
 
-import com.smilehunter.ablebody.data.repository.LikeListRepository
+import com.smilehunter.ablebody.domain.repository.LikeListRepository
 import com.smilehunter.ablebody.domain.model.LikeListData
 import com.smilehunter.ablebody.domain.model.LikedLocations
 import com.smilehunter.ablebody.network.model.response.CreatorDetailLikeUsersResponseData

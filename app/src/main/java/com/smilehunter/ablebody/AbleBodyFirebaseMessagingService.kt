@@ -9,8 +9,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.smilehunter.ablebody.data.repository.FCMSyncRepository
-import com.smilehunter.ablebody.data.repository.TokenRepository
+import com.smilehunter.ablebody.domain.repository.FCMSyncRepository
+import com.smilehunter.ablebody.domain.repository.TokenRepository
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import com.smilehunter.ablebody.ui.theme.AbleBlue

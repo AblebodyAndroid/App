@@ -1,5 +1,6 @@
 package com.smilehunter.ablebody.data.repository
 
+import com.smilehunter.ablebody.domain.repository.CommentRepository
 import com.smilehunter.ablebody.network.model.response.CreatorDetailCommentResponseData
 import com.smilehunter.ablebody.network.model.response.CreatorDetailLikeUsersResponseData
 import com.smilehunter.ablebody.network.model.response.CreatorDetailReplyResponseData

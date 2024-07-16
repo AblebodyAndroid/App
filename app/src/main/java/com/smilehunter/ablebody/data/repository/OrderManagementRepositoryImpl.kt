@@ -1,5 +1,6 @@
 package com.smilehunter.ablebody.data.repository
 
+import com.smilehunter.ablebody.domain.repository.OrderManagementRepository
 import com.smilehunter.ablebody.network.model.request.AddOrderListRequest
 import com.smilehunter.ablebody.network.model.AddOrderListResponse
 import com.smilehunter.ablebody.network.model.GetDeliveryInfoResponse

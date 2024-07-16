@@ -2,7 +2,7 @@ package com.smilehunter.ablebody.presentation.order_management
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.data.repository.OrderManagementRepository
+import com.smilehunter.ablebody.domain.repository.OrderManagementRepository
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
 import com.smilehunter.ablebody.domain.usecase.GetDeliveryTrackingNumberUseCase

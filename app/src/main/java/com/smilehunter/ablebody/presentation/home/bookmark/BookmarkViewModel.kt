@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.smilehunter.ablebody.data.repository.BookmarkRepository
+import com.smilehunter.ablebody.domain.repository.BookmarkRepository
 import com.smilehunter.ablebody.domain.usecase.CodyItemPagerUseCase
 import com.smilehunter.ablebody.domain.usecase.CodyPagingSourceData
 import com.smilehunter.ablebody.domain.usecase.ProductItemPagerUseCase

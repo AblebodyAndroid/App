@@ -11,10 +11,10 @@ import com.smilehunter.ablebody.network.model.response.BrandDetailCodyResponseDa
 import com.smilehunter.ablebody.network.model.response.FindCodyResponseData
 import com.smilehunter.ablebody.network.model.response.ReadBookmarkCodyData
 import com.smilehunter.ablebody.network.model.response.SearchCodyResponseData
-import com.smilehunter.ablebody.data.repository.BookmarkRepository
-import com.smilehunter.ablebody.data.repository.BrandRepository
-import com.smilehunter.ablebody.data.repository.FindCodyRepository
-import com.smilehunter.ablebody.data.repository.SearchRepository
+import com.smilehunter.ablebody.domain.repository.BookmarkRepository
+import com.smilehunter.ablebody.domain.repository.BrandRepository
+import com.smilehunter.ablebody.domain.repository.FindCodyRepository
+import com.smilehunter.ablebody.domain.repository.SearchRepository
 import com.smilehunter.ablebody.domain.model.CodyItemData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

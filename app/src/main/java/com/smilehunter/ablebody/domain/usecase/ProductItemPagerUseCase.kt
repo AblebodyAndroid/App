@@ -13,10 +13,10 @@ import com.smilehunter.ablebody.network.model.response.BrandDetailItemResponseDa
 import com.smilehunter.ablebody.network.model.response.FindItemResponseData
 import com.smilehunter.ablebody.network.model.response.ReadBookmarkItemData
 import com.smilehunter.ablebody.network.model.response.SearchItemResponseData
-import com.smilehunter.ablebody.data.repository.BookmarkRepository
-import com.smilehunter.ablebody.data.repository.BrandRepository
-import com.smilehunter.ablebody.data.repository.FindItemRepository
-import com.smilehunter.ablebody.data.repository.SearchRepository
+import com.smilehunter.ablebody.domain.repository.BookmarkRepository
+import com.smilehunter.ablebody.domain.repository.BrandRepository
+import com.smilehunter.ablebody.domain.repository.FindItemRepository
+import com.smilehunter.ablebody.domain.repository.SearchRepository
 import com.smilehunter.ablebody.domain.model.ProductItemData
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
