@@ -8,7 +8,7 @@ import com.smilehunter.ablebody.data.repository.CreatorDetailRepository
 import com.smilehunter.ablebody.data.repository.UserRepository
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
-import com.smilehunter.ablebody.domain.GetCreatorDetailDataListUseCase
+import com.smilehunter.ablebody.domain.usecase.GetCreatorDetailDataListUseCase
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import com.smilehunter.ablebody.presentation.creator_detail.data.CreatorDetailUiState

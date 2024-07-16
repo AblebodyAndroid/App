@@ -1,11 +1,10 @@
-package com.smilehunter.ablebody.domain
+package com.smilehunter.ablebody.domain.usecase
 
-
-import com.smilehunter.ablebody.network.model.response.GetOrderListDetailResponseData
 import com.smilehunter.ablebody.data.repository.OrderManagementRepository
 import com.smilehunter.ablebody.model.ReceiptData
-import com.smilehunter.ablebody.network.di.AbleBodyDispatcher.IO
+import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
+import com.smilehunter.ablebody.network.model.response.GetOrderListDetailResponseData
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
@@ -13,7 +12,7 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class GetReceiptUseCase @Inject constructor(
-    @Dispatcher(IO) private val ioDispatcher: CoroutineDispatcher,
+    @Dispatcher(AbleBodyDispatcher.IO) private val ioDispatcher: CoroutineDispatcher,
     private val orderManagementRepository: OrderManagementRepository
 ) {
 

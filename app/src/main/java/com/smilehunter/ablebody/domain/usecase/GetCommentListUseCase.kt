@@ -1,8 +1,8 @@
-package com.smilehunter.ablebody.domain
+package com.smilehunter.ablebody.domain.usecase
 
-import com.smilehunter.ablebody.network.model.response.CreatorDetailResponseData
 import com.smilehunter.ablebody.data.repository.CreatorDetailRepository
 import com.smilehunter.ablebody.model.CommentListData
+import com.smilehunter.ablebody.network.model.response.CreatorDetailResponseData
 import javax.inject.Inject
 
 class GetCommentListUseCase @Inject constructor(
@@ -19,6 +19,7 @@ private fun CreatorDetailResponseData.CommentOrReply.toDomain(uid: String) =
         type = when (type) {
             CreatorDetailResponseData.CommentOrReply.CommentReplyType.COMMENT ->
                 CommentListData.CommentType.COMMENT
+
             CreatorDetailResponseData.CommentOrReply.CommentReplyType.REPLY ->
                 CommentListData.CommentType.REPLY
         },

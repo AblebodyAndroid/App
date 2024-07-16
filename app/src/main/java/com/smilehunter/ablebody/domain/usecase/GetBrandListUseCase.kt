@@ -1,11 +1,11 @@
-package com.smilehunter.ablebody.domain
+package com.smilehunter.ablebody.domain.usecase
 
 import com.smilehunter.ablebody.data.model.SortingMethod
-import com.smilehunter.ablebody.network.model.response.BrandMainResponseData
 import com.smilehunter.ablebody.data.repository.BrandRepository
 import com.smilehunter.ablebody.model.BrandListData
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
+import com.smilehunter.ablebody.network.model.response.BrandMainResponseData
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

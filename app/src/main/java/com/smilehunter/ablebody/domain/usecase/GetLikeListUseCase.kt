@@ -1,9 +1,9 @@
-package com.smilehunter.ablebody.domain
+package com.smilehunter.ablebody.domain.usecase
 
-import com.smilehunter.ablebody.network.model.response.CreatorDetailLikeUsersResponseData
 import com.smilehunter.ablebody.data.repository.LikeListRepository
 import com.smilehunter.ablebody.model.LikeListData
 import com.smilehunter.ablebody.model.LikedLocations
+import com.smilehunter.ablebody.network.model.response.CreatorDetailLikeUsersResponseData
 import javax.inject.Inject
 
 class GetLikeListUseCase @Inject constructor(

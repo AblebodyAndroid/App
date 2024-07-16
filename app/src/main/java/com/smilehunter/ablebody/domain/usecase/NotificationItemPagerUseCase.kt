@@ -1,13 +1,13 @@
-package com.smilehunter.ablebody.domain
+package com.smilehunter.ablebody.domain.usecase
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.smilehunter.ablebody.network.model.response.GetMyNotiResponseData
 import com.smilehunter.ablebody.data.repository.NotificationRepository
 import com.smilehunter.ablebody.model.NotificationItemData
+import com.smilehunter.ablebody.network.model.response.GetMyNotiResponseData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -19,7 +19,7 @@ class NotificationItemPagerUseCase @Inject constructor(
 
     operator fun invoke(): Flow<PagingData<NotificationItemData.Content>> {
         return Pager(
-            config =  PagingConfig(pageSize = 20),
+            config = PagingConfig(pageSize = 20),
             initialKey = 0,
             pagingSourceFactory = { NotificationPagingSource() }
         )
@@ -49,15 +49,15 @@ class NotificationItemPagerUseCase @Inject constructor(
 
 private fun GetMyNotiResponseData.toDomain() = NotificationItemData(
     content = content.map {
-      NotificationItemData.Content(
-          id = it.id,
-          senderProfileImageURL = it.from.profileUrl,
-          senderNickname = it.from.nickname,
-          createDate = it.createDate,
-          text = it.content ?: it.body!!,
-          uri = it.url,
-          checked = it.checked,
-      )
+        NotificationItemData.Content(
+            id = it.id,
+            senderProfileImageURL = it.from.profileUrl,
+            senderNickname = it.from.nickname,
+            createDate = it.createDate,
+            text = it.content ?: it.body!!,
+            uri = it.url,
+            checked = it.checked,
+        )
     },
     totalPages = totalPages,
     last = last,

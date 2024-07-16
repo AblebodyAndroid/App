@@ -1,4 +1,4 @@
-package com.smilehunter.ablebody.domain
+package com.smilehunter.ablebody.domain.usecase
 
 import com.smilehunter.ablebody.network.model.AbleBodyResponse
 import com.smilehunter.ablebody.data.repository.UserRepository

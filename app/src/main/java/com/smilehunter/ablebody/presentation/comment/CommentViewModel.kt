@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.smilehunter.ablebody.data.repository.CommentRepository
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
-import com.smilehunter.ablebody.domain.GetCommentListUseCase
+import com.smilehunter.ablebody.domain.usecase.GetCommentListUseCase
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import com.smilehunter.ablebody.presentation.comment.data.CommentUiState
