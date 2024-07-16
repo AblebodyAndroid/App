@@ -1,5 +1,6 @@
 package com.smilehunter.ablebody.data.repository
 
+import com.smilehunter.ablebody.domain.repository.NotificationRepository
 import com.smilehunter.ablebody.network.model.CheckMyNotiResponse
 import com.smilehunter.ablebody.network.model.GetMyNotiResponse
 import com.smilehunter.ablebody.network.NetworkService

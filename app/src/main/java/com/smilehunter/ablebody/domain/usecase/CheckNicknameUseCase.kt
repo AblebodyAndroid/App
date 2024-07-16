@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain.usecase
 
-import com.smilehunter.ablebody.data.repository.OnboardingRepository
+import com.smilehunter.ablebody.domain.repository.OnboardingRepository
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import kotlinx.coroutines.CoroutineDispatcher

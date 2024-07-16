@@ -1,6 +1,7 @@
 package com.smilehunter.ablebody.data.repository
 
 import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.domain.repository.OnboardingRepository
 import com.smilehunter.ablebody.network.model.CheckSMSResponse
 import com.smilehunter.ablebody.network.model.NewUserCreateResponse
 import com.smilehunter.ablebody.network.model.SendSMSResponse

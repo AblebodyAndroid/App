@@ -1,6 +1,7 @@
 package com.smilehunter.ablebody.data.repository
 
 import com.smilehunter.ablebody.BuildConfig
+import com.smilehunter.ablebody.domain.repository.TokenRepository
 import com.smilehunter.ablebody.sharedPreferences.TokenSharedPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged

@@ -1,5 +1,6 @@
 package com.smilehunter.ablebody.data.repository
 
+import com.smilehunter.ablebody.domain.repository.BookmarkRepository
 import com.smilehunter.ablebody.network.model.AbleBodyResponse
 import com.smilehunter.ablebody.network.model.response.ReadBookmarkCodyData
 import com.smilehunter.ablebody.network.model.response.ReadBookmarkItemData

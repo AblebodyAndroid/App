@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain.usecase
 
-import com.smilehunter.ablebody.data.repository.UserRepository
+import com.smilehunter.ablebody.domain.repository.UserRepository
 import com.smilehunter.ablebody.domain.model.DeliveryAddressData
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher

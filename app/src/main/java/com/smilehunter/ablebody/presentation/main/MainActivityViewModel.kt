@@ -1,8 +1,8 @@
 package com.smilehunter.ablebody.presentation.main
 
 import androidx.lifecycle.ViewModel
-import com.smilehunter.ablebody.data.repository.TokenRepository
-import com.smilehunter.ablebody.data.repository.UserRepository
+import com.smilehunter.ablebody.domain.repository.TokenRepository
+import com.smilehunter.ablebody.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

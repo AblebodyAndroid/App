@@ -7,8 +7,8 @@ import com.smilehunter.ablebody.BuildConfig
 import com.smilehunter.ablebody.data.model.Gender
 import com.smilehunter.ablebody.network.model.NewUserCreateResponse
 import com.smilehunter.ablebody.network.model.SendSMSResponse
-import com.smilehunter.ablebody.data.repository.FCMSyncRepository
-import com.smilehunter.ablebody.data.repository.OnboardingRepository
+import com.smilehunter.ablebody.domain.repository.FCMSyncRepository
+import com.smilehunter.ablebody.domain.repository.OnboardingRepository
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import com.smilehunter.ablebody.presentation.onboarding.data.CertificationNumberInfoMessageUiState

@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.smilehunter.ablebody.data.repository.UserRepository
+import com.smilehunter.ablebody.domain.repository.UserRepository
 import com.smilehunter.ablebody.domain.model.UserBoardData
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher

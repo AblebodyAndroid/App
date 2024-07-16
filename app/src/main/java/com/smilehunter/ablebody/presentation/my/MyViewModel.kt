@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.smilehunter.ablebody.data.repository.ManageRepository
+import com.smilehunter.ablebody.domain.repository.ManageRepository
 import com.smilehunter.ablebody.domain.usecase.GetOrderItemListUseCase
 import com.smilehunter.ablebody.domain.usecase.GetUserBoardPagerUseCase
 import com.smilehunter.ablebody.domain.usecase.GetUserInfoUseCase

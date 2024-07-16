@@ -6,6 +6,7 @@ import com.smilehunter.ablebody.data.model.ItemChildCategory
 import com.smilehunter.ablebody.data.model.ItemGender
 import com.smilehunter.ablebody.data.model.ItemParentCategory
 import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.domain.repository.BrandRepository
 import com.smilehunter.ablebody.network.model.BrandDetailCodyResponse
 import com.smilehunter.ablebody.network.model.BrandDetailItemResponse
 import com.smilehunter.ablebody.network.model.BrandMainResponse

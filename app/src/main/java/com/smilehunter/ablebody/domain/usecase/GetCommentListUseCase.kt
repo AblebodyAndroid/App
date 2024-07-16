@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain.usecase
 
-import com.smilehunter.ablebody.data.repository.CreatorDetailRepository
+import com.smilehunter.ablebody.domain.repository.CreatorDetailRepository
 import com.smilehunter.ablebody.domain.model.CommentListData
 import com.smilehunter.ablebody.network.model.response.CreatorDetailResponseData
 import javax.inject.Inject

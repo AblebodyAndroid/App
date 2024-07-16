@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.smilehunter.ablebody.data.repository.UserRepository
+import com.smilehunter.ablebody.domain.repository.UserRepository
 import com.smilehunter.ablebody.domain.usecase.AddCouponUseCase
 import com.smilehunter.ablebody.domain.usecase.GetCouponListUseCase
 import com.smilehunter.ablebody.domain.usecase.GetOrderItemListUseCase

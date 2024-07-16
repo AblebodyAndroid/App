@@ -1,4 +1,4 @@
-package com.smilehunter.ablebody.data.repository
+package com.smilehunter.ablebody.domain.repository
 
 import com.smilehunter.ablebody.network.model.CheckSMSResponse
 import com.smilehunter.ablebody.network.model.NewUserCreateResponse

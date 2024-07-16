@@ -3,7 +3,7 @@ package com.smilehunter.ablebody.presentation.item_detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.data.repository.BookmarkRepository
+import com.smilehunter.ablebody.domain.repository.BookmarkRepository
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
 import com.smilehunter.ablebody.domain.usecase.GetItemOptionListUseCase

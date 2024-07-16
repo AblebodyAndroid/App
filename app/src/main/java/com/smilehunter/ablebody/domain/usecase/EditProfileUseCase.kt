@@ -1,7 +1,7 @@
 package com.smilehunter.ablebody.domain.usecase
 
 import com.smilehunter.ablebody.network.model.request.EditProfile
-import com.smilehunter.ablebody.data.repository.UserRepository
+import com.smilehunter.ablebody.domain.repository.UserRepository
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher.IO
 import com.smilehunter.ablebody.network.di.Dispatcher
 import kotlinx.coroutines.CoroutineDispatcher
