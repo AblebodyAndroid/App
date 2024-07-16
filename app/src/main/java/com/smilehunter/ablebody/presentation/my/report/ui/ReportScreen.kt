@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.smilehunter.ablebody.BuildConfig
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.data.dto.request.ReportRequest
+import com.smilehunter.ablebody.network.model.request.ReportRequest
 import com.smilehunter.ablebody.model.ErrorHandlerCode
 import com.smilehunter.ablebody.presentation.my.report.ReportViewModel
 import com.smilehunter.ablebody.ui.theme.AbleBlue
@@ -50,7 +50,6 @@ import com.smilehunter.ablebody.ui.theme.PlaneGrey
 import com.smilehunter.ablebody.ui.theme.SmallTextGrey
 import com.smilehunter.ablebody.ui.utils.AbleBodyAlertDialog
 import com.smilehunter.ablebody.ui.utils.BackButtonTopBarLayout
-import com.smilehunter.ablebody.ui.utils.SimpleErrorHandler
 import com.smilehunter.ablebody.utils.nonReplyClickable
 
 @Composable

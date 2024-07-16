@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain
 
-import com.smilehunter.ablebody.data.dto.response.data.UserDataResponseData
+import com.smilehunter.ablebody.network.model.response.UserDataResponseData
 import com.smilehunter.ablebody.data.repository.UserRepository
 import com.smilehunter.ablebody.model.UserInfoData
 import javax.inject.Inject

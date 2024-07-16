@@ -329,10 +329,12 @@ fun SuggestPage(
                     },
                     modifier = Modifier.fillMaxSize(),
                     placeholder = { Text(text = "애블바디에 이런 기능이 있었으면 좋겠어요.") },
-                    colors = TextFieldDefaults.textFieldColors(
-                        containerColor = PlaneGrey,
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = PlaneGrey,
+                        unfocusedContainerColor = PlaneGrey,
+                        disabledContainerColor = PlaneGrey,
                         focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent
+                        unfocusedIndicatorColor = Color.Transparent,
                     )
                 )
             }
@@ -453,7 +455,7 @@ fun MarketingAlarmToggleButton(
             contentAlignment = Alignment.Center
         ) {
             if (isToggle) {
-                Row() {
+                Row {
                     Icon(
                         painter = painterResource(id = R.drawable.alarm_able_toggle_btn),
                         contentDescription = null,

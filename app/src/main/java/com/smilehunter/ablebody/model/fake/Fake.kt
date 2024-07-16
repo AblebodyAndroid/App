@@ -1,8 +1,8 @@
 package com.smilehunter.ablebody.model.fake
 
-import com.smilehunter.ablebody.data.dto.Gender
-import com.smilehunter.ablebody.data.dto.HomeCategory
-import com.smilehunter.ablebody.data.dto.ItemGender
+import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.data.model.HomeCategory
+import com.smilehunter.ablebody.data.model.ItemGender
 import com.smilehunter.ablebody.model.BrandListData
 import com.smilehunter.ablebody.model.CodyItemData
 import com.smilehunter.ablebody.model.CreatorDetailData

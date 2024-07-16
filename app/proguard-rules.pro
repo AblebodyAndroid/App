@@ -21,7 +21,7 @@
 #-renamesourcefileattribute SourceFile
 
 # Keep DTO Class
--keep class com.smilehunter.ablebody.data.dto.** { *; }
+-keep class com.smilehunter.ablebody.data.model.** { *; }
 
 # Keep Model class
 -keep class com.smilehunter.ablebody.model.** { *; }

@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain
 
-import com.smilehunter.ablebody.data.dto.response.data.GetOrderListResponseData
+import com.smilehunter.ablebody.network.model.response.GetOrderListResponseData
 import com.smilehunter.ablebody.data.repository.OrderManagementRepository
 import com.smilehunter.ablebody.model.OrderItemData
 import com.smilehunter.ablebody.model.OrderItemData.OrderStatus.DELIVERY_COMPLETED

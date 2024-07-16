@@ -1,8 +1,8 @@
 package com.smilehunter.ablebody.data.repository
 
-import com.smilehunter.ablebody.data.dto.response.AbleBodyResponse
-import com.smilehunter.ablebody.data.dto.response.data.ReadBookmarkCodyData
-import com.smilehunter.ablebody.data.dto.response.data.ReadBookmarkItemData
+import com.smilehunter.ablebody.network.model.AbleBodyResponse
+import com.smilehunter.ablebody.network.model.response.ReadBookmarkCodyData
+import com.smilehunter.ablebody.network.model.response.ReadBookmarkItemData
 import com.smilehunter.ablebody.network.NetworkService
 import retrofit2.Response
 import javax.inject.Inject

@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.data.repository
 
-import com.smilehunter.ablebody.data.dto.response.data.CreatorDetailResponseData
+import com.smilehunter.ablebody.network.model.response.CreatorDetailResponseData
 
 interface CreatorDetailRepository {
 

@@ -1,12 +1,12 @@
 package com.smilehunter.ablebody.data.repository
 
-import com.smilehunter.ablebody.data.dto.request.AddOrderListRequest
-import com.smilehunter.ablebody.data.dto.response.AddOrderListResponse
-import com.smilehunter.ablebody.data.dto.response.GetDeliveryInfoResponse
-import com.smilehunter.ablebody.data.dto.response.GetOrderListDetailResponse
-import com.smilehunter.ablebody.data.dto.response.GetOrderListResponse
-import com.smilehunter.ablebody.data.dto.response.TossPaymentFailResponse
-import com.smilehunter.ablebody.data.dto.response.TossPaymentSuccessResponse
+import com.smilehunter.ablebody.network.model.request.AddOrderListRequest
+import com.smilehunter.ablebody.network.model.AddOrderListResponse
+import com.smilehunter.ablebody.network.model.GetDeliveryInfoResponse
+import com.smilehunter.ablebody.network.model.GetOrderListDetailResponse
+import com.smilehunter.ablebody.network.model.GetOrderListResponse
+import com.smilehunter.ablebody.network.model.TossPaymentFailResponse
+import com.smilehunter.ablebody.network.model.TossPaymentSuccessResponse
 
 interface OrderManagementRepository {
 

@@ -49,8 +49,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.data.dto.ItemGender
-import com.smilehunter.ablebody.data.dto.SortingMethod
+import com.smilehunter.ablebody.data.model.ItemGender
+import com.smilehunter.ablebody.data.model.SortingMethod
 import com.smilehunter.ablebody.model.ErrorHandlerCode
 import com.smilehunter.ablebody.model.fake.fakeBrandListData
 import com.smilehunter.ablebody.presentation.home.brand.BrandViewModel

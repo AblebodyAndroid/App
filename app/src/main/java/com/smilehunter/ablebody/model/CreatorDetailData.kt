@@ -1,7 +1,7 @@
 package com.smilehunter.ablebody.model
 
-import com.smilehunter.ablebody.data.dto.Gender
-import com.smilehunter.ablebody.data.dto.HomeCategory
+import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.data.model.HomeCategory
 import com.smilehunter.ablebody.utils.calculateSportElapsedTime
 import com.smilehunter.ablebody.utils.calculateUserElapsedTime
 import kotlin.math.roundToInt
