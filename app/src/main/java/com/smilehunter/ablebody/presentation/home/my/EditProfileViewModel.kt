@@ -9,7 +9,7 @@ import com.smilehunter.ablebody.data.result.asResult
 import com.smilehunter.ablebody.domain.usecase.CheckNicknameUseCase
 import com.smilehunter.ablebody.domain.usecase.EditProfileUseCase
 import com.smilehunter.ablebody.domain.usecase.GetUserInfoUseCase
-import com.smilehunter.ablebody.domain.usecase.Status
+import com.smilehunter.ablebody.domain.usecase.EditProfileResult
 import com.smilehunter.ablebody.presentation.home.my.data.EditProfileUiStatus
 import com.smilehunter.ablebody.presentation.home.my.data.NicknameCheckUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -68,8 +68,8 @@ class EditProfileViewModel @Inject constructor(
                     profileImageInputStream = inputStream
                 )
                 when (status) {
-                    Status.SUCCESS -> _uploadStatus.emit(EditProfileUiStatus.Success)
-                    Status.FAIL -> _uploadStatus.emit(EditProfileUiStatus.LoadFail(null))
+                    EditProfileResult.SUCCESS -> _uploadStatus.emit(EditProfileUiStatus.Success)
+                    EditProfileResult.FAIL -> _uploadStatus.emit(EditProfileUiStatus.LoadFail(null))
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

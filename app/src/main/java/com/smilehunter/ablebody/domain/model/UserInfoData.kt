@@ -18,7 +18,7 @@ data class UserInfoData(
     val creatorPoint: Int,
     val userType: UserType
 ) {
-    enum class UserType{
+    enum class UserType {
         CREATOR, USER
     }
 }
