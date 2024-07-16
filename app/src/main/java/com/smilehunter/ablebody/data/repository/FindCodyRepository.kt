@@ -1,8 +1,8 @@
 package com.smilehunter.ablebody.data.repository
 
-import com.smilehunter.ablebody.data.dto.Gender
-import com.smilehunter.ablebody.data.dto.HomeCategory
-import com.smilehunter.ablebody.data.dto.response.FindCodyResponse
+import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.data.model.HomeCategory
+import com.smilehunter.ablebody.network.model.FindCodyResponse
 import retrofit2.Response
 
 interface FindCodyRepository {

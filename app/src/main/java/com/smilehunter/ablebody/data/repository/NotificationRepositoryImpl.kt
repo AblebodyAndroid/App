@@ -1,7 +1,7 @@
 package com.smilehunter.ablebody.data.repository
 
-import com.smilehunter.ablebody.data.dto.response.CheckMyNotiResponse
-import com.smilehunter.ablebody.data.dto.response.GetMyNotiResponse
+import com.smilehunter.ablebody.network.model.CheckMyNotiResponse
+import com.smilehunter.ablebody.network.model.GetMyNotiResponse
 import com.smilehunter.ablebody.network.NetworkService
 import javax.inject.Inject
 

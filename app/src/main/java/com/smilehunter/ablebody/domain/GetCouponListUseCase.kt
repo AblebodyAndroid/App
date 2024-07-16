@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain
 
-import com.smilehunter.ablebody.data.dto.response.data.GetCouponBagsResponseData
+import com.smilehunter.ablebody.network.model.response.GetCouponBagsResponseData
 import com.smilehunter.ablebody.data.repository.UserRepository
 import com.smilehunter.ablebody.model.CouponData
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher.*

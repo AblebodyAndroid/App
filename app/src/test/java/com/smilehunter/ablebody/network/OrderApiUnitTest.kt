@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.network
 
-import com.smilehunter.ablebody.data.dto.request.AddOrderListRequest
+import com.smilehunter.ablebody.network.model.request.AddOrderListRequest
 import com.smilehunter.ablebody.network.utils.TestRetrofit
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert

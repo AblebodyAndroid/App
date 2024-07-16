@@ -124,7 +124,7 @@ fun AlarmPage(
 @Preview(showSystemUi = true)
 @Composable
 fun AlarmPagePreview() {
-    Column(){
+    Column {
 //        AlarmPage({}, true)
         AlarmPage({}, true, {})
     }

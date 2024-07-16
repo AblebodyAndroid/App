@@ -102,7 +102,7 @@ fun CouponScreen(
     couponData: List<CouponData>,
     couponRegisterOnClick: () -> Unit
 ) {
-    Log.d("couponData", couponData.toString() ?: "0")
+    Log.d("couponData", couponData.toString())
     Scaffold(
         topBar = {
             BackButtonTopBarLayout(onBackRequest = onBackRequest)
@@ -178,7 +178,7 @@ fun CouponContent(
                 .padding(15.dp)
                 .fillMaxSize()
         ) {
-            Column() {
+            Column {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -400,10 +400,12 @@ fun CouponNumberTextField(
                         color = SmallTextGrey
                     )
                 },
-                colors = TextFieldDefaults.textFieldColors(
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = Color.White,
+                    unfocusedContainerColor = Color.White,
+                    disabledContainerColor = Color.White,
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
-                    containerColor = Color.White
                 )
             )
 
@@ -541,7 +543,7 @@ fun CouponRegisterDialogPreview() {
 @Preview(showBackground = true)
 @Composable
 fun CouponPopupPreview() {
-    Column() {
+    Column {
         CouponPopup({}, "쿠폰 번호를 입력해주세요.")
         CouponPopup({}, "쿠폰 번호를 확인해주세요.")
         CouponPopup({}, "쿠폰 등록이 완료되었어요.")

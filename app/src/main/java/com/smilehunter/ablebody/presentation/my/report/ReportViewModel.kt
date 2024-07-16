@@ -6,14 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.data.dto.request.ReportRequest
+import com.smilehunter.ablebody.network.model.request.ReportRequest
 import com.smilehunter.ablebody.data.repository.ManageRepository
-import com.smilehunter.ablebody.data.repository.UserRepository
-import com.smilehunter.ablebody.domain.AddCouponUseCase
-import com.smilehunter.ablebody.domain.GetCouponListUseCase
-import com.smilehunter.ablebody.domain.GetOrderItemListUseCase
-import com.smilehunter.ablebody.domain.GetUserBoardPagerUseCase
-import com.smilehunter.ablebody.domain.GetUserInfoUseCase
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel

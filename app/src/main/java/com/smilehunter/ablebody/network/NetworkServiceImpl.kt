@@ -1,67 +1,72 @@
 package com.smilehunter.ablebody.network
 
 import com.google.gson.Gson
-import com.smilehunter.ablebody.data.dto.Gender
-import com.smilehunter.ablebody.data.dto.HomeCategory
-import com.smilehunter.ablebody.data.dto.ItemChildCategory
-import com.smilehunter.ablebody.data.dto.ItemGender
-import com.smilehunter.ablebody.data.dto.ItemParentCategory
-import com.smilehunter.ablebody.data.dto.SortingMethod
-import com.smilehunter.ablebody.data.dto.request.AddOrderListRequest
-import com.smilehunter.ablebody.data.dto.request.AddressRequest
-import com.smilehunter.ablebody.data.dto.request.ChangePhoneNumberRequest
-import com.smilehunter.ablebody.data.dto.request.EditProfile
-import com.smilehunter.ablebody.data.dto.request.ReportRequest
-import com.smilehunter.ablebody.data.dto.response.AbleBodyResponse
-import com.smilehunter.ablebody.data.dto.response.AcceptUserAdConsentResponse
-import com.smilehunter.ablebody.data.dto.response.AddAddressResponse
-import com.smilehunter.ablebody.data.dto.response.AddBookmarkCodyResponse
-import com.smilehunter.ablebody.data.dto.response.AddBookmarkItemResponse
-import com.smilehunter.ablebody.data.dto.response.AddCouponResponse
-import com.smilehunter.ablebody.data.dto.response.AddOrderListResponse
-import com.smilehunter.ablebody.data.dto.response.BrandDetailCodyResponse
-import com.smilehunter.ablebody.data.dto.response.BrandDetailItemResponse
-import com.smilehunter.ablebody.data.dto.response.BrandMainResponse
-import com.smilehunter.ablebody.data.dto.response.CancelOrderListResponse
-import com.smilehunter.ablebody.data.dto.response.CheckMyNotiResponse
-import com.smilehunter.ablebody.data.dto.response.CheckSMSResponse
-import com.smilehunter.ablebody.data.dto.response.CreatorDetailCommentResponse
-import com.smilehunter.ablebody.data.dto.response.CreatorDetailDeleteCommentReplyResponse
-import com.smilehunter.ablebody.data.dto.response.CreatorDetailDeleteResponse
-import com.smilehunter.ablebody.data.dto.response.CreatorDetailLikeResponse
-import com.smilehunter.ablebody.data.dto.response.CreatorDetailLikeUsersResponse
-import com.smilehunter.ablebody.data.dto.response.CreatorDetailReplyResponse
-import com.smilehunter.ablebody.data.dto.response.CreatorDetailResponse
-import com.smilehunter.ablebody.data.dto.response.DeleteBookmarkCodyResponse
-import com.smilehunter.ablebody.data.dto.response.DeleteBookmarkItemResponse
-import com.smilehunter.ablebody.data.dto.response.EditAddressResponse
-import com.smilehunter.ablebody.data.dto.response.FCMTokenAndAppVersionUpdateResponse
-import com.smilehunter.ablebody.data.dto.response.FindCodyResponse
-import com.smilehunter.ablebody.data.dto.response.FindItemResponse
-import com.smilehunter.ablebody.data.dto.response.GetAddressResponse
-import com.smilehunter.ablebody.data.dto.response.GetCouponBagsResponse
-import com.smilehunter.ablebody.data.dto.response.GetDeliveryInfoResponse
-import com.smilehunter.ablebody.data.dto.response.GetMyBoardResponse
-import com.smilehunter.ablebody.data.dto.response.GetMyNotiResponse
-import com.smilehunter.ablebody.data.dto.response.GetOrderListDetailResponse
-import com.smilehunter.ablebody.data.dto.response.GetOrderListResponse
-import com.smilehunter.ablebody.data.dto.response.GetUserAdConsentResponse
-import com.smilehunter.ablebody.data.dto.response.ItemDetailResponse
-import com.smilehunter.ablebody.data.dto.response.NewUserCreateResponse
-import com.smilehunter.ablebody.data.dto.response.RefreshTokenResponse
-import com.smilehunter.ablebody.data.dto.response.ReportResponse
-import com.smilehunter.ablebody.data.dto.response.ResignUserResponse
-import com.smilehunter.ablebody.data.dto.response.SearchCodyResponse
-import com.smilehunter.ablebody.data.dto.response.SearchItemResponse
-import com.smilehunter.ablebody.data.dto.response.SendSMSResponse
-import com.smilehunter.ablebody.data.dto.response.StringResponse
-import com.smilehunter.ablebody.data.dto.response.SuggestionResponse
-import com.smilehunter.ablebody.data.dto.response.TossPaymentFailResponse
-import com.smilehunter.ablebody.data.dto.response.TossPaymentSuccessResponse
-import com.smilehunter.ablebody.data.dto.response.UniSearchResponse
-import com.smilehunter.ablebody.data.dto.response.UserDataResponse
-import com.smilehunter.ablebody.data.dto.response.data.ReadBookmarkCodyData
-import com.smilehunter.ablebody.data.dto.response.data.ReadBookmarkItemData
+import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.data.model.HomeCategory
+import com.smilehunter.ablebody.data.model.ItemChildCategory
+import com.smilehunter.ablebody.data.model.ItemGender
+import com.smilehunter.ablebody.data.model.ItemParentCategory
+import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.network.model.request.AddOrderListRequest
+import com.smilehunter.ablebody.network.model.request.AddressRequest
+import com.smilehunter.ablebody.network.model.request.ChangePhoneNumberRequest
+import com.smilehunter.ablebody.network.model.request.EditProfile
+import com.smilehunter.ablebody.network.model.request.ReportRequest
+import com.smilehunter.ablebody.network.model.AbleBodyResponse
+import com.smilehunter.ablebody.network.model.AcceptUserAdConsentResponse
+import com.smilehunter.ablebody.network.model.AddAddressResponse
+import com.smilehunter.ablebody.network.model.AddBookmarkCodyResponse
+import com.smilehunter.ablebody.network.model.AddBookmarkItemResponse
+import com.smilehunter.ablebody.network.model.AddCouponResponse
+import com.smilehunter.ablebody.network.model.AddOrderListResponse
+import com.smilehunter.ablebody.network.model.BrandDetailCodyResponse
+import com.smilehunter.ablebody.network.model.BrandDetailItemResponse
+import com.smilehunter.ablebody.network.model.BrandMainResponse
+import com.smilehunter.ablebody.network.model.CancelOrderListResponse
+import com.smilehunter.ablebody.network.model.CheckMyNotiResponse
+import com.smilehunter.ablebody.network.model.CheckSMSResponse
+import com.smilehunter.ablebody.network.model.CreatorDetailCommentResponse
+import com.smilehunter.ablebody.network.model.CreatorDetailDeleteCommentReplyResponse
+import com.smilehunter.ablebody.network.model.CreatorDetailDeleteResponse
+import com.smilehunter.ablebody.network.model.CreatorDetailLikeResponse
+import com.smilehunter.ablebody.network.model.CreatorDetailLikeUsersResponse
+import com.smilehunter.ablebody.network.model.CreatorDetailReplyResponse
+import com.smilehunter.ablebody.network.model.CreatorDetailResponse
+import com.smilehunter.ablebody.network.model.DeleteBookmarkCodyResponse
+import com.smilehunter.ablebody.network.model.DeleteBookmarkItemResponse
+import com.smilehunter.ablebody.network.model.EditAddressResponse
+import com.smilehunter.ablebody.network.model.FCMTokenAndAppVersionUpdateResponse
+import com.smilehunter.ablebody.network.model.FindCodyResponse
+import com.smilehunter.ablebody.network.model.FindItemResponse
+import com.smilehunter.ablebody.network.model.GetAddressResponse
+import com.smilehunter.ablebody.network.model.GetCouponBagsResponse
+import com.smilehunter.ablebody.network.model.GetDeliveryInfoResponse
+import com.smilehunter.ablebody.network.model.GetMyBoardResponse
+import com.smilehunter.ablebody.network.model.GetMyNotiResponse
+import com.smilehunter.ablebody.network.model.GetOrderListDetailResponse
+import com.smilehunter.ablebody.network.model.GetOrderListResponse
+import com.smilehunter.ablebody.network.model.GetUserAdConsentResponse
+import com.smilehunter.ablebody.network.model.ItemDetailResponse
+import com.smilehunter.ablebody.network.model.NewUserCreateResponse
+import com.smilehunter.ablebody.network.model.RefreshTokenResponse
+import com.smilehunter.ablebody.network.model.ReportResponse
+import com.smilehunter.ablebody.network.model.ResignUserResponse
+import com.smilehunter.ablebody.network.model.SearchCodyResponse
+import com.smilehunter.ablebody.network.model.SearchItemResponse
+import com.smilehunter.ablebody.network.model.SendSMSResponse
+import com.smilehunter.ablebody.network.model.StringResponse
+import com.smilehunter.ablebody.network.model.SuggestionResponse
+import com.smilehunter.ablebody.network.model.TossPaymentFailResponse
+import com.smilehunter.ablebody.network.model.TossPaymentSuccessResponse
+import com.smilehunter.ablebody.network.model.UniSearchResponse
+import com.smilehunter.ablebody.network.model.UserDataResponse
+import com.smilehunter.ablebody.network.model.request.FCMTokenAndAppVersionUpdateRequest
+import com.smilehunter.ablebody.network.model.request.NewUserCreateRequest
+import com.smilehunter.ablebody.network.model.request.RefreshTokenRequest
+import com.smilehunter.ablebody.network.model.request.SMSCheckRequest
+import com.smilehunter.ablebody.network.model.request.SMSSendRequest
+import com.smilehunter.ablebody.network.model.response.ReadBookmarkCodyData
+import com.smilehunter.ablebody.network.model.response.ReadBookmarkItemData
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -91,7 +96,7 @@ class NetworkServiceImpl @Inject constructor(
 
     private val networkAPI: NetworkAPI = retrofit.create(NetworkAPI::class.java)
     override suspend fun sendSMS(phoneNumber: String, isNotTestMessage: Boolean): Response<SendSMSResponse> {
-        val smsSendRequest = com.smilehunter.ablebody.data.dto.request.SMSSendRequest(
+        val smsSendRequest = SMSSendRequest(
             phoneNumber,
             isNotTestMessage
         )
@@ -99,7 +104,7 @@ class NetworkServiceImpl @Inject constructor(
     }
 
     override suspend fun checkSMS(phoneConfirmId: Long, verifyingCode: String): Response<CheckSMSResponse> {
-        val smsCheckRequest = com.smilehunter.ablebody.data.dto.request.SMSCheckRequest(
+        val smsCheckRequest = SMSCheckRequest(
             phoneConfirmId,
             verifyingCode
         )
@@ -118,7 +123,7 @@ class NetworkServiceImpl @Inject constructor(
         agreeMarketingConsent: Boolean
     ): Response<NewUserCreateResponse> {
         val newUserCreateRequest =
-            com.smilehunter.ablebody.data.dto.request.NewUserCreateRequest(
+            NewUserCreateRequest(
                 gender = gender.name,
                 nickname = nickname,
                 profileImage = profileImage,
@@ -131,7 +136,7 @@ class NetworkServiceImpl @Inject constructor(
 
     override suspend fun getRefreshToken(refreshToken: String): Response<RefreshTokenResponse> {
         val tokenRefreshResponseData =
-            com.smilehunter.ablebody.data.dto.request.RefreshTokenRequest(refreshToken)
+            RefreshTokenRequest(refreshToken)
         return networkAPI.getRefreshToken(tokenRefreshResponseData).execute()
     }
 
@@ -142,7 +147,7 @@ class NetworkServiceImpl @Inject constructor(
         appVersion: String
     ): Response<FCMTokenAndAppVersionUpdateResponse> {
         val request =
-            com.smilehunter.ablebody.data.dto.request.FCMTokenAndAppVersionUpdateRequest(
+            FCMTokenAndAppVersionUpdateRequest(
                 fcmToken = fcmToken,
                 appVersion = appVersion
             )

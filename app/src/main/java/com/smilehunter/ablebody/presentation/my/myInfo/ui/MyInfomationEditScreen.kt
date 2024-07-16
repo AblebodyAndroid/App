@@ -1,7 +1,6 @@
 package com.smilehunter.ablebody.presentation.my.myInfo.ui
 
 import android.util.Log
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -37,13 +36,10 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.data.dto.Gender
+import com.smilehunter.ablebody.data.model.Gender
 import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.presentation.home.my.data.NicknameCheckUiState
 import com.smilehunter.ablebody.presentation.my.myInfo.MyInfoEditViewModel
-import com.smilehunter.ablebody.presentation.my.myInfo.MyInfoViewModel
 import com.smilehunter.ablebody.presentation.onboarding.data.NicknameRule
-import com.smilehunter.ablebody.presentation.onboarding.ui.InputPhoneNumberWithRuleLayout
 import com.smilehunter.ablebody.ui.theme.AbleBlue
 import com.smilehunter.ablebody.ui.theme.AbleDark
 import com.smilehunter.ablebody.ui.theme.AbleDeep
@@ -53,7 +49,6 @@ import com.smilehunter.ablebody.ui.utils.AbleBodyAlertDialog
 import com.smilehunter.ablebody.ui.utils.BackButtonTopBarLayout
 import com.smilehunter.ablebody.ui.utils.SimpleErrorHandler
 import com.smilehunter.ablebody.ui.utils.TextFieldUnderNormalText
-import com.smilehunter.ablebody.ui.utils.TextFieldUnderText
 import com.smilehunter.ablebody.utils.nonReplyClickable
 
 @Composable
@@ -241,11 +236,13 @@ fun MyInfoEditTextField(
                 .then(textFieldModifier),
             textStyle = if(editCategory == "닉네임" || editCategory == "휴대폰 번호(아이디)") TextStyle(color = Color.Black, fontSize = 17.sp) else TextStyle(color = SmallTextGrey, fontSize = 17.sp),
             shape = RoundedCornerShape(12.dp),
-            colors = TextFieldDefaults.textFieldColors(
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = PlaneGrey,
+                unfocusedContainerColor = PlaneGrey,
+                disabledContainerColor = PlaneGrey,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
-                containerColor = PlaneGrey,
-                disabledIndicatorColor = Color.Transparent
+                disabledIndicatorColor = Color.Transparent,
             ),
             enabled = editCategory == "닉네임"
         )

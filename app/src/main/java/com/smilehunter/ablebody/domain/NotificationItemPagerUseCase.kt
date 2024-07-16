@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.smilehunter.ablebody.data.dto.response.data.GetMyNotiResponseData
+import com.smilehunter.ablebody.network.model.response.GetMyNotiResponseData
 import com.smilehunter.ablebody.data.repository.NotificationRepository
 import com.smilehunter.ablebody.model.NotificationItemData
 import kotlinx.coroutines.Dispatchers

@@ -169,7 +169,7 @@ fun OtherUserScreen(
                 item(
                     span = { GridItemSpan(this.maxLineSpan) }
                 ) {
-                    Column() {
+                    Column {
                         AsyncImage(
                             model = ImageRequest.Builder(LocalContext.current)
                                 .data(data = profileImage)
@@ -200,7 +200,7 @@ fun OtherUserScreen(
 
                             Spacer(modifier = Modifier.size(4.dp))
 
-                            Row() {
+                            Row {
                                 val description = makeUserDescription(height, weight, job)
                                 androidx.compose.material.Text(
                                     text = description,

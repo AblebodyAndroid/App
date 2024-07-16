@@ -1,12 +1,12 @@
 package com.smilehunter.ablebody.data.repository
 
-import com.smilehunter.ablebody.data.dto.request.ChangePhoneNumberRequest
-import com.smilehunter.ablebody.data.dto.request.EditProfile
-import com.smilehunter.ablebody.data.dto.response.AddCouponResponse
-import com.smilehunter.ablebody.data.dto.response.GetAddressResponse
-import com.smilehunter.ablebody.data.dto.response.GetCouponBagsResponse
-import com.smilehunter.ablebody.data.dto.response.GetMyBoardResponse
-import com.smilehunter.ablebody.data.dto.response.UserDataResponse
+import com.smilehunter.ablebody.network.model.request.ChangePhoneNumberRequest
+import com.smilehunter.ablebody.network.model.request.EditProfile
+import com.smilehunter.ablebody.network.model.AddCouponResponse
+import com.smilehunter.ablebody.network.model.GetAddressResponse
+import com.smilehunter.ablebody.network.model.GetCouponBagsResponse
+import com.smilehunter.ablebody.network.model.GetMyBoardResponse
+import com.smilehunter.ablebody.network.model.UserDataResponse
 import com.smilehunter.ablebody.model.LocalUserInfoData
 import kotlinx.coroutines.flow.Flow
 import java.io.InputStream

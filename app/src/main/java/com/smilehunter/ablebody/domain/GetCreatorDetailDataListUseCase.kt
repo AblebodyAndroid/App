@@ -1,7 +1,7 @@
 package com.smilehunter.ablebody.domain
 
-import com.smilehunter.ablebody.data.dto.ItemChildCategory
-import com.smilehunter.ablebody.data.dto.response.data.CreatorDetailResponseData
+import com.smilehunter.ablebody.data.model.ItemChildCategory
+import com.smilehunter.ablebody.network.model.response.CreatorDetailResponseData
 import com.smilehunter.ablebody.data.repository.CreatorDetailRepository
 import com.smilehunter.ablebody.model.CreatorDetailData
 import javax.inject.Inject

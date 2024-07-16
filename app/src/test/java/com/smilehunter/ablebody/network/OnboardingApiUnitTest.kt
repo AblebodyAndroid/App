@@ -42,7 +42,7 @@ class OnboardingApiUnitTest {
     fun createNewUser() {
         val response = runBlocking {
             networkService.createNewUser(
-                com.smilehunter.ablebody.data.dto.Gender.MALE,
+                com.smilehunter.ablebody.data.model.Gender.MALE,
                 "brother",
                 1,
                 "2869",

@@ -1,7 +1,7 @@
 package com.smilehunter.ablebody.network
 
-import com.smilehunter.ablebody.data.dto.request.ChangePhoneNumberRequest
-import com.smilehunter.ablebody.data.dto.request.EditProfile
+import com.smilehunter.ablebody.network.model.request.ChangePhoneNumberRequest
+import com.smilehunter.ablebody.network.model.request.EditProfile
 import com.smilehunter.ablebody.network.utils.TestRetrofit
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
