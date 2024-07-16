@@ -42,7 +42,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.smilehunter.ablebody.BuildConfig
 import com.smilehunter.ablebody.R
 import com.smilehunter.ablebody.network.model.request.ReportRequest
-import com.smilehunter.ablebody.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
 import com.smilehunter.ablebody.presentation.my.report.ReportViewModel
 import com.smilehunter.ablebody.ui.theme.AbleBlue
 import com.smilehunter.ablebody.ui.theme.AbleDark

@@ -11,8 +11,8 @@ import com.smilehunter.ablebody.network.model.SearchItemResponse
 import com.smilehunter.ablebody.network.model.UniSearchResponse
 import com.smilehunter.ablebody.database.dao.SearchHistoryDao
 import com.smilehunter.ablebody.database.model.SearchHistoryEntity
-import com.smilehunter.ablebody.model.SearchHistoryQuery
-import com.smilehunter.ablebody.model.asExternalModel
+import com.smilehunter.ablebody.domain.model.SearchHistoryQuery
+import com.smilehunter.ablebody.domain.model.asExternalModel
 import com.smilehunter.ablebody.network.NetworkService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

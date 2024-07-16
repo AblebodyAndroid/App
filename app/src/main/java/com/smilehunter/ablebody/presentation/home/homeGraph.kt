@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.navArgument
-import com.smilehunter.ablebody.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
 import com.smilehunter.ablebody.presentation.main.data.NavigationItems
 import com.smilehunter.ablebody.presentation.my.coupon.ui.CouponRegisterRoute
 import com.smilehunter.ablebody.presentation.my.coupon.ui.CouponRoute

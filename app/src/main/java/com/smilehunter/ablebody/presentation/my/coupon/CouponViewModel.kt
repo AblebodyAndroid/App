@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.smilehunter.ablebody.domain.usecase.AddCouponUseCase
 import com.smilehunter.ablebody.domain.usecase.CouponStatus
 import com.smilehunter.ablebody.domain.usecase.GetCouponListUseCase
-import com.smilehunter.ablebody.model.CouponData
+import com.smilehunter.ablebody.domain.model.CouponData
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel

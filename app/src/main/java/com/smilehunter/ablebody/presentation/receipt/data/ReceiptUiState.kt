@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.presentation.receipt.data
 
-import com.smilehunter.ablebody.model.ReceiptData
+import com.smilehunter.ablebody.domain.model.ReceiptData
 
 sealed interface ReceiptUiState {
 

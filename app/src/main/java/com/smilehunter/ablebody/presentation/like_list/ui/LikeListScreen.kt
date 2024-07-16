@@ -37,8 +37,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.model.LikeListData
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.LikeListData
 import com.smilehunter.ablebody.presentation.like_list.LikeListViewModel
 import com.smilehunter.ablebody.presentation.like_list.data.LikeListUiState
 import com.smilehunter.ablebody.presentation.main.ui.LocalMainScaffoldPaddingValue

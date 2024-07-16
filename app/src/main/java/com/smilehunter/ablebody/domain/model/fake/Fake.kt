@@ -1,16 +1,16 @@
-package com.smilehunter.ablebody.model.fake
+package com.smilehunter.ablebody.domain.model.fake
 
 import com.smilehunter.ablebody.data.model.Gender
 import com.smilehunter.ablebody.data.model.HomeCategory
 import com.smilehunter.ablebody.data.model.ItemGender
-import com.smilehunter.ablebody.model.BrandListData
-import com.smilehunter.ablebody.model.CodyItemData
-import com.smilehunter.ablebody.model.CreatorDetailData
-import com.smilehunter.ablebody.model.NotificationItemData
-import com.smilehunter.ablebody.model.OrderItemData
-import com.smilehunter.ablebody.model.ProductItemData
-import com.smilehunter.ablebody.model.ReceiptData
-import com.smilehunter.ablebody.model.UserInfoData
+import com.smilehunter.ablebody.domain.model.BrandListData
+import com.smilehunter.ablebody.domain.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.CreatorDetailData
+import com.smilehunter.ablebody.domain.model.NotificationItemData
+import com.smilehunter.ablebody.domain.model.OrderItemData
+import com.smilehunter.ablebody.domain.model.ProductItemData
+import com.smilehunter.ablebody.domain.model.ReceiptData
+import com.smilehunter.ablebody.domain.model.UserInfoData
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

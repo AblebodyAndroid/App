@@ -15,7 +15,7 @@ import com.smilehunter.ablebody.data.repository.BookmarkRepository
 import com.smilehunter.ablebody.data.repository.BrandRepository
 import com.smilehunter.ablebody.data.repository.FindCodyRepository
 import com.smilehunter.ablebody.data.repository.SearchRepository
-import com.smilehunter.ablebody.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.CodyItemData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext

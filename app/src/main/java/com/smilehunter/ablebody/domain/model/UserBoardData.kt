@@ -1,13 +1,13 @@
-package com.smilehunter.ablebody.model
+package com.smilehunter.ablebody.domain.model
 
-data class CodyItemData(
-    val content: List<Item>,
+data class UserBoardData(
+    val content: List<Content>,
     val totalPages: Int,
     val last: Boolean,
     val number: Int,
     val first: Boolean,
 ) {
-    data class Item(
+    data class Content(
         val id: Long,
         val imageURL: String,
         val createDate: String,

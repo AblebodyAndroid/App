@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.presentation.main
 
-import com.smilehunter.ablebody.model.LocalUserInfoData
+import com.smilehunter.ablebody.domain.model.LocalUserInfoData
 
 object LocalUserProfile {
 

@@ -10,7 +10,7 @@ import com.smilehunter.ablebody.data.model.ItemParentCategory
 import com.smilehunter.ablebody.data.model.SortingMethod
 import com.smilehunter.ablebody.domain.usecase.ProductItemPagerUseCase
 import com.smilehunter.ablebody.domain.usecase.ProductItemPagingSourceData
-import com.smilehunter.ablebody.model.LocalUserInfoData
+import com.smilehunter.ablebody.domain.model.LocalUserInfoData
 import com.smilehunter.ablebody.presentation.main.LocalUserProfile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi

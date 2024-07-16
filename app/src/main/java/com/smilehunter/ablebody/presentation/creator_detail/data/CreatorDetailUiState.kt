@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.presentation.creator_detail.data
 
-import com.smilehunter.ablebody.model.CreatorDetailData
+import com.smilehunter.ablebody.domain.model.CreatorDetailData
 
 sealed interface CreatorDetailUiState {
 

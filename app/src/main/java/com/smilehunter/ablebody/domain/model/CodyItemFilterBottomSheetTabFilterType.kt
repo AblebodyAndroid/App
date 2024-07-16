@@ -1,4 +1,4 @@
-package com.smilehunter.ablebody.model
+package com.smilehunter.ablebody.domain.model
 
 enum class CodyItemFilterBottomSheetTabFilterType(
     val string: String

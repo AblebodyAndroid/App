@@ -41,11 +41,11 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.model.CodyItemData
-import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.model.ProductItemData
-import com.smilehunter.ablebody.model.fake.fakeCodyItemData
-import com.smilehunter.ablebody.model.fake.fakeProductItemData
+import com.smilehunter.ablebody.domain.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.ProductItemData
+import com.smilehunter.ablebody.domain.model.fake.fakeCodyItemData
+import com.smilehunter.ablebody.domain.model.fake.fakeProductItemData
 import com.smilehunter.ablebody.presentation.home.bookmark.BookmarkViewModel
 import com.smilehunter.ablebody.presentation.main.ui.LocalMainScaffoldPaddingValue
 import com.smilehunter.ablebody.presentation.main.ui.error_handler.NetworkConnectionErrorDialog

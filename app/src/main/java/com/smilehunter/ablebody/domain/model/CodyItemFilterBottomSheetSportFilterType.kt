@@ -1,4 +1,4 @@
-package com.smilehunter.ablebody.model
+package com.smilehunter.ablebody.domain.model
 
 enum class CodyItemFilterBottomSheetSportFilterType(val string: String) {
     ALL("전체"),

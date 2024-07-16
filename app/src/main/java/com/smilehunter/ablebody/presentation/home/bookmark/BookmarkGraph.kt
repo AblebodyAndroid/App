@@ -2,7 +2,7 @@ package com.smilehunter.ablebody.presentation.home.bookmark
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.smilehunter.ablebody.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
 import com.smilehunter.ablebody.presentation.home.bookmark.ui.BookmarkListRoute
 import com.smilehunter.ablebody.presentation.main.data.NavigationItems
 

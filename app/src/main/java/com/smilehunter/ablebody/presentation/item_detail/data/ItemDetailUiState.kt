@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.presentation.item_detail.data
 
-import com.smilehunter.ablebody.model.ItemDetailData
+import com.smilehunter.ablebody.domain.model.ItemDetailData
 
 sealed interface ItemDetailUiState {
 

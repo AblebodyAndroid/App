@@ -9,7 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
-import com.smilehunter.ablebody.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
 import com.smilehunter.ablebody.presentation.main.ui.error_handler.NetworkConnectionErrorDialog
 import retrofit2.HttpException
 

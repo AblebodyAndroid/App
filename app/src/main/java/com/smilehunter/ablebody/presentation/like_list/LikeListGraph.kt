@@ -6,8 +6,8 @@ import androidx.navigation.NavOptions
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.model.LikedLocations
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.LikedLocations
 import com.smilehunter.ablebody.presentation.like_list.ui.LikeListRoute
 
 

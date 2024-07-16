@@ -1,7 +1,7 @@
 package com.smilehunter.ablebody.domain.usecase
 
 import com.smilehunter.ablebody.data.repository.UserRepository
-import com.smilehunter.ablebody.model.CouponData
+import com.smilehunter.ablebody.domain.model.CouponData
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import com.smilehunter.ablebody.network.model.response.GetCouponBagsResponseData

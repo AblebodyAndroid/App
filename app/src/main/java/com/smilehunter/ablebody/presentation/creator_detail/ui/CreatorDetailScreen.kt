@@ -80,9 +80,9 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.model.CreatorDetailData
-import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.model.fake.fakeCreatorDetailData
+import com.smilehunter.ablebody.domain.model.CreatorDetailData
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.fake.fakeCreatorDetailData
 import com.smilehunter.ablebody.presentation.creator_detail.CreatorDetailViewModel
 import com.smilehunter.ablebody.presentation.creator_detail.data.CreatorDetailUiState
 import com.smilehunter.ablebody.presentation.main.ui.LocalMainScaffoldPaddingValue

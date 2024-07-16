@@ -12,8 +12,8 @@ import com.smilehunter.ablebody.domain.usecase.GetMyDeliveryAddressUseCase
 import com.smilehunter.ablebody.domain.usecase.GetUserInfoUseCase
 import com.smilehunter.ablebody.domain.usecase.HandlePaymentFailureUseCase
 import com.smilehunter.ablebody.domain.usecase.OrderItemUseCase
-import com.smilehunter.ablebody.model.CouponData
-import com.smilehunter.ablebody.model.UserInfoData
+import com.smilehunter.ablebody.domain.model.CouponData
+import com.smilehunter.ablebody.domain.model.UserInfoData
 import com.smilehunter.ablebody.presentation.payment.data.CouponBagsUiState
 import com.smilehunter.ablebody.presentation.payment.data.DeliveryAddressUiState
 import com.smilehunter.ablebody.presentation.payment.data.PaymentPassthroughData

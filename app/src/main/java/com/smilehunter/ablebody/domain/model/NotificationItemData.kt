@@ -1,4 +1,4 @@
-package com.smilehunter.ablebody.model
+package com.smilehunter.ablebody.domain.model
 
 import java.time.Duration
 import java.time.LocalDateTime
@@ -28,7 +28,7 @@ data class NotificationItemData(
         private val secondsPassed = duration.toSeconds()
 
         val passedTime: NotificationPassedTime = when {
-            secondsPassed < 60 ->  NotificationPassedTime.Second(secondsPassed)
+            secondsPassed < 60 -> NotificationPassedTime.Second(secondsPassed)
             secondsPassed < 3600 -> NotificationPassedTime.Minutes(duration.toMinutes())
             secondsPassed < 86400 -> NotificationPassedTime.Hour(duration.toHours())
             secondsPassed < 604800 -> NotificationPassedTime.Day(duration.toDays())

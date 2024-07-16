@@ -9,7 +9,7 @@ import com.smilehunter.ablebody.data.model.HomeCategory
 import com.smilehunter.ablebody.data.model.PersonHeightFilterType
 import com.smilehunter.ablebody.domain.usecase.CodyItemPagerUseCase
 import com.smilehunter.ablebody.domain.usecase.CodyPagingSourceData
-import com.smilehunter.ablebody.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.CodyItemData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow

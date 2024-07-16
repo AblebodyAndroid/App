@@ -16,9 +16,9 @@ import com.smilehunter.ablebody.domain.usecase.CodyItemPagerUseCase
 import com.smilehunter.ablebody.domain.usecase.CodyPagingSourceData
 import com.smilehunter.ablebody.domain.usecase.ProductItemPagerUseCase
 import com.smilehunter.ablebody.domain.usecase.ProductItemPagingSourceData
-import com.smilehunter.ablebody.model.CodyItemData
-import com.smilehunter.ablebody.model.LocalUserInfoData
-import com.smilehunter.ablebody.model.ProductItemData
+import com.smilehunter.ablebody.domain.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.LocalUserInfoData
+import com.smilehunter.ablebody.domain.model.ProductItemData
 import com.smilehunter.ablebody.presentation.main.LocalUserProfile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
