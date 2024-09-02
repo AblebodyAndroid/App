@@ -5,21 +5,15 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.smilehunter.ablebody.data.mapper.toDomain
 import com.smilehunter.ablebody.data.model.ItemChildCategory
 import com.smilehunter.ablebody.data.model.ItemGender
 import com.smilehunter.ablebody.data.model.ItemParentCategory
 import com.smilehunter.ablebody.data.model.SortingMethod
 import com.smilehunter.ablebody.domain.model.ProductItemData
-import com.smilehunter.ablebody.domain.repository.BookmarkRepository
-import com.smilehunter.ablebody.domain.repository.BrandRepository
-import com.smilehunter.ablebody.domain.repository.FindItemRepository
-import com.smilehunter.ablebody.domain.repository.SearchRepository
+import com.smilehunter.ablebody.network.NetworkService
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
-import com.smilehunter.ablebody.network.model.response.BrandDetailItemResponseData
-import com.smilehunter.ablebody.network.model.response.FindItemResponseData
-import com.smilehunter.ablebody.network.model.response.ReadBookmarkItemData
-import com.smilehunter.ablebody.network.model.response.SearchItemResponseData
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -27,10 +21,7 @@ import javax.inject.Inject
 
 class ProductItemPagerUseCase @Inject constructor(
     @Dispatcher(AbleBodyDispatcher.IO) private val ioDispatcher: CoroutineDispatcher,
-    private val brandRepository: BrandRepository,
-    private val findItemRepository: FindItemRepository,
-    private val bookmarkRepository: BookmarkRepository,
-    private val searchRepository: SearchRepository
+    private val networkService: NetworkService
 ) {
 
     operator fun invoke(
@@ -47,7 +38,7 @@ class ProductItemPagerUseCase @Inject constructor(
 
     private inner class ProductItemPagingSource(
         private val productItemPagingSourceData: ProductItemPagingSourceData
-    ): PagingSource<Int, ProductItemData.Item>() {
+    ) : PagingSource<Int, ProductItemData.Item>() {
         override fun getRefreshKey(state: PagingState<Int, ProductItemData.Item>): Int? =
             state.anchorPosition
 
@@ -55,20 +46,21 @@ class ProductItemPagerUseCase @Inject constructor(
             try {
                 val currentPageIndex = params.key ?: 0
                 val productItemData: ProductItemData = withContext(ioDispatcher) {
-                    when(productItemPagingSourceData) {
+                    when (productItemPagingSourceData) {
                         is ProductItemPagingSourceData.Brand -> {
-                            brandRepository.brandDetailItem(
+                            networkService.brandDetailItem(
                                 productItemPagingSourceData.sortingMethod,
                                 productItemPagingSourceData.brandID,
                                 productItemPagingSourceData.itemGender,
                                 productItemPagingSourceData.itemParentCategory,
-                                productItemPagingSourceData. itemChildCategory,
+                                productItemPagingSourceData.itemChildCategory,
                                 currentPageIndex
                             )
                                 .body()!!.data!!.toDomain()
                         }
+
                         is ProductItemPagingSourceData.Item -> {
-                            findItemRepository.findItem(
+                            networkService.findItem(
                                 productItemPagingSourceData.sortingMethod,
                                 productItemPagingSourceData.itemGender,
                                 productItemPagingSourceData.itemParentCategory,
@@ -77,8 +69,9 @@ class ProductItemPagerUseCase @Inject constructor(
                             )
                                 .body()!!.data!!.toDomain()
                         }
+
                         is ProductItemPagingSourceData.Search -> {
-                            searchRepository.searchItem(
+                            networkService.searchItem(
                                 productItemPagingSourceData.sortingMethod,
                                 productItemPagingSourceData.keyword,
                                 productItemPagingSourceData.itemGender,
@@ -90,7 +83,7 @@ class ProductItemPagerUseCase @Inject constructor(
                         }
 
                         ProductItemPagingSourceData.Bookmark -> {
-                            bookmarkRepository.readBookmarkItem(currentPageIndex)
+                            networkService.readBookmarkItem(currentPageIndex)
                                 .body()!!.data!!.toDomain()
                         }
                     }
@@ -114,14 +107,14 @@ sealed interface ProductItemPagingSourceData {
         val itemGender: ItemGender,
         val itemParentCategory: ItemParentCategory,
         val itemChildCategory: ItemChildCategory?,
-    ): ProductItemPagingSourceData
+    ) : ProductItemPagingSourceData
 
     data class Item(
         val sortingMethod: SortingMethod,
         val itemGender: ItemGender,
         val itemParentCategory: ItemParentCategory,
         val itemChildCategory: ItemChildCategory?,
-    ): ProductItemPagingSourceData
+    ) : ProductItemPagingSourceData
 
     data class Search(
         val sortingMethod: SortingMethod,
@@ -129,87 +122,7 @@ sealed interface ProductItemPagingSourceData {
         val itemGender: ItemGender,
         val itemParentCategory: ItemParentCategory,
         val itemChildCategory: ItemChildCategory?,
-    ): ProductItemPagingSourceData
+    ) : ProductItemPagingSourceData
 
-    object Bookmark: ProductItemPagingSourceData
+    object Bookmark : ProductItemPagingSourceData
 }
-
-private fun BrandDetailItemResponseData.toDomain() = ProductItemData(
-    content = content.map {
-        ProductItemData.Item(
-            id = it.id,
-            name = it.name,
-            price = it.price,
-            salePrice = it.salePrice,
-            brandName = it.brandName,
-            imageURL = it.image,
-            isSingleImage = it.isPlural,
-            url = it.url,
-            avgStarRating = it.avgStarRating
-        )
-    },
-    totalPages = totalPages,
-    last = last,
-    number = number,
-    first = first
-)
-
-private fun FindItemResponseData.toDomain() = ProductItemData(
-    content = content.map {
-        ProductItemData.Item(
-            id = it.id,
-            name = it.name,
-            price = it.price,
-            salePrice = it.salePrice,
-            brandName = it.brandName,
-            imageURL = it.image,
-            isSingleImage = it.isPlural,
-            url = it.url,
-            avgStarRating = it.avgStarRating
-        )
-    },
-    totalPages = totalPages,
-    last = last,
-    number = number,
-    first = first
-)
-
-private fun ReadBookmarkItemData.toDomain() = ProductItemData(
-    content = content.map {
-        ProductItemData.Item(
-            id = it.id,
-            name = it.name,
-            price = it.price,
-            salePrice = it.salePrice,
-            brandName = it.brandName,
-            imageURL = it.image,
-            isSingleImage = it.isPlural,
-            url = it.url,
-            avgStarRating = it.avgStarRating
-        )
-    },
-    totalPages = totalPages,
-    last = last,
-    number = number,
-    first = first
-)
-
-private fun SearchItemResponseData.toDomain() = ProductItemData(
-    content = content.map {
-        ProductItemData.Item(
-            id = it.id,
-            name = it.name,
-            price = it.price,
-            salePrice = it.salePrice,
-            brandName = it.brandName,
-            imageURL = it.image,
-            isSingleImage = it.isPlural,
-            url = it.url,
-            avgStarRating = it.avgStarRating
-        )
-    },
-    totalPages = totalPages,
-    last = last,
-    number = number,
-    first = first
-)

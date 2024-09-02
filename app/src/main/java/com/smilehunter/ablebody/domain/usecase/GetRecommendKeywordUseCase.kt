@@ -14,7 +14,7 @@ class GetRecommendKeywordUseCase @Inject constructor(
 
     suspend operator fun invoke(): List<String> {
         return withContext(ioDispatcher) {
-            searchRepository.uniSearch("").data!!.recommendKeyword.creator
+            searchRepository.uniSearch()
         }
     }
 }

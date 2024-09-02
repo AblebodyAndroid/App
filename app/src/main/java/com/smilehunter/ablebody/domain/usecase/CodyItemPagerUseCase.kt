@@ -5,27 +5,18 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.smilehunter.ablebody.data.mapper.toDomain
 import com.smilehunter.ablebody.data.model.Gender
 import com.smilehunter.ablebody.data.model.HomeCategory
 import com.smilehunter.ablebody.domain.model.CodyItemData
-import com.smilehunter.ablebody.domain.repository.BookmarkRepository
-import com.smilehunter.ablebody.domain.repository.BrandRepository
-import com.smilehunter.ablebody.domain.repository.FindCodyRepository
-import com.smilehunter.ablebody.domain.repository.SearchRepository
-import com.smilehunter.ablebody.network.model.response.BrandDetailCodyResponseData
-import com.smilehunter.ablebody.network.model.response.FindCodyResponseData
-import com.smilehunter.ablebody.network.model.response.ReadBookmarkCodyData
-import com.smilehunter.ablebody.network.model.response.SearchCodyResponseData
+import com.smilehunter.ablebody.network.NetworkService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CodyItemPagerUseCase @Inject constructor(
-    private val brandRepository: BrandRepository,
-    private val findCodyRepository: FindCodyRepository,
-    private val bookmarkRepository: BookmarkRepository,
-    private val searchRepository: SearchRepository
+    private val networkService: NetworkService
 ) {
     operator fun invoke(
         codyPagingSourceData: CodyPagingSourceData
@@ -40,7 +31,7 @@ class CodyItemPagerUseCase @Inject constructor(
 
     private inner class CodyPagingSource(
         private val codyPagingSourceData: CodyPagingSourceData
-    ): PagingSource<Int, CodyItemData.Item>() {
+    ) : PagingSource<Int, CodyItemData.Item>() {
         override fun getRefreshKey(state: PagingState<Int, CodyItemData.Item>): Int? {
             return state.anchorPosition
         }
@@ -51,7 +42,7 @@ class CodyItemPagerUseCase @Inject constructor(
                 val codyItemData: CodyItemData = withContext(Dispatchers.IO) {
                     when (codyPagingSourceData) {
                         is CodyPagingSourceData.Brand -> {
-                            brandRepository.brandDetailCody(
+                            networkService.brandDetailCody(
                                 codyPagingSourceData.brandId,
                                 codyPagingSourceData.gender,
                                 codyPagingSourceData.category,
@@ -61,8 +52,9 @@ class CodyItemPagerUseCase @Inject constructor(
                             )
                                 .body()!!.data!!.toDomain()
                         }
+
                         is CodyPagingSourceData.CodyRecommended -> {
-                            findCodyRepository.findCody(
+                            networkService.findCody(
                                 codyPagingSourceData.gender,
                                 codyPagingSourceData.category,
                                 codyPagingSourceData.personHeightRangeStart,
@@ -73,7 +65,7 @@ class CodyItemPagerUseCase @Inject constructor(
                         }
 
                         is CodyPagingSourceData.Search -> {
-                            searchRepository.searchCody(
+                            networkService.searchCody(
                                 codyPagingSourceData.keyword,
                                 codyPagingSourceData.genders,
                                 codyPagingSourceData.category,
@@ -85,7 +77,7 @@ class CodyItemPagerUseCase @Inject constructor(
                         }
 
                         CodyPagingSourceData.Bookmark -> {
-                            bookmarkRepository.readBookmarkCody(currentPageIndex)
+                            networkService.readBookmarkCody(currentPageIndex)
                                 .body()!!.data!!.toDomain()
                         }
                     }
@@ -110,92 +102,22 @@ sealed interface CodyPagingSourceData {
         val category: List<HomeCategory>,
         val personHeightRangeStart: Int? = null,
         val personHeightRangeEnd: Int? = null,
-    ): CodyPagingSourceData
+    ) : CodyPagingSourceData
+
     data class CodyRecommended(
         val gender: List<Gender>,
         val category: List<HomeCategory>,
         val personHeightRangeStart: Int? = null,
         val personHeightRangeEnd: Int? = null,
-    ): CodyPagingSourceData
+    ) : CodyPagingSourceData
+
     data class Search(
         val keyword: String,
         val genders: List<Gender>,
         val category: List<HomeCategory>,
         val personHeightRangeStart: Int? = null,
         val personHeightRangeEnd: Int? = null,
-    ): CodyPagingSourceData
-    object Bookmark: CodyPagingSourceData
-}
+    ) : CodyPagingSourceData
 
-private fun BrandDetailCodyResponseData.toDomain() =
-    CodyItemData(
-        content = content.map {
-            CodyItemData.Item(
-                id = it.id,
-                imageURL = it.imageURL,
-                createDate = it.createDate,
-                comments = it.comments,
-                likes = it.likes,
-                views = it.views,
-                isSingleImage = !it.plural
-            )
-        },
-        totalPages = totalPages,
-        last = last,
-        number = number,
-        first = first
-    )
-private fun FindCodyResponseData.toDomain() =
-    CodyItemData(
-        content = content.map {
-            CodyItemData.Item(
-                id = it.id,
-                imageURL = it.imageURL,
-                createDate = it.createDate,
-                comments = it.comments,
-                likes = it.likes,
-                views = it.views,
-                isSingleImage = !it.plural
-            )
-        },
-        totalPages = totalPages,
-        last = last,
-        number = number,
-        first = first
-    )
-private fun ReadBookmarkCodyData.toDomain() =
-    CodyItemData(
-        content = content.map {
-            CodyItemData.Item(
-                id = it.id,
-                imageURL = it.imageURL,
-                createDate = it.createDate,
-                comments = it.comments,
-                likes = it.likes,
-                views = it.views,
-                isSingleImage = !it.plural
-            )
-        },
-        totalPages = totalPages,
-        last = last,
-        number = number,
-        first = first
-    )
-private fun SearchCodyResponseData.toDomain() =
-    CodyItemData(
-        content = content.map {
-            CodyItemData.Item(
-                id = it.id,
-                imageURL = it.imageURL,
-                createDate = it.createDate,
-                comments = it.comments,
-                likes = it.likes,
-                views = it.views,
-                isSingleImage = !it.plural
-            )
-        },
-        totalPages = totalPages,
-        last = last,
-        number = number,
-        first = first
-    )
+    object Bookmark : CodyPagingSourceData
+}

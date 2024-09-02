@@ -1,16 +1,21 @@
 package com.smilehunter.ablebody.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.smilehunter.ablebody.data.mapper.toDomain
 import com.smilehunter.ablebody.data.model.Gender
 import com.smilehunter.ablebody.data.model.HomeCategory
 import com.smilehunter.ablebody.data.model.ItemChildCategory
 import com.smilehunter.ablebody.data.model.ItemGender
 import com.smilehunter.ablebody.data.model.ItemParentCategory
 import com.smilehunter.ablebody.data.model.SortingMethod
-import com.smilehunter.ablebody.network.model.SearchCodyResponse
-import com.smilehunter.ablebody.network.model.SearchItemResponse
-import com.smilehunter.ablebody.network.model.UniSearchResponse
+import com.smilehunter.ablebody.data.paging.CommonCodyItemPagingSource
+import com.smilehunter.ablebody.data.paging.CommonProductItemPagingSource
 import com.smilehunter.ablebody.database.dao.SearchHistoryDao
 import com.smilehunter.ablebody.database.model.SearchHistoryEntity
+import com.smilehunter.ablebody.domain.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.ProductItemData
 import com.smilehunter.ablebody.domain.model.SearchHistoryQuery
 import com.smilehunter.ablebody.domain.model.asExternalModel
 import com.smilehunter.ablebody.domain.repository.SearchRepository
@@ -22,9 +27,10 @@ import javax.inject.Inject
 class SearchRepositoryImpl @Inject constructor(
     private val networkService: NetworkService,
     private val searchHistoryDao: SearchHistoryDao
-): SearchRepository {
-    override suspend fun uniSearch(keyword: String, page: Int, size: Int): UniSearchResponse {
-        return networkService.uniSearch(keyword, page, size)
+) : SearchRepository {
+
+    override suspend fun uniSearch(): List<String> {
+        return networkService.uniSearch("").data!!.recommendKeyword.creator
     }
 
     override fun getSearchHistoryQueries(): Flow<List<SearchHistoryQuery>> =
@@ -36,29 +42,59 @@ class SearchRepositoryImpl @Inject constructor(
         searchHistoryDao.deleteAll()
     }
 
-    override suspend fun searchItem(
-        sort: SortingMethod,
+    override fun searchItem(
+        sortingMethod: SortingMethod,
         keyword: String,
         itemGender: ItemGender,
-        parentCategory: ItemParentCategory,
-        childCategory: ItemChildCategory?,
-        page: Int,
-        size: Int
-    ): SearchItemResponse {
+        itemParentCategory: ItemParentCategory,
+        itemChildCategory: ItemChildCategory?,
+    ): Flow<PagingData<ProductItemData.Item>> {
         searchHistoryDao.insert(SearchHistoryEntity(keyword, System.currentTimeMillis()))
-        return networkService.searchItem(sort, keyword, itemGender, parentCategory, childCategory, page, size)
+
+        return Pager(
+            config = PagingConfig(pageSize = 10),
+            initialKey = 0
+        ) {
+            CommonProductItemPagingSource { pageIndex ->
+                networkService.searchItem(
+                    sort = sortingMethod,
+                    keyword = keyword,
+                    itemGender = itemGender,
+                    parentCategory = itemParentCategory,
+                    childCategory = itemChildCategory,
+                    page = pageIndex
+                )
+                    .data!!.toDomain()
+            }
+        }
+            .flow
     }
 
-    override suspend fun searchCody(
+    override fun searchCody(
         keyword: String,
         genders: List<Gender>,
         category: List<HomeCategory>,
         personHeightRangeStart: Int?,
         personHeightRangeEnd: Int?,
-        page: Int,
-        size: Int
-    ): SearchCodyResponse {
+    ): Flow<PagingData<CodyItemData.Item>> {
         searchHistoryDao.insert(SearchHistoryEntity(keyword, System.currentTimeMillis()))
-        return networkService.searchCody(keyword, genders, category, personHeightRangeStart, personHeightRangeEnd, page, size)
+
+        return Pager(
+            config = PagingConfig(pageSize = 10),
+            initialKey = 0
+        ) {
+            CommonCodyItemPagingSource { pageIndex ->
+                networkService.searchCody(
+                    keyword = keyword,
+                    genders = genders,
+                    category = category,
+                    personHeightRangeStart = personHeightRangeStart,
+                    personHeightRangeEnd = personHeightRangeEnd,
+                    page = pageIndex
+                )
+                    .data!!.toDomain()
+            }
+        }
+            .flow
     }
 }
