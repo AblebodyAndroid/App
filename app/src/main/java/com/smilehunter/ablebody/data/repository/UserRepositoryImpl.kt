@@ -2,14 +2,19 @@ package com.smilehunter.ablebody.data.repository
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.smilehunter.ablebody.data.mapper.asExternalModel
 import com.smilehunter.ablebody.data.mapper.toDomain
 import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.data.paging.UserBoardPagingSource
 import com.smilehunter.ablebody.data.result.FileTooLargeException
 import com.smilehunter.ablebody.datastore.DataStoreService
 import com.smilehunter.ablebody.domain.model.CouponData
 import com.smilehunter.ablebody.domain.model.DeliveryAddressData
 import com.smilehunter.ablebody.domain.model.LocalUserInfoData
+import com.smilehunter.ablebody.domain.model.UserBoardData
 import com.smilehunter.ablebody.domain.model.UserInfoData
 import com.smilehunter.ablebody.domain.repository.UserRepository
 import com.smilehunter.ablebody.domain.usecase.CouponStatus
@@ -17,7 +22,6 @@ import com.smilehunter.ablebody.network.NetworkService
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher.IO
 import com.smilehunter.ablebody.network.di.Dispatcher
 import com.smilehunter.ablebody.network.model.AbleBodyResponse
-import com.smilehunter.ablebody.network.model.GetMyBoardResponse
 import com.smilehunter.ablebody.network.model.request.ChangePhoneNumberRequest
 import com.smilehunter.ablebody.network.model.request.EditProfile
 import kotlinx.coroutines.CoroutineDispatcher
@@ -178,8 +182,14 @@ class UserRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getMyBoard(uid: String?, page: Int, size: Int): GetMyBoardResponse {
-        return networkService.getMyBoard(uid = uid, page = page, size = size)
+    override fun getMyBoard(uid: String?): Flow<PagingData<UserBoardData.Content>> {
+        return Pager(
+            config = PagingConfig(pageSize = 10),
+            initialKey = 0
+        ) {
+            UserBoardPagingSource(uid = uid)
+        }
+            .flow
     }
 
     override suspend fun getUserAdConsent(): Boolean {
