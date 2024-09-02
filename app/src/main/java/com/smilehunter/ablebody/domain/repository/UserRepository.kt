@@ -1,8 +1,10 @@
 package com.smilehunter.ablebody.domain.repository
 
+import androidx.paging.PagingData
 import com.smilehunter.ablebody.domain.model.CouponData
 import com.smilehunter.ablebody.domain.model.DeliveryAddressData
 import com.smilehunter.ablebody.domain.model.LocalUserInfoData
+import com.smilehunter.ablebody.domain.model.UserBoardData
 import com.smilehunter.ablebody.domain.model.UserInfoData
 import com.smilehunter.ablebody.domain.usecase.CouponStatus
 import com.smilehunter.ablebody.network.model.GetMyBoardResponse
@@ -26,11 +28,7 @@ interface UserRepository {
         profileImageInputStream: InputStream?
     ): Boolean
 
-    suspend fun getMyBoard(
-        uid: String? = null,
-        page: Int = 0,
-        size: Int = 10
-    ): GetMyBoardResponse
+    fun getMyBoard(uid: String? = null): Flow<PagingData<UserBoardData.Content>>
 
     suspend fun getCouponBags(): List<CouponData>
 
