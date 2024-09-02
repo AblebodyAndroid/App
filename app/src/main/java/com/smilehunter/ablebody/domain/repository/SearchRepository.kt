@@ -1,45 +1,38 @@
 package com.smilehunter.ablebody.domain.repository
 
+import androidx.paging.PagingData
 import com.smilehunter.ablebody.data.model.Gender
 import com.smilehunter.ablebody.data.model.HomeCategory
 import com.smilehunter.ablebody.data.model.ItemChildCategory
 import com.smilehunter.ablebody.data.model.ItemGender
 import com.smilehunter.ablebody.data.model.ItemParentCategory
 import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.domain.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.ProductItemData
 import com.smilehunter.ablebody.domain.model.SearchHistoryQuery
-import com.smilehunter.ablebody.network.model.SearchCodyResponse
-import com.smilehunter.ablebody.network.model.SearchItemResponse
-import com.smilehunter.ablebody.network.model.UniSearchResponse
 import kotlinx.coroutines.flow.Flow
 
 interface SearchRepository {
 
-    suspend fun uniSearch(
-        keyword: String,
-        page: Int = 0,
-        size: Int = 10
-    ): UniSearchResponse
+    suspend fun uniSearch(): List<String>
 
     fun getSearchHistoryQueries(): Flow<List<SearchHistoryQuery>>
 
     suspend fun deleteAllSearchHistory()
-    suspend fun searchItem(
-        sort: SortingMethod,
+
+    fun searchItem(
+        sortingMethod: SortingMethod,
         keyword: String,
         itemGender: ItemGender,
-        parentCategory: ItemParentCategory,
-        childCategory: ItemChildCategory? = null,
-        page: Int = 0,
-        size: Int = 20
-    ): SearchItemResponse
+        itemParentCategory: ItemParentCategory,
+        itemChildCategory: ItemChildCategory?,
+    ): Flow<PagingData<ProductItemData.Item>>
 
-    suspend fun searchCody(
+    fun searchCody(
         keyword: String,
         genders: List<Gender>,
         category: List<HomeCategory>,
         personHeightRangeStart: Int? = null,
         personHeightRangeEnd: Int? = null,
-        page: Int = 0,
-        size: Int = 20
-    ): SearchCodyResponse
+    ): Flow<PagingData<CodyItemData.Item>>
 }
