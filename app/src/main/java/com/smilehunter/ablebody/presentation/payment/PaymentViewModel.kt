@@ -3,17 +3,17 @@ package com.smilehunter.ablebody.presentation.payment
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.network.model.request.AddOrderListRequest
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
+import com.smilehunter.ablebody.domain.model.CouponData
+import com.smilehunter.ablebody.domain.model.OrderRequestItem
+import com.smilehunter.ablebody.domain.model.UserInfoData
 import com.smilehunter.ablebody.domain.usecase.ConfirmPaymentUseCase
 import com.smilehunter.ablebody.domain.usecase.GetCouponListUseCase
 import com.smilehunter.ablebody.domain.usecase.GetMyDeliveryAddressUseCase
 import com.smilehunter.ablebody.domain.usecase.GetUserInfoUseCase
 import com.smilehunter.ablebody.domain.usecase.HandlePaymentFailureUseCase
 import com.smilehunter.ablebody.domain.usecase.OrderItemUseCase
-import com.smilehunter.ablebody.domain.model.CouponData
-import com.smilehunter.ablebody.domain.model.UserInfoData
 import com.smilehunter.ablebody.presentation.payment.data.CouponBagsUiState
 import com.smilehunter.ablebody.presentation.payment.data.DeliveryAddressUiState
 import com.smilehunter.ablebody.presentation.payment.data.PaymentPassthroughData
@@ -45,7 +45,7 @@ class PaymentViewModel @Inject constructor(
     private val orderItemUseCase: OrderItemUseCase,
     private val confirmPaymentUseCase: ConfirmPaymentUseCase,
     private val handlePaymentFailureUseCase: HandlePaymentFailureUseCase
-): ViewModel() {
+) : ViewModel() {
 
     private val _networkRefreshFlow = MutableSharedFlow<Unit>()
     private val networkRefreshFlow = _networkRefreshFlow.asSharedFlow()
@@ -87,7 +87,7 @@ class PaymentViewModel @Inject constructor(
                 }
                     .asResult()
                     .map {
-                        when(it) {
+                        when (it) {
                             is Result.Error -> CouponBagsUiState.LoadFail(it.exception)
                             is Result.Loading -> CouponBagsUiState.Loading
                             is Result.Success -> CouponBagsUiState.Coupons(it.data)
@@ -107,18 +107,18 @@ class PaymentViewModel @Inject constructor(
                 flow { emit(getMyDeliveryAddressUseCase()) }
                     .asResult()
                     .map {
-                        when(it) {
+                        when (it) {
                             is Result.Error -> DeliveryAddressUiState.LoadFail(it.exception)
                             is Result.Loading -> DeliveryAddressUiState.Loading
                             is Result.Success -> DeliveryAddressUiState.Success(it.data)
                         }
                     }
             }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = DeliveryAddressUiState.Loading
-        )
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = DeliveryAddressUiState.Loading
+            )
 
     private val _couponID = MutableStateFlow<Int?>(null)
     val couponID = _couponID.asStateFlow()
@@ -140,7 +140,8 @@ class PaymentViewModel @Inject constructor(
                     CouponData.DiscountType.PRICE -> selectedCoupon.discountAmount
                     CouponData.DiscountType.RATE -> {
                         val totalPrice = paymentPassthroughData.value?.totalPrice ?: 0
-                        val discountRate = (totalPrice * (selectedCoupon.discountAmount.toDouble() / 100)).roundToInt()
+                        val discountRate =
+                            (totalPrice * (selectedCoupon.discountAmount.toDouble() / 100)).roundToInt()
                         discountRate
                     }
                 }
@@ -192,7 +193,7 @@ class PaymentViewModel @Inject constructor(
             try {
                 val address = (deliveryAddress.value as DeliveryAddressUiState.Success).data
 
-                val addOrderListRequest = AddOrderListRequest(
+                val orderItemUseCase = orderItemUseCase(
                     addressId = address.id,
                     orderName = orderName,
                     paymentType = paymentType,
@@ -200,8 +201,8 @@ class PaymentViewModel @Inject constructor(
                     easyPayType = easyPayType,
                     pointDiscount = userPointTextValue.value.toIntOrNull() ?: 0,
                     deliveryPrice = paymentPassthroughData.value!!.deliveryPrice,
-                    orderListItemReqDtoList = paymentPassthroughData.value!!.items.map {
-                        AddOrderListRequest.OrderListItemReqDto(
+                    orderRequestItem = paymentPassthroughData.value!!.items.map {
+                        OrderRequestItem(
                             itemId = it.itemID,
                             couponBagsId = couponID.value,
                             colorOption = it.getContentOption(PaymentPassthroughData.ItemOptions.Option.COLOR),
@@ -214,19 +215,16 @@ class PaymentViewModel @Inject constructor(
                         )
                     }
                 )
-
-                val response = orderItemUseCase(addOrderListRequest)
-                _orderItemID.emit(response)
+                _orderItemID.emit(orderItemUseCase.orderId)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
 
-    private fun PaymentPassthroughData.Item
-            .getContentOption(option: PaymentPassthroughData.ItemOptions.Option): String? {
+    private fun PaymentPassthroughData.Item.getContentOption(option: PaymentPassthroughData.ItemOptions.Option): String? {
 
-        return this.options.firstOrNull { it.options ==  option }?.content
+        return this.options.firstOrNull { it.options == option }?.content
     }
 
     private val _paymentSuccess = MutableSharedFlow<Unit>()
