@@ -1,27 +1,43 @@
 package com.smilehunter.ablebody.domain.repository
 
-import com.smilehunter.ablebody.network.model.CheckSMSResponse
-import com.smilehunter.ablebody.network.model.NewUserCreateResponse
-import com.smilehunter.ablebody.network.model.SendSMSResponse
-import com.smilehunter.ablebody.network.model.StringResponse
-import retrofit2.Response
+import com.smilehunter.ablebody.data.model.Gender
 
 interface OnboardingRepository {
+
+    /**
+     * phoneConfirmId를 반환함
+     */
+
     suspend fun sendSMS(
         phoneNumber: String,
         isNotTestMessage: Boolean = true
-    ): Response<SendSMSResponse>
+    ): Long
+
+    /**
+     * 이미 회원가입 완료된 유저들은 true 반환함
+     */
+
     suspend fun checkSMS(
         phoneConfirmId: Long,
         verifyingCode: String
-    ): Response<CheckSMSResponse>
-    suspend fun checkNickname(nickname: String): Response<StringResponse>
+    ): Boolean
+
+    /**
+     * 닉네임 사용 가능 여부를 반환함
+     */
+
+    suspend fun checkNickname(nickname: String): Boolean
+
+    /**
+     * 이미 회원가입 완료된 유저들은 true 반환함
+     */
+
     suspend fun createNewUser(
-        gender: com.smilehunter.ablebody.data.model.Gender,
+        gender: Gender,
         nickname: String,
         profileImage: Int,
         verifyingCode: String,
         agreeRequiredConsent: Boolean,
         agreeMarketingConsent: Boolean
-    ): Response<NewUserCreateResponse>
+    ): Boolean
 }
