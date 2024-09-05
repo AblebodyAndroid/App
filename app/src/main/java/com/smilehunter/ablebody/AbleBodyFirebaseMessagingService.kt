@@ -9,8 +9,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.smilehunter.ablebody.domain.repository.FCMSyncRepository
 import com.smilehunter.ablebody.domain.repository.TokenRepository
+import com.smilehunter.ablebody.domain.usecase.SyncAppStatusUseCase
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import com.smilehunter.ablebody.ui.theme.AbleBlue
@@ -22,11 +22,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AbleBodyFirebaseMessagingService: FirebaseMessagingService() {
+class AbleBodyFirebaseMessagingService : FirebaseMessagingService() {
 
-    @Inject @Dispatcher(AbleBodyDispatcher.IO) lateinit var ioDispatcher: CoroutineDispatcher
-    @Inject lateinit var fcmSyncRepository: FCMSyncRepository
-    @Inject lateinit var tokenRepository: TokenRepository
+    @Inject
+    @Dispatcher(AbleBodyDispatcher.IO)
+    lateinit var ioDispatcher: CoroutineDispatcher
+    @Inject
+    lateinit var tokenRepository: TokenRepository
+    @Inject
+    lateinit var syncAppStatusUseCase: SyncAppStatusUseCase
 
     private val job = Job()
 
@@ -36,7 +40,7 @@ class AbleBodyFirebaseMessagingService: FirebaseMessagingService() {
         if (tokenRepository.hasToken) {
             CoroutineScope(ioDispatcher + job).launch {
                 try {
-                    fcmSyncRepository.updateFCMTokenAndAppVersion(token, BuildConfig.VERSION_NAME)
+                    syncAppStatusUseCase()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
