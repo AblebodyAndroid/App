@@ -3,10 +3,11 @@ package com.smilehunter.ablebody.presentation.item_detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.domain.repository.BookmarkRepository
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
+import com.smilehunter.ablebody.domain.usecase.BookmarkProductItemUseCase
 import com.smilehunter.ablebody.domain.usecase.GetItemOptionListUseCase
+import com.smilehunter.ablebody.domain.usecase.UnBookmarkProductItemUseCase
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher.IO
 import com.smilehunter.ablebody.network.di.Dispatcher
 import com.smilehunter.ablebody.presentation.item_detail.data.ItemDetailUiState
@@ -28,10 +29,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ItemDetailViewModel @Inject constructor(
-    private val bookmarkRepository: BookmarkRepository,
     private val itemUseCase: GetItemOptionListUseCase,
     @Dispatcher(IO) private val ioDispatcher: CoroutineDispatcher,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
+    private val bookmarkProductItemUseCase: BookmarkProductItemUseCase,
+    private val unBookmarkProductItemUseCase: UnBookmarkProductItemUseCase
 ) : ViewModel() {
 
     val itemId = savedStateHandle.getStateFlow<Long?>("content_id", null)
@@ -71,10 +73,10 @@ class ItemDetailViewModel @Inject constructor(
     fun toggleBookmarkItem(enable: Boolean) {
         viewModelScope.launch(ioDispatcher) {
             if (enable) {
-                bookmarkRepository.addBookmarkItem(itemId.value!!)
-            } else {
-                bookmarkRepository.deleteBookmarkItem(itemId.value!!)
+                bookmarkProductItemUseCase(itemId = itemId.value!!)
+                return@launch
             }
+            unBookmarkProductItemUseCase(itemId.value!!)
         }
     }
 

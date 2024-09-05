@@ -1,26 +1,21 @@
 package com.smilehunter.ablebody.domain.repository
 
-import com.smilehunter.ablebody.network.model.AbleBodyResponse
-import com.smilehunter.ablebody.network.model.response.ReadBookmarkCodyData
-import com.smilehunter.ablebody.network.model.response.ReadBookmarkItemData
-import retrofit2.Response
+import androidx.paging.PagingData
+import com.smilehunter.ablebody.domain.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.ProductItemData
+import kotlinx.coroutines.flow.Flow
 
 interface BookmarkRepository {
-    suspend fun addBookmarkItem(itemID: Long): Response<AbleBodyResponse<String>>
 
-    suspend fun readBookmarkItem(
-        page: Int = 0,
-        size: Int = 20
-    ): Response<AbleBodyResponse<ReadBookmarkItemData>>
+    suspend fun addBookmarkItem(itemID: Long)
 
-    suspend fun deleteBookmarkItem(itemID: Long): Response<AbleBodyResponse<String>>
+    suspend fun readBookmarkItem(): Flow<PagingData<ProductItemData.Item>>
 
-    suspend fun addBookmarkCody(itemID: Long): Response<AbleBodyResponse<String>>
+    suspend fun deleteBookmarkItem(itemID: Long)
 
-    suspend fun readBookmarkCody(
-        page: Int = 0,
-        size: Int = 20
-    ): Response<AbleBodyResponse<ReadBookmarkCodyData>>
+    suspend fun addBookmarkCody(itemID: Long)
 
-    suspend fun deleteBookmarkCody(itemID: Long): Response<AbleBodyResponse<String>>
+    suspend fun readBookmarkCody(): Flow<PagingData<CodyItemData.Item>>
+
+    suspend fun deleteBookmarkCody(itemID: Long)
 }
