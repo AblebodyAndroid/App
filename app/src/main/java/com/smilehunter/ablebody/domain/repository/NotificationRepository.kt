@@ -1,11 +1,14 @@
 package com.smilehunter.ablebody.domain.repository
 
-import com.smilehunter.ablebody.network.model.CheckMyNotiResponse
-import com.smilehunter.ablebody.network.model.GetMyNotiResponse
+import androidx.paging.PagingData
+import com.smilehunter.ablebody.domain.model.NotificationItemData
+import kotlinx.coroutines.flow.Flow
 
 interface NotificationRepository {
 
-    suspend fun getMyNoti(page: Int = 0, size: Int = 30): GetMyNotiResponse
-    suspend fun checkMyNoti(id: Long): CheckMyNotiResponse
-    suspend fun checkAllMyNoti(): CheckMyNotiResponse
+    fun getMyNoti(): Flow<PagingData<NotificationItemData.Content>>
+
+    suspend fun checkMyNoti(id: Long): String
+
+    suspend fun checkAllMyNoti(): String
 }
