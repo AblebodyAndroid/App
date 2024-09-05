@@ -1,5 +1,6 @@
 package com.smilehunter.ablebody.data.repository
 
+import com.smilehunter.ablebody.domain.repository.ItemRepository
 import com.smilehunter.ablebody.network.model.ItemDetailResponse
 import com.smilehunter.ablebody.network.NetworkService
 import javax.inject.Inject

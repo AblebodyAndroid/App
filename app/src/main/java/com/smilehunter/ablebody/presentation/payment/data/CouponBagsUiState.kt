@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.presentation.payment.data
 
-import com.smilehunter.ablebody.model.CouponData
+import com.smilehunter.ablebody.domain.model.CouponData
 
 sealed interface CouponBagsUiState {
 

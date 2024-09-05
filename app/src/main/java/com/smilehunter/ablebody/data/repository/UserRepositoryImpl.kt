@@ -2,26 +2,32 @@ package com.smilehunter.ablebody.data.repository
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.smilehunter.ablebody.UserInfoPreferences
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.network.model.request.ChangePhoneNumberRequest
-import com.smilehunter.ablebody.network.model.request.EditProfile
-import com.smilehunter.ablebody.network.model.AddCouponResponse
-import com.smilehunter.ablebody.network.model.GetAddressResponse
-import com.smilehunter.ablebody.network.model.GetCouponBagsResponse
-import com.smilehunter.ablebody.network.model.GetMyBoardResponse
-import com.smilehunter.ablebody.network.model.UserDataResponse
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.smilehunter.ablebody.data.mapper.asExternalModel
+import com.smilehunter.ablebody.data.mapper.toDomain
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.data.paging.UserBoardPagingSource
 import com.smilehunter.ablebody.data.result.FileTooLargeException
 import com.smilehunter.ablebody.datastore.DataStoreService
-import com.smilehunter.ablebody.model.LocalUserInfoData
+import com.smilehunter.ablebody.domain.model.CouponData
+import com.smilehunter.ablebody.domain.model.DeliveryAddressData
+import com.smilehunter.ablebody.domain.model.LocalUserInfoData
+import com.smilehunter.ablebody.domain.model.UserBoardData
+import com.smilehunter.ablebody.domain.model.UserInfoData
+import com.smilehunter.ablebody.domain.repository.UserRepository
+import com.smilehunter.ablebody.domain.usecase.CouponStatus
 import com.smilehunter.ablebody.network.NetworkService
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher.IO
 import com.smilehunter.ablebody.network.di.Dispatcher
+import com.smilehunter.ablebody.network.model.AbleBodyResponse
+import com.smilehunter.ablebody.network.model.request.ChangePhoneNumberRequest
+import com.smilehunter.ablebody.network.model.request.EditProfile
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -30,18 +36,14 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     @Dispatcher(IO) private val ioDispatcher: CoroutineDispatcher,
     private val networkService: NetworkService,
-    private val dataStoreService: DataStoreService
-): UserRepository {
-
-    override suspend fun getMyUserData(): UserDataResponse = networkService.getMyUserData()
-
-    override suspend fun getUserData(uid: String): UserDataResponse = networkService.getUserData(uid)
+    private val dataStoreService: DataStoreService,
+) : UserRepository {
 
     override val localUserInfoData: Flow<LocalUserInfoData>
         get() = dataStoreService.getUserInfoData()
             .onEach { userInfoDataStore ->
                 if (userInfoDataStore.uid.isEmpty()) {
-                    getMyUserData().data?.apply {
+                    networkService.getMyUserData().data?.apply {
                         updateLocalUserInfo {
                             it.copy(
                                 uid = uid,
@@ -61,6 +63,12 @@ class UserRepositoryImpl @Inject constructor(
                 userInfoDataStore.asExternalModel()
             }
 
+    override suspend fun getMyUserData(): UserInfoData =
+        networkService.getMyUserData().data!!.toDomain()
+
+    override suspend fun getUserData(uid: String): UserInfoData =
+        networkService.getUserData(uid).data!!.toDomain()
+
     override suspend fun updateLocalUserInfo(localUserInfoData: (LocalUserInfoData) -> LocalUserInfoData) {
         dataStoreService.updateUserInfoData {
             val data = localUserInfoData(it.asExternalModel())
@@ -69,7 +77,7 @@ class UserRepositoryImpl @Inject constructor(
                 .setName(data.name)
                 .setNickname(data.nickname)
                 .setGender(
-                    when(data.gender) {
+                    when (data.gender) {
                         LocalUserInfoData.Gender.MALE -> com.smilehunter.ablebody.Gender.MALE
                         LocalUserInfoData.Gender.FEMALE -> com.smilehunter.ablebody.Gender.FEMALE
                         LocalUserInfoData.Gender.UNRECOGNIZED -> com.smilehunter.ablebody.Gender.UNRECOGNIZED
@@ -82,12 +90,12 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun editProfile(
         editProfile: EditProfile,
-        profileImageInputStream: InputStream?
-    ): UserDataResponse = withContext(ioDispatcher) {
+        profileImageInputStream: InputStream?,
+    ): Boolean {
         if (profileImageInputStream == null) {
             val response = networkService.editProfile(profile = editProfile, profileImage = null)
             dataStoreService.updateUserInfoData { it.toBuilder().clear().build() }
-            return@withContext response
+            return response.success
         }
         val temp = File.createTempFile("image_compress_file", ".jpeg")
 
@@ -95,7 +103,7 @@ class UserRepositoryImpl @Inject constructor(
             val fileSize = profileImageInputStream.available()
             val bitmap = BitmapFactory.decodeStream(profileImageInputStream)
 
-            val quality = when  {
+            val quality = when {
                 fileSize < 1000000 -> 75
                 fileSize < 2000000 -> 40
                 fileSize < 4000000 -> 20
@@ -114,14 +122,29 @@ class UserRepositoryImpl @Inject constructor(
         temp.delete()
         temp.deleteOnExit()
         dataStoreService.updateUserInfoData { it.toBuilder().clear().build() }
-        return@withContext response
+        return response.success
     }
 
-    override suspend fun getCouponBags(): GetCouponBagsResponse = networkService.getCouponBags()
-    override suspend fun addCouponByCouponCode(couponCode: String): AddCouponResponse =
-        networkService.addCouponByCouponCode(couponCode)
+    override suspend fun getCouponBags(): List<CouponData> =
+        networkService.getCouponBags().data!!.map { it.toDomain() }
 
-    override suspend fun getMyAddress(): GetAddressResponse = networkService.getAddress()
+    override suspend fun addCouponByCouponCode(couponCode: String): CouponStatus {
+        val response = networkService.addCouponByCouponCode(couponCode)
+
+        if (response.success) {
+            return CouponStatus.SUCCESS
+        }
+
+        return when (response.errorCode) {
+            AbleBodyResponse.ErrorCode.UNABLE_COUPON -> CouponStatus.UNABLE_COUPON
+            AbleBodyResponse.ErrorCode.INVALID_COUPON_CODE -> CouponStatus.INVALID_COUPON_CODE
+            AbleBodyResponse.ErrorCode.ALREADY_EXIST_COUPON -> CouponStatus.ALREADY_EXIST_COUPON
+            else -> CouponStatus.UNKNOWN_ERROR
+        }
+    }
+
+    override suspend fun getMyAddress(): DeliveryAddressData =
+        networkService.getAddress().data!!.toDomain()
 
     override suspend fun addMyAddress(
         name: String,
@@ -159,8 +182,14 @@ class UserRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getMyBoard(uid: String?, page: Int, size: Int): GetMyBoardResponse {
-        return networkService.getMyBoard(uid = uid, page = page, size = size)
+    override fun getMyBoard(uid: String?): Flow<PagingData<UserBoardData.Content>> {
+        return Pager(
+            config = PagingConfig(pageSize = 10),
+            initialKey = 0
+        ) {
+            UserBoardPagingSource(uid = uid)
+        }
+            .flow
     }
 
     override suspend fun getUserAdConsent(): Boolean {
@@ -171,8 +200,8 @@ class UserRepositoryImpl @Inject constructor(
         return networkService.acceptUserAdConsent(accept).data!!
     }
 
-    override suspend fun changePhoneNumber(changePhoneNumberRequest: ChangePhoneNumberRequest): UserDataResponse {
-        return networkService.changePhoneNumber(changePhoneNumberRequest)
+    override suspend fun changePhoneNumber(changePhoneNumberRequest: ChangePhoneNumberRequest): UserInfoData {
+        return networkService.changePhoneNumber(changePhoneNumberRequest).data!!.toDomain()
     }
 
     override suspend fun resignUser(reason: String): String {
@@ -184,16 +213,3 @@ class UserRepositoryImpl @Inject constructor(
         networkService.suggestion(content = text)
     }
 }
-
-private fun UserInfoPreferences.asExternalModel() =
-    LocalUserInfoData(
-        uid = uid,
-        name = name,
-        nickname = nickname,
-        gender = when (gender) {
-            com.smilehunter.ablebody.Gender.MALE -> LocalUserInfoData.Gender.MALE
-            com.smilehunter.ablebody.Gender.FEMALE -> LocalUserInfoData.Gender.FEMALE
-            else -> LocalUserInfoData.Gender.UNRECOGNIZED
-        },
-        profileImageUrl = profileImageUrl
-    )

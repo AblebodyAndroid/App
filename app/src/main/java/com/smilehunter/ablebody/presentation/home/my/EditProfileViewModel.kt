@@ -3,13 +3,13 @@ package com.smilehunter.ablebody.presentation.home.my
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.network.model.request.EditProfile
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
-import com.smilehunter.ablebody.domain.CheckNicknameUseCase
-import com.smilehunter.ablebody.domain.EditProfileUseCase
-import com.smilehunter.ablebody.domain.GetUserInfoUseCase
-import com.smilehunter.ablebody.domain.Status
+import com.smilehunter.ablebody.domain.usecase.CheckDuplicatedNicknameUseCase
+import com.smilehunter.ablebody.domain.usecase.EditProfileResult
+import com.smilehunter.ablebody.domain.usecase.EditProfileUseCase
+import com.smilehunter.ablebody.domain.usecase.GetUserInfoUseCase
+import com.smilehunter.ablebody.network.model.request.EditProfile
 import com.smilehunter.ablebody.presentation.home.my.data.EditProfileUiStatus
 import com.smilehunter.ablebody.presentation.home.my.data.NicknameCheckUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,7 +35,7 @@ import javax.inject.Inject
 class EditProfileViewModel @Inject constructor(
     private val editProfileUseCase: EditProfileUseCase,
     private val getUserInfoUseCase: GetUserInfoUseCase,
-    private val checkNicknameUseCase: CheckNicknameUseCase
+    private val checkNicknameUseCase: CheckDuplicatedNicknameUseCase
 ): ViewModel() {
 
     val userInfoData = flow { emit(getUserInfoUseCase()) }
@@ -68,8 +68,8 @@ class EditProfileViewModel @Inject constructor(
                     profileImageInputStream = inputStream
                 )
                 when (status) {
-                    Status.SUCCESS -> _uploadStatus.emit(EditProfileUiStatus.Success)
-                    Status.FAIL -> _uploadStatus.emit(EditProfileUiStatus.LoadFail(null))
+                    EditProfileResult.SUCCESS -> _uploadStatus.emit(EditProfileUiStatus.Success)
+                    EditProfileResult.FAIL -> _uploadStatus.emit(EditProfileUiStatus.LoadFail(null))
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

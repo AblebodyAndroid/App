@@ -33,8 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
 import com.smilehunter.ablebody.presentation.my.setting.ui.SettingList
 import com.smilehunter.ablebody.presentation.my.myInfo.MyInfoViewModel
 import com.smilehunter.ablebody.ui.theme.AbleBlue

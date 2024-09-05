@@ -5,9 +5,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.smilehunter.ablebody.data.repository.NotificationRepository
-import com.smilehunter.ablebody.domain.NotificationItemPagerUseCase
-import com.smilehunter.ablebody.model.NotificationItemData
+import com.smilehunter.ablebody.domain.model.NotificationItemData
+import com.smilehunter.ablebody.domain.usecase.NotificationItemPagerUseCase
+import com.smilehunter.ablebody.domain.usecase.ReadAllNotificationsUseCase
+import com.smilehunter.ablebody.domain.usecase.ReadNotificationsUseCase
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,9 +27,10 @@ import javax.inject.Inject
 @HiltViewModel
 class NotificationViewModel @Inject constructor(
     @Dispatcher(AbleBodyDispatcher.IO) private val ioDispatcher: CoroutineDispatcher,
-    private val notificationRepository: NotificationRepository,
-    notificationItemPagerUseCase: NotificationItemPagerUseCase
-): ViewModel() {
+    notificationItemPagerUseCase: NotificationItemPagerUseCase,
+    private val readNotificationsUseCase: ReadNotificationsUseCase,
+    private val readAllNotificationsUseCase: ReadAllNotificationsUseCase
+) : ViewModel() {
 
     private val _networkRefreshFlow = MutableSharedFlow<Unit>()
     private val networkRefreshFlow = _networkRefreshFlow.asSharedFlow()
@@ -54,7 +56,7 @@ class NotificationViewModel @Inject constructor(
     fun allCheck() {
         viewModelScope.launch(ioDispatcher) {
             if (!refreshItemIDList.value.contains(-1)) {
-                notificationRepository.checkAllMyNoti()
+                readAllNotificationsUseCase()
                 refreshItemIDList.emit(hashSetOf(-1))
             }
         }
@@ -63,7 +65,7 @@ class NotificationViewModel @Inject constructor(
     fun itemCheck(id: Long) {
         viewModelScope.launch(ioDispatcher) {
             refreshItemIDList.emit(refreshItemIDList.value.toHashSet().apply { add(id) })
-            notificationRepository.checkMyNoti(id)
+            readNotificationsUseCase(id)
         }
     }
 }

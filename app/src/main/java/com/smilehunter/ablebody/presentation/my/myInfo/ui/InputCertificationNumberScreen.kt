@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
 import com.smilehunter.ablebody.presentation.my.myInfo.MyInfoEditViewModel
 import com.smilehunter.ablebody.presentation.onboarding.data.CertificationNumberInfoMessageUiState
 import com.smilehunter.ablebody.ui.theme.AbleBlue
@@ -41,9 +41,7 @@ import com.smilehunter.ablebody.ui.theme.AbleDark
 import com.smilehunter.ablebody.ui.utils.CustomLabelText
 import com.smilehunter.ablebody.ui.utils.CustomTextField
 import com.smilehunter.ablebody.ui.utils.HighlightText
-import com.smilehunter.ablebody.ui.utils.SimpleErrorHandler
 import com.smilehunter.ablebody.ui.utils.TextFieldUnderText
-import retrofit2.HttpException
 
 @Composable
 fun InputCertificationNumberRoute(

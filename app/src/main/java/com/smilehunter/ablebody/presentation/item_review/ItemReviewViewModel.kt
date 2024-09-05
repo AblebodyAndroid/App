@@ -3,7 +3,7 @@ package com.smilehunter.ablebody.presentation.item_review
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.model.ItemDetailData
+import com.smilehunter.ablebody.domain.model.ItemDetailData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

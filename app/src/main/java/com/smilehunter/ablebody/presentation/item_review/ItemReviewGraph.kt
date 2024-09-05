@@ -6,7 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.smilehunter.ablebody.model.ItemDetailData
+import com.smilehunter.ablebody.domain.model.ItemDetailData
 import com.smilehunter.ablebody.presentation.item_review.ui.ItemReviewScreen
 import com.smilehunter.ablebody.utils.navigate
 

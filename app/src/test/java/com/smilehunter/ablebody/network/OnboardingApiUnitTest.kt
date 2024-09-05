@@ -1,5 +1,6 @@
 package com.smilehunter.ablebody.network
 
+import com.smilehunter.ablebody.domain.model.Gender
 import com.smilehunter.ablebody.network.utils.TestRetrofit
 import com.smilehunter.ablebody.utils.printResponse
 import kotlinx.coroutines.runBlocking
@@ -42,7 +43,7 @@ class OnboardingApiUnitTest {
     fun createNewUser() {
         val response = runBlocking {
             networkService.createNewUser(
-                com.smilehunter.ablebody.data.model.Gender.MALE,
+                Gender.MALE,
                 "brother",
                 1,
                 "2869",

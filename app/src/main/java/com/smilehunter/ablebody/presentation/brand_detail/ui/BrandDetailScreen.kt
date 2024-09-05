@@ -38,18 +38,18 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.data.model.HomeCategory
-import com.smilehunter.ablebody.data.model.ItemChildCategory
-import com.smilehunter.ablebody.data.model.ItemGender
-import com.smilehunter.ablebody.data.model.ItemParentCategory
-import com.smilehunter.ablebody.data.model.PersonHeightFilterType
-import com.smilehunter.ablebody.data.model.SortingMethod
-import com.smilehunter.ablebody.model.CodyItemData
-import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.model.ProductItemData
-import com.smilehunter.ablebody.model.fake.fakeCodyItemData
-import com.smilehunter.ablebody.model.fake.fakeProductItemData
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.HomeCategory
+import com.smilehunter.ablebody.domain.model.ItemChildCategory
+import com.smilehunter.ablebody.domain.model.ItemGender
+import com.smilehunter.ablebody.domain.model.ItemParentCategory
+import com.smilehunter.ablebody.domain.model.PersonHeightFilterType
+import com.smilehunter.ablebody.domain.model.SortingMethod
+import com.smilehunter.ablebody.domain.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.ProductItemData
+import com.smilehunter.ablebody.domain.model.fake.fakeCodyItemData
+import com.smilehunter.ablebody.domain.model.fake.fakeProductItemData
 import com.smilehunter.ablebody.presentation.brand_detail.BrandDetailViewModel
 import com.smilehunter.ablebody.presentation.main.ui.error_handler.NetworkConnectionErrorDialog
 import com.smilehunter.ablebody.ui.cody_item.CodyItemListLayout
@@ -155,7 +155,7 @@ fun BrandDetailScreen(
     onProductItemParentFilterChange: (ItemParentCategory) -> Unit = {},
     onProductItemChildFilterChange: (ItemChildCategory?) -> Unit = {},
     onProductItemGenderChange: (ItemGender) -> Unit = {},
-    codyItemClick: (Long) -> Unit = {} ,
+    codyItemClick: (Long) -> Unit = {},
     codyItemFilterResetRequest: () -> Unit = {},
     onCodyItemListGenderFilterChange: (List<Gender>) -> Unit = {},
     onCodyItemListSportFilterChange: (List<HomeCategory>) -> Unit = {},

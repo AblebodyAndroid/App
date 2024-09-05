@@ -5,17 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.network.model.request.EditProfile
-import com.smilehunter.ablebody.network.model.AbleBodyResponse
-import com.smilehunter.ablebody.network.model.SendSMSResponse
-import com.smilehunter.ablebody.network.model.response.SMSCheckResponseData
-import com.smilehunter.ablebody.data.repository.OnboardingRepository
-import com.smilehunter.ablebody.data.repository.UserRepository
-import com.smilehunter.ablebody.domain.EditProfileUseCase
-import com.smilehunter.ablebody.domain.GetUserInfoUseCase
-import com.smilehunter.ablebody.model.UserInfoData
+import com.smilehunter.ablebody.domain.model.UserInfoData
+import com.smilehunter.ablebody.domain.usecase.CheckAuthenticationNumberUseCase
+import com.smilehunter.ablebody.domain.usecase.CheckDuplicatedNicknameUseCase
+import com.smilehunter.ablebody.domain.usecase.EditProfileUseCase
+import com.smilehunter.ablebody.domain.usecase.GetUserInfoUseCase
+import com.smilehunter.ablebody.domain.usecase.SendAuthenticationNumberUseCase
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
+import com.smilehunter.ablebody.network.model.request.EditProfile
 import com.smilehunter.ablebody.presentation.onboarding.data.CertificationNumberInfoMessageUiState
 import com.smilehunter.ablebody.presentation.onboarding.data.NicknameRule
 import com.smilehunter.ablebody.presentation.onboarding.utils.CertificationNumberCountDownTimer
@@ -30,7 +28,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
@@ -40,17 +37,17 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class MyInfoEditViewModel @Inject constructor(
-    private val userRepository: UserRepository,
-    private val getUserInfoUseCase: GetUserInfoUseCase,
-    private val onboardingRepository: OnboardingRepository,
-    private val editProfileUseCase: EditProfileUseCase,
     @Dispatcher(AbleBodyDispatcher.IO) private val ioDispatcher: CoroutineDispatcher,
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
+    private val getUserInfoUseCase: GetUserInfoUseCase,
+    private val editProfileUseCase: EditProfileUseCase,
+    private val sendAuthenticationNumberUseCase: SendAuthenticationNumberUseCase,
+    private val checkAuthenticationNumberUseCase: CheckAuthenticationNumberUseCase,
+    private val checkNicknameUseCase: CheckDuplicatedNicknameUseCase
 ) : ViewModel() {
     private val _userInfoLiveData = MutableLiveData<UserInfoData>()
     val userLiveData: LiveData<UserInfoData> = _userInfoLiveData
@@ -107,7 +104,7 @@ class MyInfoEditViewModel @Inject constructor(
                 flowOf(NicknameRule.UnAvailable)
             } else {
                 withContext(ioDispatcher) {
-                    if (onboardingRepository.checkNickname(nickname).body()?.success == true) {
+                    if (checkNicknameUseCase(nickname)) {
                         flowOf(NicknameRule.Available)
                     } else {
                         flowOf(NicknameRule.InUsed)
@@ -162,17 +159,16 @@ class MyInfoEditViewModel @Inject constructor(
         )
 
 
-    private val _smsResponse = MutableSharedFlow<Response<SendSMSResponse>>()
-    private val smsResponse = _smsResponse.asSharedFlow()
-
+    private val authenticationConfirmId = MutableSharedFlow<Long>()
 
     private var lastSmsVerificationCodeRequestTime = 0L
     fun requestSmsVerificationCode(phoneNumber: String) {
         viewModelScope.launch(ioDispatcher) {
             try {
                 if (System.currentTimeMillis() - lastSmsVerificationCodeRequestTime >= 1000L) {
-                    val response = onboardingRepository.sendSMS(phoneNumber)
-                    _smsResponse.emit(response)
+
+                    val confirmId = sendAuthenticationNumberUseCase(phoneNumber)
+                    authenticationConfirmId.emit(confirmId)
                     lastSmsVerificationCodeRequestTime = System.currentTimeMillis()
                 }
                 _sendErrorLiveData.postValue(null)
@@ -210,37 +206,36 @@ class MyInfoEditViewModel @Inject constructor(
 
     fun updateCertificationNumber(number: String) {
         viewModelScope.launch {
-                _certificationNumberState.emit(number)
+            _certificationNumberState.emit(number)
         }
     }
 
-    val verificationResultState: StateFlow<Response<AbleBodyResponse<SMSCheckResponseData>>?> =
-        combine(certificationNumberState, smsResponse) { number, response ->
-            val phoneConfirmID = response.body()?.data?.phoneConfirmId
-            if (number.length == 4 && phoneConfirmID != null) {
+    private val verificationResultState: StateFlow<Boolean?> =
+        combine(certificationNumberState, authenticationConfirmId) { number, id ->
+            if (number.length == 4) {
                 withContext(Dispatchers.IO) {
-                    onboardingRepository.checkSMS(phoneConfirmID, number)
+                    checkAuthenticationNumberUseCase(id, number)
                 }
             } else {
                 null
             }
         }
-        .catch {
-            _sendErrorLiveData.postValue(it)
-        }
+            .catch {
+                _sendErrorLiveData.postValue(it)
+            }
 
-        .stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = null
-    )
-    val certificationNumberInfoMessageUiState =
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = null
+            )
+    val certificationNumberInfoMessageUiState: StateFlow<CertificationNumberInfoMessageUiState> =
         combine(currentCertificationNumberTime, verificationResultState) { time, result ->
             if (time == 0L) {
                 CertificationNumberInfoMessageUiState.Timeout
             } else if (result != null) {
                 when {
-                    result.body()?.success == true -> {
+                    result == true -> {
                         CertificationNumberInfoMessageUiState.Success
                     }
 
@@ -253,10 +248,14 @@ class MyInfoEditViewModel @Inject constructor(
                     .run { "${minutes}분 ${seconds}초 남음" }
                     .let { CertificationNumberInfoMessageUiState.Timer(it) }
             }
-        }.stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = CertificationNumberInfoMessageUiState.Timer("")
-        )
+        }
+            .catch {
+                it.printStackTrace()
+            }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = CertificationNumberInfoMessageUiState.Timer("")
+            )
 
 }

@@ -70,9 +70,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.model.CommentListData
-import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.model.LikedLocations
+import com.smilehunter.ablebody.domain.model.CommentListData
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.LikedLocations
 import com.smilehunter.ablebody.presentation.comment.CommentViewModel
 import com.smilehunter.ablebody.presentation.comment.data.CommentUiState
 import com.smilehunter.ablebody.presentation.main.LocalUserProfile

@@ -3,10 +3,15 @@ package com.smilehunter.ablebody.presentation.comment
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.data.repository.CommentRepository
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
-import com.smilehunter.ablebody.domain.GetCommentListUseCase
+import com.smilehunter.ablebody.domain.usecase.AddCreatorDetailCommentUseCase
+import com.smilehunter.ablebody.domain.usecase.AddCreatorDetailReplyUseCase
+import com.smilehunter.ablebody.domain.usecase.DeleteCreatorDetailCommentUseCase
+import com.smilehunter.ablebody.domain.usecase.DeleteCreatorDetailReplyUseCase
+import com.smilehunter.ablebody.domain.usecase.GetCommentListUseCase
+import com.smilehunter.ablebody.domain.usecase.LikeCreatorDetailCommentUseCase
+import com.smilehunter.ablebody.domain.usecase.LikeCreatorDetailReplyUseCase
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import com.smilehunter.ablebody.presentation.comment.data.CommentUiState
@@ -32,7 +37,12 @@ class CommentViewModel @Inject constructor(
     @Dispatcher(AbleBodyDispatcher.IO) private val ioDispatcher: CoroutineDispatcher,
     savedStateHandle: SavedStateHandle,
     getCommentListUseCase: GetCommentListUseCase,
-    private val commentRepository: CommentRepository,
+    private val addCreatorDetailCommentUseCase: AddCreatorDetailCommentUseCase,
+    private val addCreatorDetailReplyUseCase: AddCreatorDetailReplyUseCase,
+    private val deleteCreatorDetailCommentUseCase: DeleteCreatorDetailCommentUseCase,
+    private val deleteCreatorDetailReplyUseCase: DeleteCreatorDetailReplyUseCase,
+    private val likeCreatorDetailCommentUseCase: LikeCreatorDetailCommentUseCase,
+    private val likeCreatorDetailReplyUseCase: LikeCreatorDetailReplyUseCase
 ): ViewModel() {
 
     private val _networkRefreshFlow = MutableSharedFlow<Unit>()
@@ -73,7 +83,7 @@ class CommentViewModel @Inject constructor(
     fun updateCommentText(text: String) {
         viewModelScope.launch {
             try {
-                commentRepository.creatorDetailComment(contentID.value, text)
+                addCreatorDetailCommentUseCase(contentID.value, text)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -84,7 +94,7 @@ class CommentViewModel @Inject constructor(
     fun updateReplyText(id: Long, text: String) {
         viewModelScope.launch {
             try {
-                commentRepository.creatorDetailReply(id, text)
+                addCreatorDetailReplyUseCase(id, text)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -95,7 +105,7 @@ class CommentViewModel @Inject constructor(
     fun deleteComment(id: Long) {
         viewModelScope.launch {
             try {
-                commentRepository.creatorDetailDeleteComment(id)
+                deleteCreatorDetailCommentUseCase(id)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -106,7 +116,7 @@ class CommentViewModel @Inject constructor(
     fun deleteReply(id: Long) {
         viewModelScope.launch {
             try {
-                commentRepository.creatorDetailDeleteReply(id)
+                deleteCreatorDetailReplyUseCase(id)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -117,7 +127,7 @@ class CommentViewModel @Inject constructor(
     fun toggleLikeComment(id: Long) {
         viewModelScope.launch {
             try {
-                commentRepository.creatorDetailLikeComment(id)
+                likeCreatorDetailCommentUseCase(id)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -127,7 +137,7 @@ class CommentViewModel @Inject constructor(
     fun toggleLikeReply(id: Long) {
         viewModelScope.launch {
             try {
-                commentRepository.creatorDetailLikeReply(id)
+                likeCreatorDetailReplyUseCase(id)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

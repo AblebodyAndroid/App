@@ -36,8 +36,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
 import com.smilehunter.ablebody.presentation.my.myInfo.MyInfoEditViewModel
 import com.smilehunter.ablebody.presentation.onboarding.data.NicknameRule
 import com.smilehunter.ablebody.ui.theme.AbleBlue

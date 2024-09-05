@@ -8,13 +8,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.smilehunter.ablebody.data.repository.ManageRepository
-import com.smilehunter.ablebody.domain.GetOrderItemListUseCase
-import com.smilehunter.ablebody.domain.GetUserBoardPagerUseCase
-import com.smilehunter.ablebody.domain.GetUserInfoUseCase
-import com.smilehunter.ablebody.model.OrderItemData
-import com.smilehunter.ablebody.model.UserBoardData
-import com.smilehunter.ablebody.model.UserInfoData
+import com.smilehunter.ablebody.domain.model.OrderItemData
+import com.smilehunter.ablebody.domain.model.UserBoardData
+import com.smilehunter.ablebody.domain.model.UserInfoData
+import com.smilehunter.ablebody.domain.usecase.GetOrderItemListUseCase
+import com.smilehunter.ablebody.domain.usecase.GetUserBoardPagerUseCase
+import com.smilehunter.ablebody.domain.usecase.GetUserInfoUseCase
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,13 +29,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyViewModel @Inject constructor(
-    private val manageRepository: ManageRepository,
     private val getUserInfoUseCase: GetUserInfoUseCase,
     private val getOrderItemListUseCase: GetOrderItemListUseCase,
     private val getUserBoardPagerUseCase: GetUserBoardPagerUseCase,
     @Dispatcher(AbleBodyDispatcher.IO) private val ioDispatcher: CoroutineDispatcher,
     private val savedStateHandle: SavedStateHandle
-): ViewModel() {
+) : ViewModel() {
 
     val uid = savedStateHandle.getStateFlow<String?>("uid", null)
     private val _userInfoLiveData = MutableLiveData<UserInfoData>()
@@ -60,7 +58,7 @@ class MyViewModel @Inject constructor(
     val otherUserBoard: StateFlow<PagingData<UserBoardData.Content>> = uid.flatMapLatest {
         if (it != null) {
             getUserBoardPagerUseCase(it)
-        }else{
+        } else {
             flowOf((PagingData.empty()))
         }
     }.cachedIn(viewModelScope)

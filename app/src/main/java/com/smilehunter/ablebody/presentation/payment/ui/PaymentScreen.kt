@@ -74,13 +74,12 @@ import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.smilehunter.ablebody.BuildConfig
 import com.smilehunter.ablebody.R
 import com.smilehunter.ablebody.databinding.TossPaymentLayoutBinding
-import com.smilehunter.ablebody.model.CouponData
-import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.model.UserInfoData
-import com.smilehunter.ablebody.model.fake.fakeUserInfo
+import com.smilehunter.ablebody.domain.model.CouponData
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
+import com.smilehunter.ablebody.domain.model.UserInfoData
+import com.smilehunter.ablebody.domain.model.fake.fakeUserInfo
 import com.smilehunter.ablebody.presentation.delivery.data.DeliveryPassthroughData
 import com.smilehunter.ablebody.presentation.delivery.ui.DeliveryRequestMessageBottomSheet
 import com.smilehunter.ablebody.presentation.delivery.ui.DeliveryTextField

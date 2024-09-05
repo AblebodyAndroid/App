@@ -4,25 +4,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.data.model.HomeCategory
-import com.smilehunter.ablebody.data.model.ItemChildCategory
-import com.smilehunter.ablebody.data.model.ItemGender
-import com.smilehunter.ablebody.data.model.ItemParentCategory
-import com.smilehunter.ablebody.data.model.PersonHeightFilterType
-import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.HomeCategory
+import com.smilehunter.ablebody.domain.model.ItemChildCategory
+import com.smilehunter.ablebody.domain.model.ItemGender
+import com.smilehunter.ablebody.domain.model.ItemParentCategory
+import com.smilehunter.ablebody.domain.model.PersonHeightFilterType
+import com.smilehunter.ablebody.domain.model.SortingMethod
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
-import com.smilehunter.ablebody.domain.CodyItemPagerUseCase
-import com.smilehunter.ablebody.domain.CodyPagingSourceData
-import com.smilehunter.ablebody.domain.DeleteSearchHistoryUseCase
-import com.smilehunter.ablebody.domain.GetRecommendKeywordUseCase
-import com.smilehunter.ablebody.domain.GetSearchHistoryUseCase
-import com.smilehunter.ablebody.domain.ProductItemPagerUseCase
-import com.smilehunter.ablebody.domain.ProductItemPagingSourceData
-import com.smilehunter.ablebody.model.CodyItemData
-import com.smilehunter.ablebody.model.ProductItemData
-import com.smilehunter.ablebody.model.SearchHistoryQuery
+import com.smilehunter.ablebody.domain.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.ProductItemData
+import com.smilehunter.ablebody.domain.model.SearchHistoryQuery
+import com.smilehunter.ablebody.domain.usecase.DeleteSearchHistoryUseCase
+import com.smilehunter.ablebody.domain.usecase.GetRecommendKeywordUseCase
+import com.smilehunter.ablebody.domain.usecase.GetSearchCodyItemPagerUseCase
+import com.smilehunter.ablebody.domain.usecase.GetSearchHistoryUseCase
+import com.smilehunter.ablebody.domain.usecase.GetSearchProductItemPagerUseCase
 import com.smilehunter.ablebody.presentation.search.data.KeywordUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -46,12 +44,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    productItemPagerUseCase: ProductItemPagerUseCase,
-    codyItemPagerUseCase: CodyItemPagerUseCase,
+    getSearchProductItemPagerUseCase: GetSearchProductItemPagerUseCase,
+    getSearchCodyItemPagerUseCase: GetSearchCodyItemPagerUseCase,
     getRecommendKeywordUseCase: GetRecommendKeywordUseCase,
     getSearchHistoryUseCase: GetSearchHistoryUseCase,
     private val deleteSearchHistoryUseCase: DeleteSearchHistoryUseCase
-): ViewModel() {
+) : ViewModel() {
 
     private val _networkRefreshFlow = MutableSharedFlow<Unit>()
     private val networkRefreshFlow = _networkRefreshFlow.asSharedFlow()
@@ -150,16 +148,16 @@ class SearchViewModel @Inject constructor(
                     productItemGender,
                     productItemParentCategory,
                     productItemChildCategory
-                ) { sort, keyword, gender, parent, child, ->
+                ) { sort, keyword, gender, parent, child ->
                     if (keyword.isNotEmpty()) {
-                        productItemPagerUseCase(ProductItemPagingSourceData.Search(sort, keyword, gender, parent, child))
+                        getSearchProductItemPagerUseCase(sort, keyword, gender, parent, child)
                     } else {
                         flowOf(PagingData.empty())
                     }
                 }
                     .flatMapLatest { it }
                     .cachedIn(viewModelScope)
-        }
+            }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
@@ -206,14 +204,12 @@ class SearchViewModel @Inject constructor(
                     codyItemListPersonHeightFilter
                 ) { keyword, gender, sport, height ->
                     if (keyword.isNotEmpty()) {
-                        codyItemPagerUseCase(
-                            CodyPagingSourceData.Search(
-                                keyword,
-                                gender,
-                                sport,
-                                height.rangeStart,
-                                height.rangeEnd
-                            )
+                        getSearchCodyItemPagerUseCase(
+                            keyword = keyword,
+                            genders = gender,
+                            category = sport,
+                            personHeightRangeStart = height.rangeStart,
+                            personHeightRangeEnd = height.rangeEnd
                         )
                     } else {
                         flowOf(PagingData.empty())

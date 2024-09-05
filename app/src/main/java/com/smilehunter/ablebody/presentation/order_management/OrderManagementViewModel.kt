@@ -2,11 +2,11 @@ package com.smilehunter.ablebody.presentation.order_management
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.data.repository.OrderManagementRepository
+import com.smilehunter.ablebody.domain.repository.OrderManagementRepository
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
-import com.smilehunter.ablebody.domain.GetDeliveryTrackingNumberUseCase
-import com.smilehunter.ablebody.domain.GetOrderItemListUseCase
+import com.smilehunter.ablebody.domain.usecase.GetDeliveryTrackingNumberUseCase
+import com.smilehunter.ablebody.domain.usecase.GetOrderItemListUseCase
 import com.smilehunter.ablebody.presentation.order_management.data.DeliveryTrackingUiState
 import com.smilehunter.ablebody.presentation.order_management.data.OrderItemUiState
 import dagger.hilt.android.lifecycle.HiltViewModel

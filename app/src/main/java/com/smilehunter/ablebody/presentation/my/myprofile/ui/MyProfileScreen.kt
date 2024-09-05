@@ -58,8 +58,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.model.ErrorHandlerCode
-import com.smilehunter.ablebody.presentation.item_detail.data.ItemDetailUiState
+import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
 import com.smilehunter.ablebody.presentation.main.ui.LocalMainScaffoldPaddingValue
 import com.smilehunter.ablebody.presentation.my.coupon.CouponViewModel
 import com.smilehunter.ablebody.presentation.my.myprofile.MyProfileViewModel

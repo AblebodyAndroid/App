@@ -2,25 +2,23 @@ package com.smilehunter.ablebody.presentation.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.messaging.FirebaseMessaging
-import com.smilehunter.ablebody.BuildConfig
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.network.model.NewUserCreateResponse
-import com.smilehunter.ablebody.network.model.SendSMSResponse
-import com.smilehunter.ablebody.data.repository.FCMSyncRepository
-import com.smilehunter.ablebody.data.repository.OnboardingRepository
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.usecase.CheckAuthenticationNumberUseCase
+import com.smilehunter.ablebody.domain.usecase.CheckDuplicatedNicknameUseCase
+import com.smilehunter.ablebody.domain.usecase.RegisterAppUseCase
+import com.smilehunter.ablebody.domain.usecase.SendAuthenticationNumberUseCase
+import com.smilehunter.ablebody.domain.usecase.SyncAppStatusUseCase
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
+import com.smilehunter.ablebody.presentation.onboarding.data.AuthenticationVerificationUiState
 import com.smilehunter.ablebody.presentation.onboarding.data.CertificationNumberInfoMessageUiState
 import com.smilehunter.ablebody.presentation.onboarding.data.NicknameRule
 import com.smilehunter.ablebody.presentation.onboarding.data.ProfileImages
 import com.smilehunter.ablebody.presentation.onboarding.data.TermsAgreements
 import com.smilehunter.ablebody.presentation.onboarding.utils.CertificationNumberCountDownTimer
-import com.smilehunter.ablebody.presentation.onboarding.utils.convertMillisecondsToFormattedTime
 import com.smilehunter.ablebody.presentation.onboarding.utils.isNicknameRuleMatch
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -28,8 +26,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
@@ -37,17 +35,19 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
     @Dispatcher(AbleBodyDispatcher.IO) private val ioDispatcher: CoroutineDispatcher,
-    private val onboardingRepository: OnboardingRepository,
-    private val fcmSyncRepository: FCMSyncRepository
-): ViewModel() {
+    private val sendAuthenticationNumberUseCase: SendAuthenticationNumberUseCase,
+    private val checkAuthenticationNumberUseCase: CheckAuthenticationNumberUseCase,
+    private val checkNicknameUseCase: CheckDuplicatedNicknameUseCase,
+    private val registerAppUseCase: RegisterAppUseCase,
+    private val syncAppStatusUseCase: SyncAppStatusUseCase
+) : ViewModel() {
 
-    val phoneNumberState: StateFlow<String> get() =  _phoneNumberState.asStateFlow()
+    val phoneNumberState: StateFlow<String> get() = _phoneNumberState.asStateFlow()
     private val _phoneNumberState = MutableStateFlow<String>("")
 
     fun updatePhoneNumber(phoneNumber: String) {
@@ -55,6 +55,7 @@ class OnboardingViewModel @Inject constructor(
     }
 
     private val phoneNumberRegex = "^01[0-1, 7][0-9]{8}\$".toRegex()
+
     @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     val isPhoneNumberCorrectState: StateFlow<Boolean> =
         phoneNumberState.debounce(500L)
@@ -82,15 +83,14 @@ class OnboardingViewModel @Inject constructor(
             )
 
 
-    private val _smsResponse = MutableSharedFlow<Response<SendSMSResponse>>()
-    private val smsResponse = _smsResponse.asSharedFlow()
+    private val certificationId = MutableSharedFlow<Long>()
 
     private var lastSmsVerificationCodeRequestTime = 0L
     fun requestSmsVerificationCode(phoneNumber: String) {
         viewModelScope.launch(ioDispatcher) {
             if (System.currentTimeMillis() - lastSmsVerificationCodeRequestTime >= 1000L) {
-                val response = onboardingRepository.sendSMS(phoneNumber)
-                _smsResponse.emit(response)
+                val id = sendAuthenticationNumberUseCase(phoneNumber)
+                certificationId.emit(id)
                 lastSmsVerificationCodeRequestTime = System.currentTimeMillis()
             }
         }
@@ -124,51 +124,56 @@ class OnboardingViewModel @Inject constructor(
         viewModelScope.launch { _certificationNumberState.emit(number) }
     }
 
-    val verificationResultState = combine(certificationNumberState, smsResponse) { number, response ->
-        val phoneConfirmID = response.body()?.data?.phoneConfirmId
-        if (number.length == 4 && phoneConfirmID != null) {
-            withContext(Dispatchers.IO) {
-                onboardingRepository.checkSMS(phoneConfirmID, number)
-            }
-        } else {
-            null
-        }
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = null
-    )
+    val verificationResultState: StateFlow<AuthenticationVerificationUiState> =
+        combine(certificationNumberState, certificationId) { number, id ->
+            require(number.length == 4)
+            val isRegisteredUser = checkAuthenticationNumberUseCase(id, number)
 
-    val certificationNumberInfoMessageUiState = combine(currentCertificationNumberTime, verificationResultState) { time, result ->
-        if (time == 0L) {
-            CertificationNumberInfoMessageUiState.Timeout
-        } else if (result != null) {
-            when {
-                result.body()?.data?.registered == true -> {
-                    CertificationNumberInfoMessageUiState.Already
-                }
-                result.body()?.success == true -> {
-                    CertificationNumberInfoMessageUiState.Success
-                }
-                else -> {
-                    CertificationNumberInfoMessageUiState.InValid
+            if (isRegisteredUser) {
+                return@combine AuthenticationVerificationUiState.AlreadyUser
+            }
+            AuthenticationVerificationUiState.NewUser
+        }
+            .catch {
+                AuthenticationVerificationUiState.Error(it)
+            }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = AuthenticationVerificationUiState.Init
+            )
+
+    val certificationNumberInfoMessageUiState =
+        combine(currentCertificationNumberTime, verificationResultState) { time, result ->
+            if (time == 0L) {
+                CertificationNumberInfoMessageUiState.Timeout
+            } else run {
+                when (result) {
+                    is AuthenticationVerificationUiState.AlreadyUser -> {
+                        CertificationNumberInfoMessageUiState.Already
+                    }
+
+                    is AuthenticationVerificationUiState.NewUser -> {
+                        CertificationNumberInfoMessageUiState.Success
+                    }
+
+                    else -> {
+                        CertificationNumberInfoMessageUiState.InValid
+                    }
                 }
             }
-        } else {
-            convertMillisecondsToFormattedTime(time)
-                .run { "${minutes}분 ${seconds}초 남음" }
-                .let { CertificationNumberInfoMessageUiState.Timer(it) }
-        }
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = CertificationNumberInfoMessageUiState.Timer("")
-    )
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = CertificationNumberInfoMessageUiState.Timer("")
+        )
 
     private val _nicknameState = MutableStateFlow("")
     val nicknameState = _nicknameState.asStateFlow()
 
-    fun updateNickname(value: String) { _nicknameState.value = value }
+    fun updateNickname(value: String) {
+        _nicknameState.value = value
+    }
 
     private val regex1 = "[0-9a-z_.]{1,20}".toRegex()
     private val startsWithDotRegex = "^[.].*\$".toRegex()
@@ -190,7 +195,7 @@ class OnboardingViewModel @Inject constructor(
                 flowOf(NicknameRule.UnAvailable)
             } else {
                 withContext(ioDispatcher) {
-                    if (onboardingRepository.checkNickname(nickname).body()?.success == true) {
+                    if (checkNicknameUseCase(nickname)) {
                         flowOf(NicknameRule.Available)
                     } else {
                         flowOf(NicknameRule.InUsed)
@@ -206,12 +211,16 @@ class OnboardingViewModel @Inject constructor(
     private val _genderState = MutableStateFlow<Gender?>(null)
     val genderState = _genderState.asStateFlow()
 
-    fun updateGender(value: Gender) { _genderState.value = value }
+    fun updateGender(value: Gender) {
+        _genderState.value = value
+    }
 
     private val _profileImageState = MutableStateFlow<ProfileImages?>(null)
     val profileImageState = _profileImageState.asStateFlow()
 
-    fun updateProfileImage(value: ProfileImages) { _profileImageState.value = value }
+    fun updateProfileImage(value: ProfileImages) {
+        _profileImageState.value = value
+    }
 
     private val _termsAgreementsListState = MutableStateFlow<List<TermsAgreements>>(emptyList())
     val termsAgreementsListState = _termsAgreementsListState.asStateFlow()
@@ -220,8 +229,9 @@ class OnboardingViewModel @Inject constructor(
         viewModelScope.launch { _termsAgreementsListState.emit(value) }
     }
 
-    private val _createNewUser = MutableSharedFlow<Response<NewUserCreateResponse>>()
-    val createNewUser: SharedFlow<Response<NewUserCreateResponse>> = _createNewUser
+    private val _createNewUser = MutableSharedFlow<Unit>()
+    val createNewUser: SharedFlow<Unit> = _createNewUser
+
     fun createNewUser(
         gender: Gender,
         nickname: String,
@@ -231,29 +241,24 @@ class OnboardingViewModel @Inject constructor(
         agreeMarketingConsent: Boolean
     ) {
         viewModelScope.launch(ioDispatcher) {
-            onboardingRepository.createNewUser(
+            registerAppUseCase(
                 gender = gender,
                 nickname = nickname,
                 profileImage = profileImage,
                 verifyingCode = verifyingCode,
                 agreeRequiredConsent = agreeRequiredConsent,
                 agreeMarketingConsent = agreeMarketingConsent
-            ).let { _createNewUser.emit(it) }
+            ).also { _createNewUser.emit(Unit) }
         }
     }
 
     fun updateFCMTokenAndAppVersion() {
-        try {
-            FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-                viewModelScope.launch(ioDispatcher) {
-                    fcmSyncRepository.updateFCMTokenAndAppVersion(
-                        fcmToken = task.result,
-                        appVersion = BuildConfig.VERSION_NAME
-                    )
-                }
+        viewModelScope.launch(ioDispatcher) {
+            try {
+                syncAppStatusUseCase()
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 }

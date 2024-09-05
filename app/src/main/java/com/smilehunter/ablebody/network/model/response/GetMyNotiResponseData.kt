@@ -1,7 +1,7 @@
 package com.smilehunter.ablebody.network.model.response
 
-import com.smilehunter.ablebody.data.model.NetworkAuthorityName
-import com.smilehunter.ablebody.data.model.NetworkNotificationType
+import com.smilehunter.ablebody.network.model.NetworkAuthorityName
+import com.smilehunter.ablebody.network.model.NetworkNotificationType
 
 data class GetMyNotiResponseData(
     val content: List<Content>,

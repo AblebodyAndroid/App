@@ -74,7 +74,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.smilehunter.ablebody.R
 import com.smilehunter.ablebody.data.result.FileTooLargeException
-import com.smilehunter.ablebody.model.UserInfoData
+import com.smilehunter.ablebody.domain.model.UserInfoData
 import com.smilehunter.ablebody.presentation.home.my.EditProfileViewModel
 import com.smilehunter.ablebody.presentation.home.my.data.EditProfileUiStatus
 import com.smilehunter.ablebody.presentation.home.my.data.NicknameCheckUiState

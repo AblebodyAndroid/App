@@ -2,11 +2,11 @@ package com.smilehunter.ablebody.presentation.home.brand
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.data.model.ItemGender
-import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.domain.model.ItemGender
+import com.smilehunter.ablebody.domain.model.SortingMethod
 import com.smilehunter.ablebody.data.result.Result
 import com.smilehunter.ablebody.data.result.asResult
-import com.smilehunter.ablebody.domain.GetBrandListUseCase
+import com.smilehunter.ablebody.domain.usecase.GetBrandListUseCase
 import com.smilehunter.ablebody.presentation.home.brand.data.BrandListResultUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
