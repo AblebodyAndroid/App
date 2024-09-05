@@ -1,7 +1,7 @@
 package com.smilehunter.ablebody.data.repository
 
 import com.smilehunter.ablebody.common.exception.SMSRequestCountLimitException
-import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.domain.model.Gender
 import com.smilehunter.ablebody.domain.repository.OnboardingRepository
 import com.smilehunter.ablebody.network.NetworkService
 import com.smilehunter.ablebody.sharedPreferences.TokenSharedPreferences

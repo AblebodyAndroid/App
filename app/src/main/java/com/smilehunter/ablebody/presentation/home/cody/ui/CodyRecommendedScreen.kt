@@ -19,9 +19,9 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.data.model.HomeCategory
-import com.smilehunter.ablebody.data.model.PersonHeightFilterType
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.HomeCategory
+import com.smilehunter.ablebody.domain.model.PersonHeightFilterType
 import com.smilehunter.ablebody.domain.model.CodyItemData
 import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
 import com.smilehunter.ablebody.domain.model.fake.fakeCodyItemData

@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.data.mapper
 
-import com.smilehunter.ablebody.data.model.ItemChildCategory
+import com.smilehunter.ablebody.domain.model.ItemChildCategory
 import com.smilehunter.ablebody.domain.model.CreatorDetailData
 import com.smilehunter.ablebody.network.model.response.CreatorDetailResponseData
 

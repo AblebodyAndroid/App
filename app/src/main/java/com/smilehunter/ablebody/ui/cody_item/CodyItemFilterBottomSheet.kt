@@ -49,9 +49,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.smilehunter.ablebody.domain.model.CodyItemFilterBottomSheetTabFilterType
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.data.model.HomeCategory
-import com.smilehunter.ablebody.data.model.PersonHeightFilterType
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.HomeCategory
+import com.smilehunter.ablebody.domain.model.PersonHeightFilterType
 import com.smilehunter.ablebody.R
 import com.smilehunter.ablebody.ui.theme.ABLEBODY_AndroidTheme
 import com.smilehunter.ablebody.ui.theme.AbleBlue

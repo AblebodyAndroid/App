@@ -1,7 +1,6 @@
 package com.smilehunter.ablebody.domain.model
 
 import android.os.Parcelable
-import com.smilehunter.ablebody.data.model.Gender
 import kotlinx.parcelize.Parcelize
 import kotlin.math.roundToInt
 

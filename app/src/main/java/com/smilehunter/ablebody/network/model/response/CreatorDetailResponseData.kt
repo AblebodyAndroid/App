@@ -1,11 +1,11 @@
 package com.smilehunter.ablebody.network.model.response
 
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.data.model.HomeCategory
-import com.smilehunter.ablebody.data.model.ItemChildCategory
-import com.smilehunter.ablebody.data.model.ItemGender
-import com.smilehunter.ablebody.data.model.ItemParentCategory
-import com.smilehunter.ablebody.data.model.NetworkAuthorityName
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.HomeCategory
+import com.smilehunter.ablebody.domain.model.ItemChildCategory
+import com.smilehunter.ablebody.domain.model.ItemGender
+import com.smilehunter.ablebody.domain.model.ItemParentCategory
+import com.smilehunter.ablebody.network.model.NetworkAuthorityName
 
 data class CreatorDetailResponseData(
     val id: Long,

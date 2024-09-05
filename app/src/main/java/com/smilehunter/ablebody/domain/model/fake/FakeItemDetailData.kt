@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain.model.fake
 
-import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.domain.model.Gender
 import com.smilehunter.ablebody.domain.model.ItemDetailData
 
 val fakeItemDetailData = ItemDetailData(

@@ -1,10 +1,10 @@
 package com.smilehunter.ablebody.network
 
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.data.model.HomeCategory
-import com.smilehunter.ablebody.data.model.ItemGender
-import com.smilehunter.ablebody.data.model.ItemParentCategory
-import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.HomeCategory
+import com.smilehunter.ablebody.domain.model.ItemGender
+import com.smilehunter.ablebody.domain.model.ItemParentCategory
+import com.smilehunter.ablebody.domain.model.SortingMethod
 import com.smilehunter.ablebody.network.utils.TestRetrofit
 import com.smilehunter.ablebody.utils.printResponse
 import kotlinx.coroutines.runBlocking

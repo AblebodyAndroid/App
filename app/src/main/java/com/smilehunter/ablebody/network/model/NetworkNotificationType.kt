@@ -1,4 +1,4 @@
-package com.smilehunter.ablebody.data.model
+package com.smilehunter.ablebody.network.model
 
 enum class NetworkNotificationType {
     OFFICIAL, COMMON

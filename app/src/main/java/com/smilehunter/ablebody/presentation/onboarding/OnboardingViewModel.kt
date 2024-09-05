@@ -2,7 +2,7 @@ package com.smilehunter.ablebody.presentation.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.domain.model.Gender
 import com.smilehunter.ablebody.domain.usecase.CheckAuthenticationNumberUseCase
 import com.smilehunter.ablebody.domain.usecase.CheckDuplicatedNicknameUseCase
 import com.smilehunter.ablebody.domain.usecase.RegisterAppUseCase

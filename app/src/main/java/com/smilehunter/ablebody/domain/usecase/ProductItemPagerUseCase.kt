@@ -6,10 +6,10 @@ import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.smilehunter.ablebody.data.mapper.toDomain
-import com.smilehunter.ablebody.data.model.ItemChildCategory
-import com.smilehunter.ablebody.data.model.ItemGender
-import com.smilehunter.ablebody.data.model.ItemParentCategory
-import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.domain.model.ItemChildCategory
+import com.smilehunter.ablebody.domain.model.ItemGender
+import com.smilehunter.ablebody.domain.model.ItemParentCategory
+import com.smilehunter.ablebody.domain.model.SortingMethod
 import com.smilehunter.ablebody.domain.model.ProductItemData
 import com.smilehunter.ablebody.network.NetworkService
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher

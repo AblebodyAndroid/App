@@ -1,4 +1,4 @@
-package com.smilehunter.ablebody.data.model
+package com.smilehunter.ablebody.domain.model
 
 enum class ItemGender(val string: String) {
     UNISEX(string = "전체"),
