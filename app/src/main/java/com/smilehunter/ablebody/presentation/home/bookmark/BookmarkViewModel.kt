@@ -4,13 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.smilehunter.ablebody.domain.repository.BookmarkRepository
+import com.smilehunter.ablebody.domain.model.CodyItemData
+import com.smilehunter.ablebody.domain.model.ProductItemData
 import com.smilehunter.ablebody.domain.usecase.CodyItemPagerUseCase
 import com.smilehunter.ablebody.domain.usecase.CodyPagingSourceData
 import com.smilehunter.ablebody.domain.usecase.ProductItemPagerUseCase
 import com.smilehunter.ablebody.domain.usecase.ProductItemPagingSourceData
-import com.smilehunter.ablebody.domain.model.CodyItemData
-import com.smilehunter.ablebody.domain.model.ProductItemData
+import com.smilehunter.ablebody.domain.usecase.UnBookmarkProductItemUseCase
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,10 +30,10 @@ import javax.inject.Inject
 @HiltViewModel
 class BookmarkViewModel @Inject constructor(
     @Dispatcher(AbleBodyDispatcher.IO) private val ioDispatcher: CoroutineDispatcher,
-    private val bookmarkRepository: BookmarkRepository,
     productItemPagerUseCase: ProductItemPagerUseCase,
-    codyItemPagerUseCase: CodyItemPagerUseCase
-): ViewModel() {
+    codyItemPagerUseCase: CodyItemPagerUseCase,
+    private val unBookmarkProductItemUseCase: UnBookmarkProductItemUseCase
+) : ViewModel() {
 
     private val _networkRefreshFlow = MutableSharedFlow<Unit>()
     private val networkRefreshFlow = _networkRefreshFlow.asSharedFlow()
@@ -44,7 +44,7 @@ class BookmarkViewModel @Inject constructor(
 
     fun deleteProductItem(items: List<Long>) {
         viewModelScope.launch(ioDispatcher) {
-            items.forEach { bookmarkRepository.deleteBookmarkItem(it) }
+            items.forEach { unBookmarkProductItemUseCase(it) }
         }
     }
 
