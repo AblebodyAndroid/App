@@ -2,14 +2,12 @@ package com.smilehunter.ablebody.presentation.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.messaging.FirebaseMessaging
-import com.smilehunter.ablebody.BuildConfig
 import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.domain.repository.FCMSyncRepository
 import com.smilehunter.ablebody.domain.usecase.CheckAuthenticationNumberUseCase
 import com.smilehunter.ablebody.domain.usecase.CheckDuplicatedNicknameUseCase
 import com.smilehunter.ablebody.domain.usecase.RegisterAppUseCase
 import com.smilehunter.ablebody.domain.usecase.SendAuthenticationNumberUseCase
+import com.smilehunter.ablebody.domain.usecase.SyncAppStatusUseCase
 import com.smilehunter.ablebody.network.di.AbleBodyDispatcher
 import com.smilehunter.ablebody.network.di.Dispatcher
 import com.smilehunter.ablebody.presentation.onboarding.data.AuthenticationVerificationUiState
@@ -42,11 +40,11 @@ import javax.inject.Inject
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
     @Dispatcher(AbleBodyDispatcher.IO) private val ioDispatcher: CoroutineDispatcher,
-    private val fcmSyncRepository: FCMSyncRepository,
     private val sendAuthenticationNumberUseCase: SendAuthenticationNumberUseCase,
     private val checkAuthenticationNumberUseCase: CheckAuthenticationNumberUseCase,
     private val checkNicknameUseCase: CheckDuplicatedNicknameUseCase,
-    private val registerAppUseCase: RegisterAppUseCase
+    private val registerAppUseCase: RegisterAppUseCase,
+    private val syncAppStatusUseCase: SyncAppStatusUseCase
 ) : ViewModel() {
 
     val phoneNumberState: StateFlow<String> get() = _phoneNumberState.asStateFlow()
@@ -255,17 +253,12 @@ class OnboardingViewModel @Inject constructor(
     }
 
     fun updateFCMTokenAndAppVersion() {
-        try {
-            FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-                viewModelScope.launch(ioDispatcher) {
-                    fcmSyncRepository.updateFCMTokenAndAppVersion(
-                        fcmToken = task.result,
-                        appVersion = BuildConfig.VERSION_NAME
-                    )
-                }
+        viewModelScope.launch(ioDispatcher) {
+            try {
+                syncAppStatusUseCase()
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 }
