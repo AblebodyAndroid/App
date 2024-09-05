@@ -17,7 +17,7 @@ class FindCodyRepositoryImpl @Inject constructor(
     private val networkService: NetworkService
 ) : FindCodyRepository {
 
-    override suspend fun findCody(
+    override fun findCody(
         genders: List<Gender>,
         category: List<HomeCategory>,
         personHeightRangeStart: Int?,

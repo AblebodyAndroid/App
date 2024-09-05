@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface FindCodyRepository {
 
-    suspend fun findCody(
+    fun findCody(
         genders: List<Gender>,
         category: List<HomeCategory>,
         personHeightRangeStart: Int? = null,
