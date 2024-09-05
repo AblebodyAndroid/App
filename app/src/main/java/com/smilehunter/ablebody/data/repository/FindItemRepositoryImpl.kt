@@ -4,10 +4,10 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.smilehunter.ablebody.data.mapper.toDomain
-import com.smilehunter.ablebody.data.model.ItemChildCategory
-import com.smilehunter.ablebody.data.model.ItemGender
-import com.smilehunter.ablebody.data.model.ItemParentCategory
-import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.domain.model.ItemChildCategory
+import com.smilehunter.ablebody.domain.model.ItemGender
+import com.smilehunter.ablebody.domain.model.ItemParentCategory
+import com.smilehunter.ablebody.domain.model.SortingMethod
 import com.smilehunter.ablebody.data.paging.CommonProductItemPagingSource
 import com.smilehunter.ablebody.domain.model.ProductItemData
 import com.smilehunter.ablebody.domain.repository.FindItemRepository

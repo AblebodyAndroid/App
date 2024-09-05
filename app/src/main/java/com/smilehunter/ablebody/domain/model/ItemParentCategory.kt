@@ -1,4 +1,4 @@
-package com.smilehunter.ablebody.data.model
+package com.smilehunter.ablebody.domain.model
 
 enum class ItemParentCategory(val string: String) {
     ALL("전체"),

@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.data.model.HomeCategory
-import com.smilehunter.ablebody.data.model.PersonHeightFilterType
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.HomeCategory
+import com.smilehunter.ablebody.domain.model.PersonHeightFilterType
 import com.smilehunter.ablebody.domain.usecase.CodyItemPagerUseCase
 import com.smilehunter.ablebody.domain.usecase.CodyPagingSourceData
 import com.smilehunter.ablebody.domain.model.CodyItemData

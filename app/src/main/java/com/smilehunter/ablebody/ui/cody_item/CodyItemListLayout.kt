@@ -34,9 +34,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.data.model.HomeCategory
-import com.smilehunter.ablebody.data.model.PersonHeightFilterType
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.HomeCategory
+import com.smilehunter.ablebody.domain.model.PersonHeightFilterType
 import com.smilehunter.ablebody.domain.model.CodyItemData
 import com.smilehunter.ablebody.domain.model.CodyItemFilterBottomSheetTabFilterType
 import com.smilehunter.ablebody.domain.model.fake.fakeCodyItemData

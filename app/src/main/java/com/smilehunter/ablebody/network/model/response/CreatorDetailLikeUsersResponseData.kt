@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.network.model.response
 
-import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.domain.model.Gender
 
 data class CreatorDetailLikeUsersResponseData(
     val createDate: String,

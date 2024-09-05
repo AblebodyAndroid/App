@@ -1,8 +1,8 @@
 package com.smilehunter.ablebody.domain.usecase
 
 import androidx.paging.PagingData
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.data.model.HomeCategory
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.HomeCategory
 import com.smilehunter.ablebody.domain.model.CodyItemData
 import com.smilehunter.ablebody.domain.repository.SearchRepository
 import kotlinx.coroutines.flow.Flow

@@ -1,12 +1,12 @@
 package com.smilehunter.ablebody.domain.repository
 
 import androidx.paging.PagingData
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.data.model.HomeCategory
-import com.smilehunter.ablebody.data.model.ItemChildCategory
-import com.smilehunter.ablebody.data.model.ItemGender
-import com.smilehunter.ablebody.data.model.ItemParentCategory
-import com.smilehunter.ablebody.data.model.SortingMethod
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.HomeCategory
+import com.smilehunter.ablebody.domain.model.ItemChildCategory
+import com.smilehunter.ablebody.domain.model.ItemGender
+import com.smilehunter.ablebody.domain.model.ItemParentCategory
+import com.smilehunter.ablebody.domain.model.SortingMethod
 import com.smilehunter.ablebody.domain.model.CodyItemData
 import com.smilehunter.ablebody.domain.model.ProductItemData
 import com.smilehunter.ablebody.domain.model.SearchHistoryQuery

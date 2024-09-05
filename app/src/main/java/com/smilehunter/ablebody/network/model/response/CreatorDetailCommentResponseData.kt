@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.network.model.response
 
-import com.smilehunter.ablebody.data.model.NetworkAuthorityName
+import com.smilehunter.ablebody.network.model.NetworkAuthorityName
 
 data class CreatorDetailCommentResponseData(
     val type: CommentReplyType,

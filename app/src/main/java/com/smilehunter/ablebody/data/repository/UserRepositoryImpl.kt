@@ -7,7 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.smilehunter.ablebody.data.mapper.asExternalModel
 import com.smilehunter.ablebody.data.mapper.toDomain
-import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.domain.model.Gender
 import com.smilehunter.ablebody.data.paging.UserBoardPagingSource
 import com.smilehunter.ablebody.data.result.FileTooLargeException
 import com.smilehunter.ablebody.datastore.DataStoreService

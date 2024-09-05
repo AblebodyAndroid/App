@@ -6,8 +6,8 @@ import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.smilehunter.ablebody.data.mapper.toDomain
-import com.smilehunter.ablebody.data.model.Gender
-import com.smilehunter.ablebody.data.model.HomeCategory
+import com.smilehunter.ablebody.domain.model.Gender
+import com.smilehunter.ablebody.domain.model.HomeCategory
 import com.smilehunter.ablebody.domain.model.CodyItemData
 import com.smilehunter.ablebody.network.NetworkService
 import kotlinx.coroutines.Dispatchers

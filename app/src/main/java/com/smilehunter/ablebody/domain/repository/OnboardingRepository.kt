@@ -1,6 +1,6 @@
 package com.smilehunter.ablebody.domain.repository
 
-import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.domain.model.Gender
 
 interface OnboardingRepository {
 

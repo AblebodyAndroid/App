@@ -28,7 +28,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.smilehunter.ablebody.data.model.Gender
+import com.smilehunter.ablebody.domain.model.Gender
 import com.smilehunter.ablebody.R
 import com.smilehunter.ablebody.presentation.onboarding.OnboardingViewModel
 import com.smilehunter.ablebody.ui.theme.AbleBlue

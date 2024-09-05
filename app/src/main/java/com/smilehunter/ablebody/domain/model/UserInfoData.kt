@@ -1,7 +1,5 @@
 package com.smilehunter.ablebody.domain.model
 
-import com.smilehunter.ablebody.data.model.Gender
-
 data class UserInfoData(
     val createDate: String,
     val modifiedDate: String,
