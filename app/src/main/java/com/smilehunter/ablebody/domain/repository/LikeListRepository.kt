@@ -1,18 +1,18 @@
 package com.smilehunter.ablebody.domain.repository
 
-import com.smilehunter.ablebody.network.model.response.CreatorDetailLikeUsersResponseData
+import com.smilehunter.ablebody.domain.model.LikeListData
 
 interface LikeListRepository {
 
     suspend fun creatorDetailLikeUsersBoard(
         id: Long
-    ): List<CreatorDetailLikeUsersResponseData>
+    ): List<LikeListData>
 
     suspend fun creatorDetailLikeUsersComment(
         id: Long
-    ): List<CreatorDetailLikeUsersResponseData>
+    ): List<LikeListData>
 
     suspend fun creatorDetailLikeUsersReply(
         id: Long
-    ): List<CreatorDetailLikeUsersResponseData>
+    ): List<LikeListData>
 }
