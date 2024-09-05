@@ -1,8 +1,22 @@
 package com.smilehunter.ablebody.domain.repository
 
-import com.smilehunter.ablebody.network.model.ReportResponse
-import com.smilehunter.ablebody.network.model.request.ReportRequest
-
 interface ManageRepository {
-    suspend fun report(reportRequest: ReportRequest): ReportResponse
+
+    suspend fun reportBookmarkPost(
+        id: Long,
+        reason: String,
+        content: String
+    ): String
+
+    suspend fun reportUser(
+        id: Long,
+        reason: String,
+        content: String
+    ): String
+
+    suspend fun reportHomeBoard(
+        id: Long,
+        reason: String,
+        content: String
+    ): String
 }
