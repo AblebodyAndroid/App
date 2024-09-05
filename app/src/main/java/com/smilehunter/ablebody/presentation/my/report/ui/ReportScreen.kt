@@ -41,7 +41,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.smilehunter.ablebody.BuildConfig
 import com.smilehunter.ablebody.R
-import com.smilehunter.ablebody.network.model.request.ReportRequest
 import com.smilehunter.ablebody.domain.model.ErrorHandlerCode
 import com.smilehunter.ablebody.presentation.my.report.ReportViewModel
 import com.smilehunter.ablebody.ui.theme.AbleBlue
@@ -149,12 +148,9 @@ fun ReportScreen(
                     listText = option,
                     onReportOnClick = {
                         reportViewModel.reportUser(
-                            ReportRequest(
-                                ReportRequest.ContentType.User,
-                                uid.toLong(),
-                                option,
-                                ""
-                            )
+                            id = uid.toLong(),
+                            reason = option,
+                            content = ""
                         )
                     },
                     onReportCompleteDialog = onReportCompleteDialog
