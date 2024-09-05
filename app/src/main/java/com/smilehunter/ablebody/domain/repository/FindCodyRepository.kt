@@ -1,9 +1,10 @@
 package com.smilehunter.ablebody.domain.repository
 
+import androidx.paging.PagingData
 import com.smilehunter.ablebody.data.model.Gender
 import com.smilehunter.ablebody.data.model.HomeCategory
-import com.smilehunter.ablebody.network.model.FindCodyResponse
-import retrofit2.Response
+import com.smilehunter.ablebody.domain.model.CodyItemData
+import kotlinx.coroutines.flow.Flow
 
 interface FindCodyRepository {
 
@@ -12,7 +13,5 @@ interface FindCodyRepository {
         category: List<HomeCategory>,
         personHeightRangeStart: Int? = null,
         personHeightRangeEnd: Int? = null,
-        page: Int = 0,
-        size: Int = 20
-    ): Response<FindCodyResponse>
+    ): Flow<PagingData<CodyItemData.Item>>
 }
