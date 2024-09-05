@@ -1,15 +1,14 @@
 package com.smilehunter.ablebody.data.repository
 
+import com.smilehunter.ablebody.data.mapper.toDomain
+import com.smilehunter.ablebody.domain.model.LikeListData
 import com.smilehunter.ablebody.domain.repository.CommentRepository
-import com.smilehunter.ablebody.network.model.response.CreatorDetailCommentResponseData
-import com.smilehunter.ablebody.network.model.response.CreatorDetailLikeUsersResponseData
-import com.smilehunter.ablebody.network.model.response.CreatorDetailReplyResponseData
 import com.smilehunter.ablebody.network.NetworkService
 import javax.inject.Inject
 
 class CommentRepositoryImpl @Inject constructor(
     private val networkService: NetworkService
-): CommentRepository {
+) : CommentRepository {
     override suspend fun creatorDetailLikeBoard(id: Long) {
         networkService.creatorDetailLikeBoard(id)
     }
@@ -22,27 +21,29 @@ class CommentRepositoryImpl @Inject constructor(
         networkService.creatorDetailLikeReply(id)
     }
 
-    override suspend fun creatorDetailLikeUsersBoard(id: Long): List<CreatorDetailLikeUsersResponseData> =
-        networkService.creatorDetailLikeUsersBoard(id).data!!
+    override suspend fun creatorDetailLikeUsersBoard(id: Long): List<LikeListData> =
+        networkService.creatorDetailLikeUsersBoard(id).data!!.map { it.toDomain() }
 
 
-    override suspend fun creatorDetailLikeUsersComment(id: Long): List<CreatorDetailLikeUsersResponseData> =
-        networkService.creatorDetailLikeUsersComment(id).data!!
+    override suspend fun creatorDetailLikeUsersComment(id: Long): List<LikeListData> =
+        networkService.creatorDetailLikeUsersComment(id).data!!.map { it.toDomain() }
 
-    override suspend fun creatorDetailLikeUsersReply(id: Long): List<CreatorDetailLikeUsersResponseData> =
-        networkService.creatorDetailLikeUsersReply(id).data!!
+    override suspend fun creatorDetailLikeUsersReply(id: Long): List<LikeListData> =
+        networkService.creatorDetailLikeUsersReply(id).data!!.map { it.toDomain() }
 
     override suspend fun creatorDetailComment(
         id: Long,
         content: String
-    ): CreatorDetailCommentResponseData =
-        networkService.creatorDetailComment(id, content).data!!
+    ) {
+        networkService.creatorDetailComment(id, content).data
+    }
 
     override suspend fun creatorDetailReply(
         id: Long,
         content: String
-    ): CreatorDetailReplyResponseData =
-        networkService.creatorDetailReply(id, content).data!!
+    ) {
+        networkService.creatorDetailReply(id, content).data
+    }
 
     override suspend fun creatorDetailDeleteComment(id: Long) {
         networkService.creatorDetailDeleteComment(id)
