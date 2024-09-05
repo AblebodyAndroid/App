@@ -4,7 +4,6 @@ import com.smilehunter.ablebody.data.repository.BookmarkRepositoryImpl
 import com.smilehunter.ablebody.data.repository.BrandRepositoryImpl
 import com.smilehunter.ablebody.data.repository.CommentRepositoryImpl
 import com.smilehunter.ablebody.data.repository.CreatorDetailRepositoryImpl
-import com.smilehunter.ablebody.data.repository.FCMSyncRepositoryImpl
 import com.smilehunter.ablebody.data.repository.FindCodyRepositoryImpl
 import com.smilehunter.ablebody.data.repository.ItemRepositoryImpl
 import com.smilehunter.ablebody.data.repository.LikeListRepositoryImpl
@@ -19,7 +18,6 @@ import com.smilehunter.ablebody.domain.repository.BookmarkRepository
 import com.smilehunter.ablebody.domain.repository.BrandRepository
 import com.smilehunter.ablebody.domain.repository.CommentRepository
 import com.smilehunter.ablebody.domain.repository.CreatorDetailRepository
-import com.smilehunter.ablebody.domain.repository.FCMSyncRepository
 import com.smilehunter.ablebody.domain.repository.FindCodyRepository
 import com.smilehunter.ablebody.domain.repository.ItemRepository
 import com.smilehunter.ablebody.domain.repository.LikeListRepository
@@ -33,21 +31,16 @@ import com.smilehunter.ablebody.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import dagger.hilt.android.components.ViewModelComponent
 
 @Module
-@InstallIn(SingletonComponent::class)
-interface DataModule {
+@InstallIn(ViewModelComponent::class)
+interface DataViewModelModule {
 
     @Binds
     fun bindsUserRepository(
         userRepositoryImpl: UserRepositoryImpl
     ): UserRepository
-
-    @Binds
-    fun bindsTokenRepository(
-        tokenRepositoryImpl: TokenRepositoryImpl
-    ): TokenRepository
 
     @Binds
     fun bindsOnboardingRepository(
@@ -78,11 +71,6 @@ interface DataModule {
     fun bindsNotificationRepository(
         notificationRepositoryImpl: NotificationRepositoryImpl
     ): NotificationRepository
-
-    @Binds
-    fun bindsFCMSyncRepository(
-        fcmSyncRepositoryImpl: FCMSyncRepositoryImpl
-    ): FCMSyncRepository
 
     @Binds
     fun bindsLikeListRepository(
