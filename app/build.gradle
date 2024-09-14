@@ -13,6 +13,9 @@ android {
     namespace 'com.smilehunter.ablebody'
     compileSdk 34
 
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('.env').newDataInputStream())
+
     defaultConfig {
         applicationId "com.smilehunter.ablebody"
         minSdk 24
@@ -24,6 +27,11 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        buildConfigField "String", "MAIN_SERVER_URL", "\"${properties.getProperty('MAIN_SERVER_URL')}\""
+        buildConfigField "String", "TEST_SERVER_URL", "\"${properties.getProperty('TEST_SERVER_URL')}\""
+        buildConfigField "String", "ADMIN_AUTH_TOKEN", "\"${properties.getProperty('ADMIN_AUTH_TOKEN')}\""
+        buildConfigField "String", "TOSS_LIVE_TOKEN", "\"${properties.getProperty('TOSS_LIVE_TOKEN')}\""
     }
 
     buildTypes {
@@ -86,6 +94,10 @@ protobuf {
         }
     }
 }
+
+project.ext.envConfigFiles = [
+        anycustombuildlowercase: "env/.env",
+]
 
 dependencies {
     def compose_version = "2023.09.01"
@@ -174,7 +186,7 @@ dependencies {
 }
 
 dependencies {
-    implementation  "com.google.protobuf:protobuf-javalite:3.24.4"
+    implementation "com.google.protobuf:protobuf-javalite:3.24.4"
 }
 
 dependencies {
